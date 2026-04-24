@@ -104,7 +104,7 @@ export const works = {
       title: "HiHorus",
       tags: ["Medical AI", "Ophthalmology", "Diagnostics"],
       year: "2024 — 2025",
-      image: "/hihorus.jpg",
+      image: "/hihorus.png",
       summary:
         "AI-powered diagnostic platform for ophthalmology. Detects pathologic myopia and segments lesions on fundus images using deep learning.",
       stack: "PyTorch · TensorFlow · OpenCV · React",
