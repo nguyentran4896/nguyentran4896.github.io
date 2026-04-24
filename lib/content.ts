@@ -23,6 +23,7 @@ export const about = {
     "Published at the 5th Global Ortho-K & Myopia Conference, 2025.",
     "AI doesn't replace engineers — it amplifies them.",
     "I translate research into scalable, deployable systems.",
+    "I explore model interpretability and generalisation across diverse datasets.",
   ],
 }
 
@@ -32,6 +33,7 @@ export type Role = {
   company: string
   location: string
   summary: string
+  bullets: string[]
   stack: string[]
 }
 
@@ -46,6 +48,11 @@ export const experience = {
       location: "Remote · Vietnam",
       summary:
         "Designing scalable backend systems serving 300,000+ businesses across 5 countries. Leading architectural decisions for distributed payroll services and integrating AI tooling across the engineering organisation.",
+      bullets: [
+        "Lead technical research and architectural decision-making for complex distributed payroll systems",
+        "Integrate AI tools into development workflows to enhance code quality and team productivity",
+        "Implement CI/CD pipelines using GitHub Actions and CircleCI for automated testing and deployment",
+      ],
       stack: ["Ruby on Rails", "TypeScript", "PostgreSQL", "Kubernetes", "AWS"],
     },
     {
@@ -55,6 +62,11 @@ export const experience = {
       location: "Ho Chi Minh City",
       summary:
         "Architected the full-stack authentication system for Zalo Web Login (millions of daily active users). Built Java microservices, REST APIs, and observability tooling for anomaly detection.",
+      bullets: [
+        "Designed logging, error-tracking, and statistical analysis systems for monitoring and anomaly detection",
+        "Integrated authentication across multiple platforms; addressed web security challenges and data protection",
+        "Built Java server-side applications using microservices architecture and RESTful APIs",
+      ],
       stack: ["Java", "Microservices", "REST", "Monitoring"],
     },
     {
@@ -64,6 +76,10 @@ export const experience = {
       location: "Ho Chi Minh City",
       summary:
         "Built full-stack web applications on the MEAN stack. Deployed scalable backend services on AWS for early-stage commerce products.",
+      bullets: [
+        "Built scalable backend services with Node.js, RESTful APIs, and AWS cloud infrastructure",
+        "Applied Agile/Scrum methodologies and automated testing for continuous delivery",
+      ],
       stack: ["MongoDB", "Express", "Angular", "Node.js"],
     },
   ] satisfies Role[],

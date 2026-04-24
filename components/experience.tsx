@@ -57,6 +57,14 @@ export function Experience() {
                 <p className="mt-5 max-w-2xl text-sm md:text-base leading-relaxed text-white/70">
                   {role.summary}
                 </p>
+                <ul className="mt-4 max-w-2xl space-y-1.5">
+                  {role.bullets.map((bullet) => (
+                    <li key={bullet} className="flex gap-3 text-sm leading-relaxed text-white/50">
+                      <span className="text-accent mt-0.5 shrink-0">·</span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {role.stack.map((s) => (
                     <span
