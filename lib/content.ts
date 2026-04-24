@@ -121,16 +121,6 @@ export const works = {
       stack: "Python · CNN · Flask · Waitress",
       href: "https://github.com/nguyentran4896",
     },
-    {
-      title: "Employment Hero Platform",
-      tags: ["Backend", "Distributed", "Payroll"],
-      year: "2021 — Present",
-      image: "/futuristic-data-dashboard-dark-minimal.jpg",
-      summary:
-        "500+ merged PRs across enterprise payroll & HR microservices. Engine optimisation, KeyPay sync services, and infrastructure automation at scale.",
-      stack: "Rails · TypeScript · Kubernetes · Redis",
-      href: "https://employmenthero.com",
-    },
   ] satisfies Project[],
 }
 

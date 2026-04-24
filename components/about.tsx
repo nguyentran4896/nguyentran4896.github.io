@@ -26,8 +26,31 @@ export function About() {
         transition={{ duration: 0.8 }}
         className="px-8 md:px-12 mb-0 py-20"
       >
-        <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground mb-4">{sectionLabel}</p>
-        <h2 className="font-sans text-3xl md:text-5xl font-light italic">{sectionTitle}</h2>
+        <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-12">
+          {/* Avatar */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="relative flex-shrink-0 w-24 h-24 md:w-32 md:h-32"
+          >
+            <div className="absolute inset-0 rounded-full border border-white/10" />
+            <div className="absolute -inset-1 rounded-full border border-accent/20" />
+            <img
+              src="/avatar-thailand.jpeg"
+              alt="Nguyen Tran"
+              className="w-full h-full rounded-full object-cover object-top grayscale contrast-[1.1]"
+            />
+            <span className="absolute -bottom-1 -right-1 w-3 h-3 bg-accent rounded-full ring-2 ring-background" />
+          </motion.div>
+
+          {/* Label + Title */}
+          <div>
+            <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground mb-4">{sectionLabel}</p>
+            <h2 className="font-sans text-3xl md:text-5xl font-light italic">{sectionTitle}</h2>
+          </div>
+        </div>
       </motion.div>
 
       {/* Horizontal Scroll Container */}
