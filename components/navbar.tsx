@@ -51,7 +51,7 @@ export function Navbar() {
           </a>
 
           {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center gap-8">
+          <ul className="hidden md:flex items-center gap-5 lg:gap-8">
             {navLinks.map((link, index) => (
               <li key={link.label}>
                 <button
@@ -67,7 +67,7 @@ export function Navbar() {
           </ul>
 
           {/* Status Indicator */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />

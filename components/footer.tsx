@@ -69,32 +69,40 @@ export function Footer() {
       </motion.a>
 
       {/* Footer Info */}
-      <div className="px-8 md:px-12 py-8 border-t border-white/10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          {/* Local Time */}
-          <div className="font-mono text-xs tracking-widest text-muted-foreground">
-            <span className="mr-2">LOCAL TIME</span>
-            <span className="text-white tabular-nums">{time}</span>
+      <div className="px-8 md:px-12 py-10 border-t border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-3 items-start md:items-center gap-8 md:gap-4">
+          {/* Location + Time */}
+          <div className="flex flex-col gap-1.5">
+            <span className="font-mono text-xs tracking-widest text-muted-foreground">
+              {footer.location}
+            </span>
+            <span className="font-mono text-xs tracking-widest text-muted-foreground">
+              <span className="mr-2">LOCAL TIME</span>
+              <span className="text-white tabular-nums">{time}</span>
+            </span>
           </div>
 
           {/* Links */}
-          <div className="flex gap-8">
+          <div className="flex flex-wrap gap-6 md:gap-8 md:justify-center">
             {footer.socials.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                target="_blank"
+                target={link.href.startsWith("mailto:") ? undefined : "_blank"}
                 rel="noopener noreferrer"
                 data-cursor-hover
-                className="font-mono text-xs tracking-widest text-muted-foreground hover:text-white transition-colors duration-300"
+                className="group relative font-mono text-xs tracking-widest text-muted-foreground hover:text-white transition-colors duration-300"
               >
-                {link.label}
+                {link.label.toUpperCase()}
+                <span className="absolute -bottom-1 left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-300" />
               </a>
             ))}
           </div>
 
           {/* Copyright */}
-          <p className="font-mono text-xs tracking-widest text-muted-foreground">© {new Date().getFullYear()}</p>
+          <p className="font-mono text-xs tracking-widest text-muted-foreground md:text-right">
+            © {new Date().getFullYear()} · NGUYEN TRAN
+          </p>
         </div>
       </div>
     </footer>
