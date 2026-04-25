@@ -9,13 +9,39 @@ const navLinks = nav.links
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [activeHref, setActiveHref] = useState<string>("")
+  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
+      const doc = document.documentElement
+      const max = doc.scrollHeight - doc.clientHeight
+      setProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0)
     }
-    window.addEventListener("scroll", handleScroll)
+    handleScroll()
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const ids = navLinks.map((l) => l.href).filter((h) => h.startsWith("#"))
+    const targets = ids
+      .map((id) => document.querySelector(id))
+      .filter((el): el is Element => !!el)
+    if (targets.length === 0) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+        if (visible) setActiveHref(`#${visible.target.id}`)
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
+    )
+    targets.forEach((t) => observer.observe(t))
+    return () => observer.disconnect()
   }, [])
 
   const scrollToSection = (href: string) => {
@@ -36,6 +62,12 @@ export function Navbar() {
           isScrolled ? "bg-background/80 backdrop-blur-md border-b border-border" : ""
         }`}
       >
+        {/* Scroll progress hairline */}
+        <div
+          aria-hidden
+          className="absolute bottom-0 left-0 h-px bg-foreground/60 origin-left"
+          style={{ width: "100%", transform: `scaleX(${progress})` }}
+        />
         <nav className="flex items-center justify-between px-6 py-4 my-0 md:px-12 md:py-5">
           {/* Logo */}
           <a
@@ -56,11 +88,18 @@ export function Navbar() {
               <li key={link.label}>
                 <button
                   onClick={() => scrollToSection(link.href)}
-                  className="group relative font-mono text-xs tracking-wider text-muted-foreground hover:text-foreground transition-colors duration-300"
+                  aria-current={activeHref === link.href ? "true" : undefined}
+                  className={`group relative font-mono text-xs tracking-wider transition-colors duration-300 hover:text-foreground ${
+                    activeHref === link.href ? "text-foreground" : "text-muted-foreground"
+                  }`}
                 >
                   <span className="text-accent mr-1">0{index + 1}</span>
                   {link.label.toUpperCase()}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-foreground group-hover:w-full transition-all duration-300" />
+                  <span
+                    className={`absolute -bottom-1 left-0 h-px bg-foreground transition-all duration-300 ${
+                      activeHref === link.href ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
+                  />
                 </button>
               </li>
             ))}

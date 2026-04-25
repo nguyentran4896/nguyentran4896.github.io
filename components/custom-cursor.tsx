@@ -7,8 +7,17 @@ export function CustomCursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
+  const [enabled, setEnabled] = useState(false)
 
   useEffect(() => {
+    const coarse = window.matchMedia("(hover: none), (pointer: coarse)").matches
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (coarse || reduced || "ontouchstart" in window) return
+    setEnabled(true)
+  }, [])
+
+  useEffect(() => {
+    if (!enabled) return
     const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY })
       setIsVisible(true)
@@ -44,7 +53,9 @@ export function CustomCursor() {
       document.removeEventListener("mouseover", handleHoverStart)
       document.removeEventListener("mouseout", handleHoverEnd)
     }
-  }, [])
+  }, [enabled])
+
+  if (!enabled) return null
 
   return (
     <>

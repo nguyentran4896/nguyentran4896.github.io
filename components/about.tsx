@@ -54,8 +54,8 @@ export function About() {
       </motion.div>
 
       {/* Horizontal Scroll Container */}
-      <div className="relative flex items-center overflow-hidden py-0 gap-0 h-16">
-        <motion.div style={{ x: smoothX }} className="flex gap-16 md:gap-24 px-8 md:px-12 whitespace-nowrap">
+      <div className="relative flex items-center overflow-x-hidden overflow-y-visible py-4 md:py-6 gap-0">
+        <motion.div style={{ x: smoothX }} className="flex items-center gap-16 md:gap-24 px-8 md:px-12 whitespace-nowrap leading-tight">
           {statements.map((statement, index) => (
             <motion.p
               key={index}

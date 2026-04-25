@@ -15,12 +15,11 @@ export function Footer() {
       const hours = now.getHours().toString().padStart(2, "0")
       const minutes = now.getMinutes().toString().padStart(2, "0")
       const seconds = now.getSeconds().toString().padStart(2, "0")
-      const milliseconds = now.getMilliseconds().toString().padStart(3, "0")
-      setTime(`${hours}:${minutes}:${seconds}.${milliseconds}`)
+      setTime(`${hours}:${minutes}:${seconds}`)
     }
 
     updateTime()
-    const interval = setInterval(updateTime, 10)
+    const interval = setInterval(updateTime, 1000)
     return () => clearInterval(interval)
   }, [])
 

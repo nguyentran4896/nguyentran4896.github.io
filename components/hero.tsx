@@ -1,9 +1,14 @@
 "use client"
 
 import { useRef } from "react"
+import dynamic from "next/dynamic"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { SentientSphere } from "./sentient-sphere"
 import { hero } from "@/lib/content"
+
+const SentientSphere = dynamic(
+  () => import("./sentient-sphere").then((m) => m.SentientSphere),
+  { ssr: false, loading: () => null },
+)
 
 export function Hero() {
   const containerRef = useRef<HTMLElement>(null)
@@ -31,11 +36,11 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground mb-2">{hero.topLabel}</p>
-          <h2 className="font-sans text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-balance">
+          <h1 className="font-sans text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-balance">
             {hero.topTitleLine1}
             <br />
             <span className="italic">{hero.topTitleLine2}</span>
-          </h2>
+          </h1>
         </motion.div>
 
         {/* Center Button */}
@@ -43,7 +48,7 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
+          className="self-center md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-20"
         >
           <motion.button
             data-cursor-hover
