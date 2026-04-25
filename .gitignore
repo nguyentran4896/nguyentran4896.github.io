@@ -29,3 +29,5 @@ next-env.d.ts
 # claude code workspace
 /.claude/
 /.eh-claude-code/
+
+/.playwright-mcp/

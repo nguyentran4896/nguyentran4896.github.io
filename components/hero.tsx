@@ -22,6 +22,11 @@ export function Hero() {
 
   return (
     <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-[#050505]">
+      <h1 className="sr-only">
+        Nguyen Tran — Senior Software Engineer and AI Researcher based in Ho Chi Minh City,
+        Vietnam. Ten years of production engineering with research in medical AI and computer
+        vision.
+      </h1>
       {/* 3D Sphere Background */}
       <div className="absolute inset-0">
         <SentientSphere />
@@ -36,11 +41,11 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground mb-2">{hero.topLabel}</p>
-          <h1 className="font-sans text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-balance">
+          <p aria-hidden="true" className="font-sans text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-balance">
             {hero.topTitleLine1}
             <br />
             <span className="italic">{hero.topTitleLine2}</span>
-          </h1>
+          </p>
         </motion.div>
 
         {/* Center Button */}
@@ -69,11 +74,11 @@ export function Hero() {
           className="self-end text-right"
         >
           <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground mb-2">{hero.bottomLabel}</p>
-          <h2 className="font-sans text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-balance">
+          <p aria-hidden="true" className="font-sans text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-balance">
             {hero.bottomTitleLine1}
             <br />
             <span className="italic">{hero.bottomTitleLine2}</span>
-          </h2>
+          </p>
         </motion.div>
       </motion.div>
 

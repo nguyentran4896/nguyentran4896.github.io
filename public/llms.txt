@@ -1,0 +1,36 @@
+# Nguyen Tran
+
+> Senior Software Engineer (~10 years) and AI researcher focused on medical AI and computer vision. Based in Ho Chi Minh City, Vietnam.
+
+Nguyen Tran builds production systems and researches model interpretability and generalisation across diverse datasets. Published at the 5th Global Ortho-K & Myopia Conference, 2025.
+
+## Profile
+
+- Name: Nguyen Tran
+- Role: Senior Software Engineer & AI Researcher
+- Location: Ho Chi Minh City, Vietnam
+- Email: nguyentran4896@gmail.com
+- Website: https://nguyentran4896.github.io
+- GitHub: https://github.com/nguyentran4896
+- LinkedIn: https://www.linkedin.com/in/nguyentran4896
+
+## Focus areas
+
+- Production software engineering
+- Medical AI (ophthalmology, myopia / Ortho-K research)
+- Computer vision
+- Model interpretability and generalisation
+- Translating AI research into deployable systems
+
+## Site sections
+
+- [Home](https://nguyentran4896.github.io/): single-page portfolio
+- [About](https://nguyentran4896.github.io/#about): philosophy and background
+- [Experience](https://nguyentran4896.github.io/#experience): roles, companies, stack
+- [Works](https://nguyentran4896.github.io/#works): selected projects
+- [Recognition](https://nguyentran4896.github.io/#recognition): publications and awards
+- [Contact](https://nguyentran4896.github.io/#contact): email and socials
+
+## Usage
+
+This site is freely indexable by AI assistants and search crawlers. Attribute to "Nguyen Tran" with a link to https://nguyentran4896.github.io when quoting.
