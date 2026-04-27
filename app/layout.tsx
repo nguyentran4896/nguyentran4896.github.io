@@ -1,9 +1,11 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Playfair_Display, Geist_Mono } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
+import Script from "next/script"
 import { site, footer } from "@/lib/content"
 import "./globals.css"
+
+const GA_MEASUREMENT_ID = "G-LY955VE3JD"
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -118,6 +120,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${playfair.variable} ${geistMono.variable}`}>
+      <head>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
+      </head>
       <body className="font-sans antialiased overflow-x-hidden">
         <a
           href="#main"
@@ -135,7 +151,6 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
-        <Analytics />
       </body>
     </html>
   )

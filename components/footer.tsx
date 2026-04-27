@@ -8,6 +8,15 @@ import { footer } from "@/lib/content"
 export function Footer() {
   const [time, setTime] = useState("")
   const [isHovered, setIsHovered] = useState(false)
+  const [copied, setCopied] = useState(false)
+
+  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(footer.email).catch(() => {})
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 2000)
+    }
+  }
 
   useEffect(() => {
     const updateTime = () => {
@@ -30,6 +39,7 @@ export function Footer() {
         href={`mailto:${footer.email}`}
         data-cursor-hover
         className="relative block overflow-hidden"
+        onClick={handleContactClick}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -44,15 +54,24 @@ export function Footer() {
         {/* Content */}
         <div className="relative py-16 md:py-24 px-8 md:px-12 border-t border-white/10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <motion.h2
-              className="font-sans text-4xl md:text-6xl lg:text-8xl font-light tracking-tight text-center md:text-left"
-              animate={{
-                color: isHovered ? "#050505" : "#fafafa",
-              }}
-              transition={{ duration: 0.3 }}
-            >
-              {footer.heading1} <span className="italic">{footer.heading2}</span>
-            </motion.h2>
+            <div className="flex flex-col gap-4 text-center md:text-left">
+              <motion.h2
+                className="font-sans text-4xl md:text-6xl lg:text-8xl font-light tracking-tight"
+                animate={{
+                  color: isHovered ? "#050505" : "#fafafa",
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                {footer.heading1} <span className="italic">{footer.heading2}</span>
+              </motion.h2>
+              <motion.span
+                className="font-mono text-xs tracking-widest"
+                animate={{ color: isHovered ? "#050505" : "#a1a1a1" }}
+                transition={{ duration: 0.3 }}
+              >
+                {copied ? "EMAIL COPIED — OPENING MAIL CLIENT…" : `${footer.email.toUpperCase()} · CLICK TO COPY`}
+              </motion.span>
+            </div>
 
             <motion.div
               animate={{
