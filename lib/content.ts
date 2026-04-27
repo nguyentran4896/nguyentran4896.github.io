@@ -212,6 +212,7 @@ export const nav = {
     { label: "About", href: "#about" },
     { label: "Experience", href: "#experience" },
     { label: "Works", href: "#works" },
+    { label: "Writing", href: "/blog" },
     { label: "Contact", href: "#contact" },
   ],
 }

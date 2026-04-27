@@ -1,0 +1,33 @@
+---
+title: "On Building Quiet Interfaces"
+date: "2026-04-27"
+excerpt: "A short note on restraint as a design tool — and why my best engineering work feels invisible."
+tags: ["design", "engineering"]
+draft: false
+---
+
+The interfaces I keep coming back to share a single quality: they get out of the way. Not minimalism for its own sake — _restraint_, which is different. Minimalism removes; restraint chooses.
+
+## Three rules I keep returning to
+
+1. **One accent per viewport.** A single point of color earns attention. Two compete.
+2. **Hairlines, not boxes.** A 1px divider organises space without adding weight.
+3. **Type does the work.** If the typography is right, you need very little else.
+
+> The best tool is the one you don't notice using.
+
+## A small example
+
+```ts
+// Prefer this
+const accent = "var(--accent)"
+
+// Over this
+const accent = "#3B5CFF"
+```
+
+The first survives a redesign. The second locks you in.
+
+---
+
+That's it. Short by design. The next post will get into how this rule plays out at the system level — when you have a hundred screens and a team of fifteen, restraint becomes infrastructure.

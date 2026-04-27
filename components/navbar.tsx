@@ -1,12 +1,16 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { usePathname, useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { nav } from "@/lib/content"
 
 const navLinks = nav.links
 
 export function Navbar() {
+  const pathname = usePathname()
+  const router = useRouter()
+  const onHome = pathname === "/"
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeHref, setActiveHref] = useState<string>("")
@@ -25,6 +29,11 @@ export function Navbar() {
   }, [])
 
   useEffect(() => {
+    if (!onHome) {
+      const match = navLinks.find((l) => l.href === pathname || (l.href !== "/" && pathname.startsWith(l.href)))
+      setActiveHref(match?.href ?? "")
+      return
+    }
     const ids = navLinks.map((l) => l.href).filter((h) => h.startsWith("#"))
     const targets = ids
       .map((id) => document.querySelector(id))
@@ -42,13 +51,21 @@ export function Navbar() {
     )
     targets.forEach((t) => observer.observe(t))
     return () => observer.disconnect()
-  }, [])
+  }, [onHome, pathname])
 
   const scrollToSection = (href: string) => {
     setIsMenuOpen(false)
-    const element = document.querySelector(href)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+    if (href.startsWith("/")) {
+      router.push(href)
+      return
+    }
+    if (href.startsWith("#")) {
+      if (!onHome) {
+        router.push(`/${href}`)
+        return
+      }
+      const element = document.querySelector(href)
+      if (element) element.scrollIntoView({ behavior: "smooth" })
     }
   }
 
@@ -71,10 +88,12 @@ export function Navbar() {
         <nav className="flex items-center justify-between px-6 py-4 my-0 md:px-12 md:py-5">
           {/* Logo */}
           <a
-            href="#"
+            href="/"
             onClick={(e) => {
-              e.preventDefault()
-              window.scrollTo({ top: 0, behavior: "smooth" })
+              if (onHome) {
+                e.preventDefault()
+                window.scrollTo({ top: 0, behavior: "smooth" })
+              }
             }}
             className="group flex items-center gap-2"
           >
