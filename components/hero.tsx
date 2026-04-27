@@ -28,7 +28,7 @@ export function Hero() {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8])
 
   return (
-    <section ref={containerRef} className="relative h-screen w-full overflow-hidden bg-[#050505]">
+    <section ref={containerRef} className="relative h-[100svh] w-full overflow-hidden bg-[#050505]">
       <h1 className="sr-only">
         Nguyen Tran — Senior Software Engineer and AI Researcher based in Ho Chi Minh City,
         Vietnam. Ten years of production engineering with research in medical AI and computer
@@ -40,7 +40,7 @@ export function Hero() {
       </div>
 
       {/* Typography Overlay */}
-      <motion.div style={{ opacity, scale }} className="relative z-10 h-full flex flex-col justify-between p-8 md:p-12 md:px-12 md:py-20">
+      <motion.div style={{ opacity, scale }} className="relative z-10 h-full flex flex-col justify-between p-6 sm:p-8 md:p-12 md:py-20">
         {/* Top Left */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -48,7 +48,7 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground mb-2">{hero.topLabel}</p>
-          <p aria-hidden="true" className="font-sans text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-balance">
+          <p aria-hidden="true" className="font-sans text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-balance">
             {hero.topTitleLine1}
             <br />
             <span className="italic">{hero.topTitleLine2}</span>
@@ -81,7 +81,7 @@ export function Hero() {
           className="self-end text-right"
         >
           <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground mb-2">{hero.bottomLabel}</p>
-          <p aria-hidden="true" className="font-sans text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-balance">
+          <p aria-hidden="true" className="font-sans text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-balance">
             {hero.bottomTitleLine1}
             <br />
             <span className="italic">{hero.bottomTitleLine2}</span>

@@ -26,7 +26,7 @@ export function Stats() {
             transition={{ duration: 0.7, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <span className="block font-sans text-5xl md:text-7xl lg:text-8xl font-light tracking-tight tabular-nums leading-none">
+            <span className="block font-sans text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-light tracking-tight tabular-nums leading-none">
               {item.value}
             </span>
             <span className="mt-3 block font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground">

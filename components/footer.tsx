@@ -78,7 +78,7 @@ export function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex flex-col gap-4 text-center md:text-left">
               <motion.h2
-                className="font-sans text-4xl md:text-6xl lg:text-8xl font-light tracking-tight"
+                className="font-sans text-[2.5rem] sm:text-5xl md:text-6xl lg:text-8xl font-light tracking-tight"
                 animate={{
                   color: isHovered ? "#050505" : "#fafafa",
                 }}

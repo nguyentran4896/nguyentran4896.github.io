@@ -17,7 +17,7 @@ function MarqueeRow({ items, direction = "left" }: { items: string[]; direction?
         {duplicatedItems.map((item, index) => (
           <span
             key={index}
-            className="group font-sans text-5xl md:text-7xl lg:text-8xl font-light tracking-tight whitespace-nowrap cursor-default"
+            className="group font-sans text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-light tracking-tight whitespace-nowrap cursor-default"
             style={{
               WebkitTextStroke: "1px rgba(255,255,255,0.3)",
               color: "transparent",

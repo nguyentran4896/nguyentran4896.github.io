@@ -59,7 +59,7 @@ export function About() {
           {statements.map((statement, index) => (
             <motion.p
               key={index}
-              className="text-4xl md:text-6xl lg:text-7xl font-sans font-light tracking-tight text-white/90"
+              className="text-[2.25rem] sm:text-5xl md:text-6xl lg:text-7xl font-sans font-light tracking-tight text-white/90"
               style={{
                 WebkitTextStroke: index % 2 === 0 ? "none" : "1px rgba(255,255,255,0.3)",
                 color: index % 2 === 0 ? "inherit" : "transparent",

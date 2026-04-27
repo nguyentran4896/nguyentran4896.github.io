@@ -36,7 +36,7 @@ export function Recognition() {
 
         {/* Place */}
         <div className="flex md:flex-col items-baseline md:items-start gap-3 md:gap-1">
-          <span className="font-sans text-6xl md:text-7xl lg:text-8xl font-light italic leading-none text-accent">
+          <span className="font-sans text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light italic leading-none text-accent">
             2nd
           </span>
           <span className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase text-muted-foreground">

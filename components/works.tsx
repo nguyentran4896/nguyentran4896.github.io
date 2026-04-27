@@ -68,7 +68,7 @@ export function Works() {
                 </span>
 
                 <motion.h3
-                  className="font-sans text-4xl md:text-6xl lg:text-7xl font-light tracking-tight group-hover:text-white/70 transition-colors duration-300 flex-1 flex items-center gap-3 md:gap-5"
+                  className="font-sans text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight group-hover:text-white/70 transition-colors duration-300 flex-1 flex items-center gap-3 md:gap-5"
                   animate={{ x: hoveredIndex === index ? 16 : 0 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
