@@ -40,7 +40,7 @@ export function Hero() {
       </div>
 
       {/* Typography Overlay */}
-      <motion.div style={{ opacity, scale }} className="relative z-10 h-full flex flex-col justify-between p-6 sm:p-8 md:p-12 md:py-20">
+      <motion.div style={{ opacity, scale }} className="relative z-10 h-full flex flex-col justify-between px-6 pt-20 pb-8 sm:px-8 sm:pt-24 sm:pb-10 md:p-12 md:py-20">
         {/* Top Left */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
