@@ -120,7 +120,7 @@ export const works = {
       title: "HiHorus",
       tags: ["Medical AI", "Ophthalmology", "Diagnostics"],
       year: "2024 — 2025",
-      image: "/hihorus.png",
+      image: "/works/hihorus-editorial.jpg",
       summary:
         "AI-powered diagnostic platform for ophthalmology. Detects pathologic myopia and segments lesions on fundus images using deep learning.",
       stack: "PyTorch · TensorFlow · OpenCV · React",
@@ -131,7 +131,7 @@ export const works = {
       title: "Retinal OCT Classification",
       tags: ["Deep Learning", "Computer Vision", "Healthcare"],
       year: "2024",
-      image: "/retinal-oct.jpg",
+      image: "/works/retinal-oct-editorial.jpg",
       summary:
         "Multi-class CNN models for automated retinal disease detection from OCT scans. Optimised for production and deployed as a Flask REST API.",
       stack: "Python · CNN · Flask · Waitress",
