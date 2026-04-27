@@ -66,7 +66,7 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  icons: { icon: "/icon.svg", apple: "/apple-icon.png" },
+  icons: { apple: "/apple-icon.png" },
   category: "technology",
 }
 
