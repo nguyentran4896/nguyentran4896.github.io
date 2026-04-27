@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import dynamic from "next/dynamic"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { hero } from "@/lib/content"
@@ -12,6 +12,13 @@ const SentientSphere = dynamic(
 
 export function Hero() {
   const containerRef = useRef<HTMLElement>(null)
+  const [showSphere, setShowSphere] = useState(false)
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    setShowSphere(true)
+  }, [])
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -29,7 +36,7 @@ export function Hero() {
       </h1>
       {/* 3D Sphere Background */}
       <div className="absolute inset-0">
-        <SentientSphere />
+        {showSphere && <SentientSphere />}
       </div>
 
       {/* Typography Overlay */}

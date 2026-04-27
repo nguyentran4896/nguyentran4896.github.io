@@ -28,8 +28,30 @@ export function Footer() {
     }
 
     updateTime()
-    const interval = setInterval(updateTime, 1000)
-    return () => clearInterval(interval)
+    let interval: number | undefined
+    const start = () => {
+      if (interval === undefined) interval = window.setInterval(updateTime, 1000)
+    }
+    const stop = () => {
+      if (interval !== undefined) {
+        clearInterval(interval)
+        interval = undefined
+      }
+    }
+    const onVisibility = () => {
+      if (document.visibilityState === "visible") {
+        updateTime()
+        start()
+      } else {
+        stop()
+      }
+    }
+    start()
+    document.addEventListener("visibilitychange", onVisibility)
+    return () => {
+      stop()
+      document.removeEventListener("visibilitychange", onVisibility)
+    }
   }, [])
 
   return (
