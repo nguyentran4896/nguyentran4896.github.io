@@ -116,6 +116,27 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* Paper reading theme — scoped light surface for long-form articles.
+   Inverts neutrals to warm cream + ink while preserving the single
+   #3B5CFF accent. Apply via [data-theme="paper"] on a wrapper. */
+[data-theme="paper"] {
+  --background: oklch(0.975 0.008 85);
+  --foreground: oklch(0.18 0.005 60);
+  --card: oklch(0.985 0.006 85);
+  --card-foreground: oklch(0.18 0.005 60);
+  --popover: oklch(0.985 0.006 85);
+  --popover-foreground: oklch(0.18 0.005 60);
+  --primary: oklch(0.18 0.005 60);
+  --primary-foreground: oklch(0.985 0.006 85);
+  --secondary: oklch(0.93 0.006 80);
+  --secondary-foreground: oklch(0.18 0.005 60);
+  --muted: oklch(0.93 0.006 80);
+  --muted-foreground: oklch(0.42 0.005 60);
+  --border: oklch(0.18 0.005 60 / 0.14);
+  --input: oklch(0.18 0.005 60 / 0.14);
+  --ring: oklch(0.546 0.245 262.881);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
