@@ -27,14 +27,18 @@ export const about = {
   ],
 }
 
+export type Highlight = { icon: string; value: string; label: string }
+
 export type Role = {
   period: string
   role: string
   company: string
   location: string
+  icon: string
   summary: string
   bullets: string[]
   stack: string[]
+  highlights?: Highlight[]
 }
 
 export const experience = {
@@ -46,6 +50,7 @@ export const experience = {
       role: "Senior Software Engineer",
       company: "Employment Hero",
       location: "Remote · Vietnam",
+      icon: "Server",
       summary:
         "Designing scalable backend systems serving 300,000+ businesses across 5 countries. Leading architectural decisions for distributed payroll services and integrating AI tooling across the engineering organisation.",
       bullets: [
@@ -54,12 +59,18 @@ export const experience = {
         "Implement CI/CD pipelines using GitHub Actions and CircleCI for automated testing and deployment",
       ],
       stack: ["Ruby on Rails", "TypeScript", "PostgreSQL", "Kubernetes", "AWS"],
+      highlights: [
+        { icon: "Users", value: "300k+", label: "Businesses served" },
+        { icon: "Globe", value: "5", label: "Countries" },
+        { icon: "Sparkles", value: "AI", label: "Tooling lead" },
+      ],
     },
     {
       period: "2018 — 2020",
       role: "Software Engineer",
       company: "VNG Corporation",
       location: "Ho Chi Minh City",
+      icon: "ShieldCheck",
       summary:
         "Architected the full-stack authentication system for Zalo Web Login (millions of daily active users). Built Java microservices, REST APIs, and observability tooling for anomaly detection.",
       bullets: [
@@ -68,12 +79,18 @@ export const experience = {
         "Built Java server-side applications using microservices architecture and RESTful APIs",
       ],
       stack: ["Java", "Microservices", "REST", "Monitoring"],
+      highlights: [
+        { icon: "Users", value: "Millions", label: "Daily active users" },
+        { icon: "Lock", value: "Auth", label: "Web Login system" },
+        { icon: "Activity", value: "24/7", label: "Observability" },
+      ],
     },
     {
       period: "2017 — 2018",
       role: "Web Developer",
       company: "Nguyen Hiep Software",
       location: "Ho Chi Minh City",
+      icon: "Code2",
       summary:
         "Built full-stack web applications on the MEAN stack. Deployed scalable backend services on AWS for early-stage commerce products.",
       bullets: [
@@ -81,6 +98,10 @@ export const experience = {
         "Applied Agile/Scrum methodologies and automated testing for continuous delivery",
       ],
       stack: ["MongoDB", "Express", "Angular", "Node.js"],
+      highlights: [
+        { icon: "Cloud", value: "AWS", label: "Cloud delivery" },
+        { icon: "Repeat", value: "Agile", label: "CI · automated tests" },
+      ],
     },
   ] satisfies Role[],
   education: {
