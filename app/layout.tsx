@@ -66,7 +66,14 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  icons: { apple: "/apple-icon.png" },
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icon.png", type: "image/png", sizes: "1024x1024" },
+    ],
+    shortcut: "/icon.svg",
+    apple: "/apple-icon.png",
+  },
   category: "technology",
 }
 
