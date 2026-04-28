@@ -14,11 +14,18 @@ export interface Env {
 
 const MAX_MSG_LEN = 1000
 
+function isLocalhost(origin: string): boolean {
+  try {
+    const u = new URL(origin)
+    return (u.protocol === "http:" || u.protocol === "https:") && u.hostname === "localhost"
+  } catch {
+    return false
+  }
+}
+
 function corsHeaders(env: Env, origin: string | null): HeadersInit {
   const allow =
-    origin && (origin === env.ALLOWED_ORIGIN || origin.startsWith("http://localhost"))
-      ? origin
-      : env.ALLOWED_ORIGIN
+    origin && (origin === env.ALLOWED_ORIGIN || isLocalhost(origin)) ? origin : env.ALLOWED_ORIGIN
   return {
     "Access-Control-Allow-Origin": allow,
     "Access-Control-Allow-Methods": "POST, OPTIONS",
