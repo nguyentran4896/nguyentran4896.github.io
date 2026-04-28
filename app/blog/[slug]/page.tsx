@@ -9,6 +9,8 @@ import { SmoothScroll } from "@/components/smooth-scroll"
 import { mdxComponents } from "@/components/mdx-components"
 import { getAllArticles, getArticleBySlug } from "@/lib/articles"
 
+const SITE_URL = "https://nguyentran4896.github.io"
+
 type Params = { slug: string }
 
 export function generateStaticParams(): Params[] {
@@ -23,21 +25,27 @@ export async function generateMetadata({
   const { slug } = await params
   const article = getArticleBySlug(slug)
   if (!article) return {}
+  const url = `${SITE_URL}/blog/${article.slug}`
   return {
     title: article.title,
     description: article.excerpt,
     alternates: { canonical: `/blog/${article.slug}` },
     openGraph: {
       type: "article",
+      url,
       title: article.title,
       description: article.excerpt,
+      siteName: "Nguyen Tran",
       publishedTime: article.date,
+      modifiedTime: article.date,
+      authors: [`${SITE_URL}`],
       tags: article.tags,
     },
     twitter: {
       card: "summary_large_image",
       title: article.title,
       description: article.excerpt,
+      creator: "@nguyentran4896",
     },
   }
 }
@@ -60,6 +68,41 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
   if (!article) notFound()
 
   const mins = readingTime(article.content)
+  const url = `${SITE_URL}/blog/${article.slug}`
+
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: article.title,
+    description: article.excerpt,
+    datePublished: article.date,
+    dateModified: article.date,
+    inLanguage: "en",
+    keywords: article.tags.join(", "),
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    url,
+    author: {
+      "@type": "Person",
+      name: "Nguyen Tran",
+      url: SITE_URL,
+    },
+    publisher: {
+      "@type": "Person",
+      name: "Nguyen Tran",
+      url: SITE_URL,
+    },
+    wordCount: article.content.trim().split(/\s+/).length,
+  }
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+      { "@type": "ListItem", position: 2, name: "Writing", item: `${SITE_URL}/blog` },
+      { "@type": "ListItem", position: 3, name: article.title, item: url },
+    ],
+  }
 
   return (
     <div data-theme="paper" className="bg-background text-foreground min-h-screen">
@@ -151,6 +194,14 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
               </div>
             </footer>
           </article>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+          />
         </main>
       </SmoothScroll>
     </div>

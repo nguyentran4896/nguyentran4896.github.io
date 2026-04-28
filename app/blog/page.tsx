@@ -4,10 +4,28 @@ import { Navbar } from "@/components/navbar"
 import { SmoothScroll } from "@/components/smooth-scroll"
 import { getAllArticles } from "@/lib/articles"
 
+const SITE_URL = "https://nguyentran4896.github.io"
+
 export const metadata: Metadata = {
   title: "Writing",
-  description: "Notes and essays on engineering, AI research, and design.",
+  description:
+    "Notes and essays by Nguyen Tran on software engineering at scale, medical AI, computer vision, and the discipline of building quiet software.",
   alternates: { canonical: "/blog" },
+  openGraph: {
+    type: "website",
+    url: `${SITE_URL}/blog`,
+    siteName: "Nguyen Tran",
+    title: "Writing — Nguyen Tran",
+    description:
+      "Notes and essays on software engineering at scale, medical AI, and computer vision.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Writing — Nguyen Tran",
+    description:
+      "Notes and essays on software engineering at scale, medical AI, and computer vision.",
+    creator: "@nguyentran4896",
+  },
 }
 
 function formatDate(d: string) {
@@ -20,10 +38,45 @@ function formatDate(d: string) {
 export default function BlogIndexPage() {
   const articles = getAllArticles()
 
+  const blogJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "Writing — Nguyen Tran",
+    url: `${SITE_URL}/blog`,
+    inLanguage: "en",
+    author: { "@type": "Person", name: "Nguyen Tran", url: SITE_URL },
+    blogPost: articles.map((a) => ({
+      "@type": "BlogPosting",
+      headline: a.title,
+      description: a.excerpt,
+      datePublished: a.date,
+      url: `${SITE_URL}/blog/${a.slug}`,
+      keywords: a.tags.join(", "),
+      author: { "@type": "Person", name: "Nguyen Tran", url: SITE_URL },
+    })),
+  }
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+      { "@type": "ListItem", position: 2, name: "Writing", item: `${SITE_URL}/blog` },
+    ],
+  }
+
   return (
     <SmoothScroll>
       <Navbar />
       <main id="main" className="min-h-screen pt-32 pb-32">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        />
         <section className="relative px-8 md:px-12 py-20 md:py-28">
           <div className="mb-20 md:mb-24 max-w-4xl">
             <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground mb-4">

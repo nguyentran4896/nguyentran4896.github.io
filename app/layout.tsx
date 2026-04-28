@@ -104,7 +104,29 @@ const personJsonLd = {
     "Computer Vision",
     "Model Interpretability",
     "Generalisation",
+    "Distributed Systems",
+    "Ruby on Rails",
+    "TypeScript",
+    "PyTorch",
   ],
+  hasOccupation: {
+    "@type": "Occupation",
+    name: "Senior Software Engineer & AI Researcher",
+    occupationLocation: {
+      "@type": "City",
+      name: "Ho Chi Minh City",
+    },
+    skills:
+      "Software engineering, distributed systems, medical AI, computer vision, model interpretability",
+  },
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Ho Chi Minh University of Technology (HCMUT)",
+  },
+  worksFor: {
+    "@type": "Organization",
+    name: "Employment Hero",
+  },
 }
 
 const websiteJsonLd = {

@@ -9,13 +9,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date()
   const articles = getAllArticles()
 
+  // Note: hash fragments are ignored by search crawlers and shouldn't appear
+  // in sitemaps. Only list canonical, crawlable URLs here.
   return [
     { url: `${SITE_URL}/`, lastModified, changeFrequency: "monthly", priority: 1 },
-    { url: `${SITE_URL}/#about`, lastModified, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/#experience`, lastModified, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/#works`, lastModified, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/#recognition`, lastModified, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE_URL}/#contact`, lastModified, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/blog`, lastModified, changeFrequency: "weekly", priority: 0.7 },
     ...articles.map((a) => ({
       url: `${SITE_URL}/blog/${a.slug}`,

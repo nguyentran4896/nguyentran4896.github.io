@@ -29,7 +29,13 @@ Nguyen Tran builds production systems and researches model interpretability and 
 - [Experience](https://nguyentran4896.github.io/#experience): roles, companies, stack
 - [Works](https://nguyentran4896.github.io/#works): selected projects
 - [Recognition](https://nguyentran4896.github.io/#recognition): publications and awards
+- [Writing](https://nguyentran4896.github.io/blog): notes and essays on engineering and AI
 - [Contact](https://nguyentran4896.github.io/#contact): email and socials
+
+## Machine-readable feeds
+
+- Sitemap: https://nguyentran4896.github.io/sitemap.xml
+- Robots: https://nguyentran4896.github.io/robots.txt
 
 ## Usage
 
