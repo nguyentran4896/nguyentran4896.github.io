@@ -4,8 +4,11 @@ import type { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import remarkGfm from "remark-gfm"
 import rehypePrettyCode from "rehype-pretty-code"
+import rehypeSlug from "rehype-slug"
+import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import { Navbar } from "@/components/navbar"
 import { SmoothScroll } from "@/components/smooth-scroll"
+import { ReadingProgress } from "@/components/reading-progress"
 import { mdxComponents } from "@/components/mdx-components"
 import { getAllArticles, getArticleBySlug, getRelatedArticles } from "@/lib/articles"
 
@@ -111,6 +114,7 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
   return (
     <div data-theme="paper" className="bg-background text-foreground min-h-screen">
       <SmoothScroll>
+        <ReadingProgress />
         <Navbar />
         <main id="main" className="relative">
           <article className="relative">
@@ -168,6 +172,18 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
                     mdxOptions: {
                       remarkPlugins: [remarkGfm],
                       rehypePlugins: [
+                        rehypeSlug,
+                        [
+                          rehypeAutolinkHeadings,
+                          {
+                            behavior: "append",
+                            properties: {
+                              className: ["heading-anchor"],
+                              ariaLabel: "Permalink",
+                            },
+                            content: { type: "text", value: "#" },
+                          },
+                        ],
                         [
                           rehypePrettyCode,
                           {

@@ -1,0 +1,14 @@
+{
+  "name": "Nguyen Tran — Portfolio",
+  "short_name": "Nguyen Tran",
+  "description": "Senior Software Engineer & AI Researcher.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#1a1a1a",
+  "icons": [
+    { "src": "/icon.png", "sizes": "64x64", "type": "image/png" },
+    { "src": "/apple-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
+  ]
+}

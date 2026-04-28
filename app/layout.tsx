@@ -3,6 +3,8 @@ import type { Metadata, Viewport } from "next"
 import { Playfair_Display, Geist_Mono } from "next/font/google"
 import Script from "next/script"
 import { site, footer } from "@/lib/content"
+import { Konami } from "@/components/konami"
+import { SwRegister } from "@/components/sw-register"
 import "./globals.css"
 
 const GA_MEASUREMENT_ID = "G-LY955VE3JD"
@@ -42,6 +44,7 @@ export const metadata: Metadata = {
     canonical: "/",
     types: { "application/rss+xml": "/feed.xml" },
   },
+  manifest: "/manifest.webmanifest",
   openGraph: {
     type: "profile",
     url: SITE_URL,
@@ -174,6 +177,8 @@ export default function RootLayout({
           Skip to content
         </a>
         <div className="noise-overlay" />
+        <Konami />
+        <SwRegister />
         {children}
         <script
           type="application/ld+json"
