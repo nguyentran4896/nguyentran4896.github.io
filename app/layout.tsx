@@ -38,7 +38,10 @@ export const metadata: Metadata = {
     "Vietnam",
     "portfolio",
   ],
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    types: { "application/rss+xml": "/feed.xml" },
+  },
   openGraph: {
     type: "profile",
     url: SITE_URL,

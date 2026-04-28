@@ -7,7 +7,7 @@ import rehypePrettyCode from "rehype-pretty-code"
 import { Navbar } from "@/components/navbar"
 import { SmoothScroll } from "@/components/smooth-scroll"
 import { mdxComponents } from "@/components/mdx-components"
-import { getAllArticles, getArticleBySlug } from "@/lib/articles"
+import { getAllArticles, getArticleBySlug, getRelatedArticles } from "@/lib/articles"
 
 const SITE_URL = "https://nguyentran4896.github.io"
 
@@ -26,6 +26,7 @@ export async function generateMetadata({
   const article = getArticleBySlug(slug)
   if (!article) return {}
   const url = `${SITE_URL}/blog/${article.slug}`
+  const ogImage = `${SITE_URL}/opengraph-image.png`
   return {
     title: article.title,
     description: article.excerpt,
@@ -40,12 +41,14 @@ export async function generateMetadata({
       modifiedTime: article.date,
       authors: [`${SITE_URL}`],
       tags: article.tags,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: article.title }],
     },
     twitter: {
       card: "summary_large_image",
       title: article.title,
       description: article.excerpt,
       creator: "@nguyentran4896",
+      images: [ogImage],
     },
   }
 }
@@ -69,6 +72,7 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
 
   const mins = readingTime(article.content)
   const url = `${SITE_URL}/blog/${article.slug}`
+  const related = getRelatedArticles(article.slug, 3)
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -177,6 +181,41 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
                 />
               </div>
             </div>
+
+            {related.length > 0 && (
+              <aside className="px-6 sm:px-10 md:px-12 pb-16 md:pb-20">
+                <div className="max-w-[68ch] mx-auto pt-10 border-t border-border">
+                  <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-8">
+                    Related reading
+                  </p>
+                  <ul className="space-y-6">
+                    {related.map((r) => (
+                      <li key={r.slug}>
+                        <Link href={`/blog/${r.slug}`} className="group block">
+                          <h3 className="font-sans text-xl md:text-2xl font-light italic leading-tight text-foreground/90 group-hover:text-accent transition-colors">
+                            {r.title}
+                          </h3>
+                          {r.excerpt && (
+                            <p className="mt-2 text-sm md:text-[0.95rem] leading-relaxed text-foreground/55">
+                              {r.excerpt}
+                            </p>
+                          )}
+                          <span className="mt-3 inline-block font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
+                            {formatDate(r.date)}
+                            {r.tags.length > 0 && (
+                              <>
+                                <span aria-hidden className="mx-2 text-foreground/20">/</span>
+                                <span className="text-accent">{r.tags.join(" · ")}</span>
+                              </>
+                            )}
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </aside>
+            )}
 
             {/* Footer */}
             <footer className="px-6 sm:px-10 md:px-12 pb-24 md:pb-32">
