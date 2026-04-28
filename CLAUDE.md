@@ -39,3 +39,11 @@ Path alias `@/*` resolves to the repo root (see `tsconfig.json`), so `@/componen
 - **Adding a new section** → new component in `components/`, new export object in `lib/content.ts`, slot it into the stack in `app/page.tsx`. Follow the section rhythm from `DESIGN.md` (mono eyebrow → Playfair italic heading → asymmetric content → hairline divider).
 - **Color, type, spacing, radius changes** → update `app/globals.css` *and* the YAML front matter in `DESIGN.md` together. Re-run the lint command above.
 - **Static export caveat** → because `output: "export"`, anything requiring a Node server at runtime (route handlers, dynamic `revalidate`, `next/image` optimization, middleware) will not work. Keep everything client- or build-time only.
+
+## Chat widget + worker
+
+The "Ask about Nguyen" chat widget (`components/chat-widget.tsx`, `hooks/use-chat.ts`) talks to a Cloudflare Worker in `worker/` (separate deploy, see `worker/README.md`). Worker runs Groq + a Durable Object that debounces 2 min of inactivity and sends the transcript to Telegram.
+
+- **Bio sync invariant**: `worker/src/bio.ts` is a hand-maintained snapshot of the chat-relevant facts in `lib/content.ts`. When meaningful bio facts change in `lib/content.ts` (experience, recognition, projects, contact), update `worker/src/bio.ts` in the same change. The chatbot answers from this file — drift here means the bot lies.
+- **Two CI pipelines**: `.github/workflows/deploy.yml` rebuilds the static site on any push (and bakes the `NEXT_PUBLIC_CHAT_ENDPOINT` repo variable into the bundle). `.github/workflows/deploy-worker.yml` redeploys the worker only when `worker/**` changes, syncing secrets from GitHub to Cloudflare each time.
+- **Removal**: delete `worker/`, the chat widget files, the `<ChatWidget />` mount in `app/layout.tsx`, and `deploy-worker.yml`. The repo variable + secrets can stay; they're inert without consumers.
