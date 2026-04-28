@@ -72,6 +72,9 @@ export const metadata: Metadata = {
     apple: "/apple-icon.png",
   },
   category: "technology",
+  verification: {
+    google: "bfebd5a1bcb882b6",
+  },
 }
 
 export const viewport: Viewport = {
