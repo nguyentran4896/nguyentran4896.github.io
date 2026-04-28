@@ -5,6 +5,7 @@ import Script from "next/script"
 import { site, footer } from "@/lib/content"
 import { Konami } from "@/components/konami"
 import { SwRegister } from "@/components/sw-register"
+import { ChatWidget } from "@/components/chat-widget"
 import "./globals.css"
 
 const GA_MEASUREMENT_ID = "G-LY955VE3JD"
@@ -180,6 +181,7 @@ export default function RootLayout({
         <Konami />
         <SwRegister />
         {children}
+        <ChatWidget />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}

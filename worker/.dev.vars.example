@@ -1,0 +1,4 @@
+# Copy to .dev.vars for `wrangler dev`. Real secrets go via `wrangler secret put`.
+GROQ_API_KEY=
+TELEGRAM_BOT_TOKEN=
+TELEGRAM_CHAT_ID=

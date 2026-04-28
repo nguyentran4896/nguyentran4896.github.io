@@ -1,0 +1,17 @@
+name = "nguyen-portfolio-chat"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+account_id = "1484e8b763ec5f315623c8dc98469f6b"
+
+[[durable_objects.bindings]]
+name = "SESSION"
+class_name = "ChatSession"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["ChatSession"]
+
+[vars]
+GROQ_MODEL = "llama-3.3-70b-versatile"
+GROQ_FALLBACK_MODEL = "llama-3.1-8b-instant"
+ALLOWED_ORIGIN = "https://nguyentran4896.github.io"

@@ -32,6 +32,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - run: pnpm build
+        env:
+          NEXT_PUBLIC_CHAT_ENDPOINT: ${{ vars.NEXT_PUBLIC_CHAT_ENDPOINT }}
 
       - run: touch out/.nojekyll
 
