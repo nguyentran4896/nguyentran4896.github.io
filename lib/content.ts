@@ -222,6 +222,7 @@ export const footer = {
   socials: [
     { label: "GitHub", href: "https://github.com/nguyentran4896" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/nguyentran4896" },
+    { label: "ORCID", href: "https://orcid.org/0009-0003-6853-4316" },
     { label: "Email", href: "mailto:nguyentran4896@gmail.com" },
   ],
 }

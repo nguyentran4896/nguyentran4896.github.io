@@ -6,6 +6,7 @@ Location: Ho Chi Minh City, Vietnam
 Contact: nguyentran4896@gmail.com
 GitHub: https://github.com/nguyentran4896
 LinkedIn: https://www.linkedin.com/in/nguyentran4896
+ORCID: https://orcid.org/0009-0003-6853-4316
 
 Summary:
 ~10 years building production systems. Researches medical AI and computer vision. Bridges AI research with real-world impact. Translates research into scalable, deployable systems. Explores model interpretability and generalisation across diverse datasets.
