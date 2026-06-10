@@ -227,45 +227,6 @@
   color: var(--accent);
 }
 
-/* Terminal-mode easter egg (Konami code).
-   Activated by setting data-terminal on <html>. Visual-only swap. */
-html[data-terminal] body {
-  font-family: var(--font-mono) !important;
-}
-html[data-terminal] [data-three],
-html[data-terminal] .noise-overlay,
-html[data-terminal] .animate-marquee-left,
-html[data-terminal] .animate-marquee-right {
-  display: none !important;
-}
-html[data-terminal] h1,
-html[data-terminal] h2,
-html[data-terminal] h3 {
-  font-family: var(--font-mono) !important;
-  font-style: normal !important;
-  letter-spacing: -0.01em;
-}
-html[data-terminal] h1::before,
-html[data-terminal] h2::before,
-html[data-terminal] h3::before {
-  content: "> ";
-  color: var(--accent);
-}
-html[data-terminal] body::after {
-  content: "█";
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  color: var(--accent);
-  font-family: var(--font-mono);
-  z-index: 10001;
-  animation: terminal-blink 1s steps(2) infinite;
-  pointer-events: none;
-}
-@keyframes terminal-blink {
-  50% { opacity: 0; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee-left,
   .animate-marquee-right {

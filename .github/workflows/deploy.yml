@@ -31,6 +31,10 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      # Refresh the public contribution snapshot from GitHub (no token needed).
+      # No-ops and keeps the committed snapshot if the fetch fails.
+      - run: node scripts/fetch-contributions.mjs
+
       - run: pnpm build
         env:
           NEXT_PUBLIC_CHAT_ENDPOINT: ${{ vars.NEXT_PUBLIC_CHAT_ENDPOINT }}

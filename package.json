@@ -6,7 +6,8 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "eslint .",
-    "start": "next start"
+    "start": "next start",
+    "contributions": "node scripts/fetch-contributions.mjs"
   },
   "dependencies": {
     "@react-three/fiber": "9.4.0",

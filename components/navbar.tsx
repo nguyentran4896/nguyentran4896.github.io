@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { usePathname, useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { nav } from "@/lib/content"
+import { toggleTerminal } from "@/lib/terminal-bus"
 
 const navLinks = nav.links
 
@@ -124,13 +125,25 @@ export function Navbar() {
             ))}
           </ul>
 
-          {/* Status Indicator */}
-          <div className="hidden lg:flex items-center gap-3">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
-            </span>
-            <span className="font-mono text-xs tracking-wider text-muted-foreground">{nav.status}</span>
+          {/* Right cluster: console trigger + availability status */}
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => toggleTerminal()}
+              aria-label="Open interactive console (Ctrl + `)"
+              title="Interactive console — Ctrl + `"
+              data-cursor-hover
+              className="hidden md:inline-flex items-center gap-1.5 font-mono text-xs tracking-wider text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <span aria-hidden>›_</span>
+              <span className="hidden lg:inline">console</span>
+            </button>
+            <div className="hidden lg:flex items-center gap-3">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
+              </span>
+              <span className="font-mono text-xs tracking-wider text-muted-foreground">{nav.status}</span>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -180,6 +193,20 @@ export function Navbar() {
                   {link.label}
                 </motion.button>
               ))}
+              <motion.button
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ delay: navLinks.length * 0.1 }}
+                onClick={() => {
+                  setIsMenuOpen(false)
+                  toggleTerminal()
+                }}
+                className="group font-mono text-sm tracking-wider text-muted-foreground"
+              >
+                <span className="text-accent mr-2">›_</span>
+                CONSOLE
+              </motion.button>
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

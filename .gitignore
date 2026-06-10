@@ -31,3 +31,4 @@ next-env.d.ts
 /.eh-claude-code/
 
 /.playwright-mcp/
+.claude/auto-context.md

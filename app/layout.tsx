@@ -6,6 +6,7 @@ import { site, footer } from "@/lib/content"
 import { Konami } from "@/components/konami"
 import { SwRegister } from "@/components/sw-register"
 import { ChatWidget } from "@/components/chat-widget"
+import { TerminalConsole } from "@/components/terminal-console"
 import "./globals.css"
 
 const GA_MEASUREMENT_ID = "G-LY955VE3JD"
@@ -182,6 +183,7 @@ export default function RootLayout({
         <SwRegister />
         {children}
         <ChatWidget />
+        <TerminalConsole />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}

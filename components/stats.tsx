@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { stats } from "@/lib/content"
+import { Contributions } from "@/components/contributions"
 
 export function Stats() {
   return (
@@ -38,6 +39,8 @@ export function Stats() {
           </motion.li>
         ))}
       </ul>
+
+      <Contributions />
     </section>
   )
 }

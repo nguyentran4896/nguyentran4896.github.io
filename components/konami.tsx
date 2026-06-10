@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
+import { toggleTerminal } from "@/lib/terminal-bus"
 
 const SEQUENCE = [
   "ArrowUp",
@@ -20,19 +21,10 @@ export function Konami() {
     let buffer: string[] = []
 
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && document.documentElement.hasAttribute("data-terminal")) {
-        document.documentElement.removeAttribute("data-terminal")
-        return
-      }
       const key = e.key.length === 1 ? e.key.toLowerCase() : e.key
       buffer = [...buffer, key].slice(-SEQUENCE.length)
       if (buffer.length === SEQUENCE.length && buffer.every((k, i) => k === SEQUENCE[i])) {
-        const html = document.documentElement
-        if (html.hasAttribute("data-terminal")) {
-          html.removeAttribute("data-terminal")
-        } else {
-          html.setAttribute("data-terminal", "")
-        }
+        toggleTerminal()
         buffer = []
       }
     }

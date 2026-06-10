@@ -122,6 +122,11 @@ export const stats = {
   ],
 }
 
+export const contributions = {
+  label: "GitHub Activity",
+  caption: "in the last year",
+}
+
 export type Project = {
   title: string
   tags: string[]
