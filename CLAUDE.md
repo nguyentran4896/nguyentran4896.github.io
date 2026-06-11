@@ -17,6 +17,11 @@ This repo has an opinionated visual identity. **Before changing anything visual,
 - `pnpm build` — static export build (`output: "export"` in `next.config.mjs`; emits `out/`).
 - `pnpm start` — serve a non-export production build.
 - `pnpm lint` — ESLint.
+- `pnpm contributions` — fetch GitHub contribution calendar data into `public/contributions.json`. Re-run when the snapshot is stale.
+- `pnpm embeddings` — generate `lib/embeddings.json` (MiniLM-L6 sentence embeddings for every blog post paragraph, work, and bio entry). **Re-run after adding a new blog post** so the Embedding Atlas reflects the new content.
+- `pnpm map` — generate `public/footprint-map.json` (dotted-map SVG paths for the Footprint section). **Re-run after adding new cities** to `footprint.cities` in `lib/content.ts`.
+
+Both `lib/embeddings.json` and `public/footprint-map.json` are committed build artifacts — they are generated at development time and served as static files.
 
 There is no test suite configured. `next.config.mjs` sets `typescript.ignoreBuildErrors: true` and `images.unoptimized: true` because the site builds as a fully static export.
 
@@ -40,10 +45,12 @@ Path alias `@/*` resolves to the repo root (see `tsconfig.json`), so `@/componen
 - **Color, type, spacing, radius changes** → update `app/globals.css` *and* the YAML front matter in `DESIGN.md` together. Re-run the lint command above.
 - **Static export caveat** → because `output: "export"`, anything requiring a Node server at runtime (route handlers, dynamic `revalidate`, `next/image` optimization, middleware) will not work. Keep everything client- or build-time only.
 
-## Chat widget + worker
+## On-device chat
 
-The "Ask about Nguyen" chat widget (`components/chat-widget.tsx`, `hooks/use-chat.ts`) talks to a Cloudflare Worker in `worker/` (separate deploy, see `worker/README.md`). Worker runs Groq + a Durable Object that debounces 2 min of inactivity and sends the transcript to Telegram.
+The "CHAT — ON-DEVICE" panel (`components/on-device-chat.tsx`) runs entirely in the visitor's browser — no server, no API key, no network request after the model download.
 
-- **Bio sync invariant**: `worker/src/bio.ts` is a hand-maintained snapshot of the chat-relevant facts in `lib/content.ts`. When meaningful bio facts change in `lib/content.ts` (experience, recognition, projects, contact), update `worker/src/bio.ts` in the same change. The chatbot answers from this file — drift here means the bot lies.
-- **Two CI pipelines**: `.github/workflows/deploy.yml` rebuilds the static site on any push (and bakes the `NEXT_PUBLIC_CHAT_ENDPOINT` repo variable into the bundle). `.github/workflows/deploy-worker.yml` redeploys the worker only when `worker/**` changes, syncing secrets from GitHub to Cloudflare each time.
-- **Removal**: delete `worker/`, the chat widget files, the `<ChatWidget />` mount in `app/layout.tsx`, and `deploy-worker.yml`. The repo variable + secrets can stay; they're inert without consumers.
+- **Engine**: `@mlc-ai/web-llm` with model `SmolLM2-360M-Instruct-q4f16_1-MLC`. A Web Worker (`components/llm.worker.ts`) is spawned via `new Worker(new URL('./llm.worker.ts', import.meta.url), { type: 'module' })` to keep inference off the main thread; falls back to `CreateMLCEngine` (main-thread) if worker bundling fails.
+- **System prompt**: built at runtime by `lib/local-llm.ts` which imports `hero`, `about`, `experience`, `works`, `recognition`, and `footer` directly from `lib/content.ts`. No hand-maintained snapshot — bio facts cannot drift.
+- **Privacy flow**: before any download the panel shows a plain-language disclosure: WebGPU required; ~190 MB one-time download; nothing leaves the page. Two buttons: `LOAD MODEL (190 MB)` / `NOT NOW`.
+- **WebGPU guard**: if `navigator.gpu` is absent the load button is replaced with `REQUIRES WEBGPU — RECENT DESKTOP BROWSER`.
+- **CI**: a single `.github/workflows/deploy.yml` pipeline builds and deploys the static site. `deploy-worker.yml` has been removed.

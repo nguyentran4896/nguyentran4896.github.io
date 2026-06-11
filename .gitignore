@@ -7,6 +7,9 @@
 /.next/
 /out/
 
+# build-time model cache (huggingface transformers for embeddings)
+/.hf-cache/
+
 # production
 /build
 

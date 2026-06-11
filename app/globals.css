@@ -241,3 +241,172 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   Native CSS scroll-driven micro-animations
+   Opt-in utility classes — NO global element selectors touched.
+   Wrapped in @supports so non-supporting browsers (Safari < 18, older FF)
+   silently skip the block and show the elements in their resting state.
+
+   Firefox consistency trick: an explicit animation-duration is set on every
+   rule. The scroll-driven spec requires it even though duration is logically
+   overridden by timeline range — Firefox Nightly and early Chromium builds
+   ignored the animation when the property was absent.
+   ========================================================================== */
+
+/* Keyframes used by the three utilities below */
+@keyframes scroll-draw-rule {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+@keyframes scroll-clip-reveal {
+  from { clip-path: inset(8% 4% 8% 4%); }
+  to   { clip-path: inset(0% 0% 0% 0%); }
+}
+
+@keyframes scroll-eyebrow-in {
+  from {
+    opacity: 0;
+    letter-spacing: 0.4em;
+  }
+  to {
+    opacity: 1;
+    /* resting value matches the design token: label-caps = 0.3em tracking */
+    letter-spacing: 0.3em;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  /* ------------------------------------------------------------------
+     .scroll-draw
+     Apply to hairline <hr> or <div class="h-px"> divider elements.
+     The rule "draws" from 0 to full width as it crosses the viewport.
+     Finishes around entry 60-80% so it completes before the element
+     reaches the mid-screen, feeling snappy and deliberate.
+  ------------------------------------------------------------------ */
+  .scroll-draw {
+    animation-name: scroll-draw-rule;
+    animation-duration: 1ms;          /* Firefox consistency fix */
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+    /* Start at zero width so the un-animated state is invisible */
+    width: 0;
+    transform-origin: left center;
+    will-change: width;
+  }
+
+  /* ------------------------------------------------------------------
+     .scroll-clip
+     Apply to <figure>, <img>, or any decorative image wrapper.
+     De-clips from a slight inset mask as the element enters the viewport.
+     The 8% vertical / 4% horizontal starting inset is subtle enough to
+     avoid noticeable layout shift while still conveying reveal motion.
+  ------------------------------------------------------------------ */
+  .scroll-clip {
+    animation-name: scroll-clip-reveal;
+    animation-duration: 1ms;          /* Firefox consistency fix */
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 75%;
+    clip-path: inset(8% 4% 8% 4%);
+    will-change: clip-path;
+  }
+
+  /* ------------------------------------------------------------------
+     .scroll-eyebrow
+     Apply to mono eyebrow <p> / <span> elements (class="font-mono …").
+     Fades in while letter-spacing eases from the exaggerated 0.4em
+     down to the design-system resting value (0.3em), giving the
+     typewriter-expanding feel requested without JavaScript.
+  ------------------------------------------------------------------ */
+  .scroll-eyebrow {
+    animation-name: scroll-eyebrow-in;
+    animation-duration: 1ms;          /* Firefox consistency fix */
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 65%;
+    opacity: 0;
+    letter-spacing: 0.4em;
+    will-change: opacity, letter-spacing;
+  }
+}
+
+/* ------------------------------------------------------------------
+   prefers-reduced-motion: disable all three scroll-driven utilities
+   unconditionally. The @supports block above only activates when the
+   browser supports animation-timeline; this media query takes priority
+   via the cascade and eliminates animation regardless of support.
+------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-draw {
+    animation: none !important;
+    width: 100% !important;
+  }
+  .scroll-clip {
+    animation: none !important;
+    clip-path: none !important;
+  }
+  .scroll-eyebrow {
+    animation: none !important;
+    opacity: 1 !important;
+    letter-spacing: 0.3em !important;
+  }
+}
+
+/* ==========================================================================
+   View Transitions — blog title morph between index and article pages.
+
+   The root page-level cross-fade keeps the dark-to-paper theme crossing
+   from feeling jarring: a short, tight opacity blend that fires only on
+   the ::view-transition-root pseudo-element so the rest of the UI doesn't
+   flash. The title morph is handled by the per-slug view-transition-name
+   (post-title-<slug>) applied inline to <h2> on the index and <h1> in the
+   article — the browser interpolates geometry, font-size, and color across
+   the matched pair automatically.
+
+   prefers-reduced-motion: both the root fade AND the title morph are
+   removed; the browser performs an instant swap instead.
+   ========================================================================== */
+
+/* Root cross-fade: short and subtle so the dark→paper theme change reads
+   as a deliberate shift rather than an accidental flash. */
+::view-transition-old(root) {
+  animation: 180ms ease-out both vt-fade-out;
+}
+::view-transition-new(root) {
+  animation: 220ms ease-out both vt-fade-in;
+}
+
+/* Title morph: longer duration so the Playfair italic heading has time to
+   smoothly interpolate size and position across the page boundary. */
+::view-transition-old(post-title) {
+  animation: 260ms ease-out both vt-fade-out;
+}
+::view-transition-new(post-title) {
+  animation: 260ms ease-out both vt-fade-in;
+}
+
+@keyframes vt-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes vt-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Instant swap — no animation — for users who prefer reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-old(post-title),
+  ::view-transition-new(post-title) {
+    animation: none !important;
+  }
+}

@@ -192,8 +192,76 @@ export const recognition = {
     "AI is not replacing developers — it's amplifying our capabilities. I use AI as a collaborative tool to focus on high-level problem-solving while automating the routine.",
 }
 
+export const latentField = {
+  eyebrow: "08 — LATENT SPACE",
+  heading: "Generative field",
+  captionPrefix: "SEED",
+  captionSuffix: "— WEIGHTS RE-ROLLED FOR YOU",
+  rerollLabel: "REROLL",
+  subCaption: "CPPN · 5 TANH LAYERS · 16 NEURONS · DRIFT ACTIVE",
+} as const
+
+export const particleMonogram = {
+  text: "NGUYEN TRAN",
+  ariaLabel: "Nguyen Tran — particle monogram",
+} as const
+
+export const contactGlobe = {
+  caption: "COORDINATES — 10.776 N · 106.700 E · SAIGON",
+  eyebrow: "SIGNAL FROM SAIGON",
+} as const
+
+export const footprint = {
+  eyebrow: "FOOTPRINT",
+  title: "Where the work lives",
+  caption: "Built across two cities, shipped to the world.",
+  cities: [
+    { id: "hcmc", name: "Ho Chi Minh City", lat: 10.8231, lng: 106.6297, coords: "10°49′N 106°37′E" },
+    { id: "sydney", name: "Sydney", lat: -33.8688, lng: 151.2093, coords: "33°52′S 151°12′E" },
+  ],
+} as const
+
+export const tokenizerPlayground = {
+  eyebrow: "10 — TOKENS",
+  heading: "Tokenizer Playground",
+  intro:
+    "Paste any text and watch it decompose into BPE tokens in real time. Toggle encodings, reveal token IDs, and see how the model actually reads language.",
+  inputLabel: "INPUT TEXT",
+  inputPlaceholder: "Type or paste text to tokenize…",
+  countLabel: "TOKEN COUNT",
+  charLabel: "CHAR COUNT",
+  encodingLabel: "ENCODING",
+  idsToggle: "IDS",
+  examples: [
+    { label: "emoji", text: "Hello 😊 World 🌍 AI 🤖" },
+    { label: "leading space", text: " token vs token" },
+    { label: "banh mi", text: "banh mi" },
+  ],
+} as const
+
+export const physicsChips = {
+  eyebrow: "TECHNICAL ARSENAL",
+  resetLabel: "RESET",
+} as const
+
+export const embeddingAtlas = {
+  eyebrow: "10 — ATLAS",
+  heading: "Latent space of the writing",
+  cornerLabel: "LATENT — MINILM-L6 · PCA",
+  kindLabels: {
+    "post-para": "ARTICLE",
+    work: "WORK",
+    about: "BIO",
+  } as Record<string, string>,
+} as const
+
+export const worksGallery = {
+  scrollHint: "SCROLL TO EXPLORE",
+  viewProject: "VIEW PROJECT",
+} as const
+
 export const tech = {
-  sectionLabel: "08 — TECHNICAL ARSENAL",
+  sectionLabel: "09 — TECHNICAL ARSENAL",
   techItems: [
     "RUBY ON RAILS",
     "TYPESCRIPT",
@@ -231,6 +299,31 @@ export const footer = {
     { label: "Email", href: "mailto:nguyentran4896@gmail.com" },
   ],
 }
+
+export const onDeviceChat = {
+  trigger: "CHAT — ON-DEVICE",
+  close: "CLOSE",
+  eyebrow: "00 — ON-DEVICE LLM",
+  heading: "Ask about Nguyen.",
+  disclaimer:
+    "Runs entirely in your browser via WebGPU. One-time ~190 MB model download, cached for repeat visits. Nothing you type leaves this page — watch the network tab.",
+  loadBtn: "LOAD MODEL (190 MB)",
+  cancelBtn: "NOT NOW",
+  webgpuMissing: "REQUIRES WEBGPU — RECENT DESKTOP BROWSER",
+  loadingPrefix: "LOADING",
+  readyMsg: "Model loaded. Ask me anything about Nguyen.",
+  placeholder: "Type a question…",
+  sendLabel: "SEND",
+  loadingLabel: "LOADING…",
+  errorPrefix: "ERROR:",
+  inputAriaLabel: "Chat input",
+  closeAriaLabel: "Close chat",
+  dialogAriaLabel: "On-device chat about Nguyen Tran",
+} as const
+
+export const ping = {
+  header: "ROUGH RTT — BROWSER FETCH, NOT ICMP",
+} as const
 
 export const nav = {
   brand: "NGUYEN TRAN",

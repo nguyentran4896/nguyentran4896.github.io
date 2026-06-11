@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { usePathname, useRouter } from "next/navigation"
 import { TERMINAL_EVENT } from "@/lib/terminal-bus"
-import { COMMAND_NAMES, runCommand, type TerminalLine } from "@/lib/terminal"
+import { COMMAND_NAMES, runCommand, type CommandResult, type TerminalLine } from "@/lib/terminal"
 
 const BANNER: TerminalLine[] = [
   { kind: "head", text: "Nguyen Tran — interactive console" },
@@ -107,6 +107,17 @@ export function TerminalConsole() {
     [router, pathname],
   )
 
+  /** Drain an async stream from a command, appending each batch to output. */
+  const drainStream = useCallback(
+    async (gen: CommandResult["stream"]) => {
+      if (!gen) return
+      for await (const batch of gen) {
+        setOutput((prev) => [...prev, ...batch])
+      }
+    },
+    [],
+  )
+
   const submit = useCallback(() => {
     const raw = value
     const result = runCommand(raw, history)
@@ -118,7 +129,8 @@ export function TerminalConsole() {
     setHistoryIndex(null)
     setValue("")
     if (result.navigate) navigate(result.navigate)
-  }, [value, history, navigate])
+    if (result.stream) drainStream(result.stream)
+  }, [value, history, navigate, drainStream])
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {

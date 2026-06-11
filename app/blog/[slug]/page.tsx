@@ -1,5 +1,5 @@
-import Link from "next/link"
 import { notFound } from "next/navigation"
+import { Link } from "next-view-transitions"
 import type { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import remarkGfm from "remark-gfm"
@@ -141,7 +141,10 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
                   )}
                 </div>
 
-                <h1 className="font-sans font-light italic leading-[1.04] tracking-tight text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[4.25rem] text-balance">
+                <h1
+                  className="font-sans font-light italic leading-[1.04] tracking-tight text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[4.25rem] text-balance"
+                  style={{ viewTransitionName: `post-title-${article.slug}` }}
+                >
                   {article.title}
                 </h1>
 

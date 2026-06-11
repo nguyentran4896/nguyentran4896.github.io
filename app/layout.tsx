@@ -2,11 +2,13 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Playfair_Display, Geist_Mono } from "next/font/google"
 import Script from "next/script"
+import { ViewTransitions } from "next-view-transitions"
 import { site, footer } from "@/lib/content"
 import { Konami } from "@/components/konami"
 import { SwRegister } from "@/components/sw-register"
-import { ChatWidget } from "@/components/chat-widget"
+import { OnDeviceChat } from "@/components/on-device-chat"
 import { TerminalConsole } from "@/components/terminal-console"
+import { CommandPalette } from "@/components/command-palette"
 import "./globals.css"
 
 const GA_MEASUREMENT_ID = "G-LY955VE3JD"
@@ -14,6 +16,13 @@ const GA_MEASUREMENT_ID = "G-LY955VE3JD"
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
+  // Load as a variable font to expose the full wght axis (400–900).
+  // weight: "variable" instructs next/font/google to request the variable-font
+  // resource. Playfair Display's only variable axis is wght (400–900), which is
+  // included automatically; no `axes` entry is needed beyond `weight: "variable"`.
+  // The resulting CSS variable then supports font-variation-settings: "wght" N
+  // at runtime for kinetic typography.
+  weight: "variable",
 })
 
 const geistMono = Geist_Mono({
@@ -156,43 +165,46 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${geistMono.variable}`}>
-      <head>
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_MEASUREMENT_ID}');
-          `}
-        </Script>
-      </head>
-      <body className="font-sans antialiased overflow-x-hidden">
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[10001] focus:px-4 focus:py-2 focus:bg-foreground focus:text-background focus:font-mono focus:text-xs focus:tracking-widest focus:uppercase focus:rounded-full"
-        >
-          Skip to content
-        </a>
-        <div className="noise-overlay" />
-        <Konami />
-        <SwRegister />
-        {children}
-        <ChatWidget />
-        <TerminalConsole />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
-        />
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en" className={`${playfair.variable} ${geistMono.variable}`}>
+        <head>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_MEASUREMENT_ID}');
+            `}
+          </Script>
+        </head>
+        <body className="font-sans antialiased overflow-x-hidden">
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[10001] focus:px-4 focus:py-2 focus:bg-foreground focus:text-background focus:font-mono focus:text-xs focus:tracking-widest focus:uppercase focus:rounded-full"
+          >
+            Skip to content
+          </a>
+          <div className="noise-overlay" />
+          <Konami />
+          <SwRegister />
+          {children}
+          <OnDeviceChat />
+          <TerminalConsole />
+          <CommandPalette />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+          />
+        </body>
+      </html>
+    </ViewTransitions>
   )
 }

@@ -1,5 +1,6 @@
 "use client"
 
+import dynamic from "next/dynamic"
 import { motion } from "framer-motion"
 import {
   Activity,
@@ -22,6 +23,12 @@ import { experience } from "@/lib/content"
 
 const { roles, education, sectionLabel, sectionTitle } = experience
 
+// Lazily load the globe — heavy deps, rendered client-side only
+const CareerGlobe = dynamic(
+  () => import("@/components/career-globe").then((m) => ({ default: m.CareerGlobe })),
+  { ssr: false },
+)
+
 const ICONS: Record<string, LucideIcon> = {
   Server,
   ShieldCheck,
@@ -43,17 +50,30 @@ function Icon({ name, className }: { name: string; className?: string }) {
 export function Experience() {
   return (
     <section id="experience" className="relative px-8 md:px-12 py-32 md:py-40">
-      {/* Section Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="mb-20 md:mb-24"
-      >
-        <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground mb-4">{sectionLabel}</p>
-        <h2 className="font-sans text-3xl md:text-5xl font-light italic">{sectionTitle}</h2>
-      </motion.div>
+      {/* Section Header — asymmetric: title left, globe right on lg+ */}
+      <div className="mb-20 md:mb-24 flex flex-col lg:flex-row lg:items-start lg:gap-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="flex-1 min-w-0"
+        >
+          <p className="scroll-eyebrow font-mono text-xs tracking-[0.3em] text-muted-foreground mb-4">{sectionLabel}</p>
+          <h2 className="font-sans text-3xl md:text-5xl font-light italic">{sectionTitle}</h2>
+        </motion.div>
+
+        {/* Globe — right counterweight, desktop only */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, delay: 0.3 }}
+          className="hidden lg:block lg:w-[340px] xl:w-[400px] shrink-0 -mt-8"
+        >
+          <CareerGlobe />
+        </motion.div>
+      </div>
 
       {/* Timeline */}
       <div className="relative">

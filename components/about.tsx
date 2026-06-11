@@ -2,7 +2,9 @@
 
 import { useRef } from "react"
 import { motion, useScroll, useTransform, useSpring } from "framer-motion"
-import { about } from "@/lib/content"
+import { about, footprint } from "@/lib/content"
+import { FootprintMap } from "@/components/footprint-map"
+import { RevealText } from "@/components/reveal-text"
 
 const { statements, sectionLabel, sectionTitle } = about
 
@@ -19,13 +21,7 @@ export function About() {
   return (
     <section id="about" ref={containerRef} className="relative py-32 overflow-hidden md:py-0">
       {/* Section Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="px-8 md:px-12 mb-0 py-20"
-      >
+      <div className="px-8 md:px-12 mb-0 py-20">
         <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-12">
           {/* Avatar */}
           <motion.div
@@ -47,11 +43,21 @@ export function About() {
 
           {/* Label + Title */}
           <div>
-            <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground mb-4">{sectionLabel}</p>
-            <h2 className="font-sans text-3xl md:text-5xl font-light italic">{sectionTitle}</h2>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="scroll-eyebrow font-mono text-xs tracking-[0.3em] text-muted-foreground mb-4"
+            >
+              {sectionLabel}
+            </motion.p>
+            <RevealText as="h2" className="font-sans text-3xl md:text-5xl font-light italic">
+              {sectionTitle}
+            </RevealText>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Horizontal Scroll Container */}
       <div className="relative flex items-center overflow-x-hidden overflow-y-visible py-4 md:py-6 gap-0">
@@ -71,13 +77,36 @@ export function About() {
         </motion.div>
       </div>
 
+      {/* Footprint Map — asymmetric editorial figure */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.15 }}
+        className="mt-16 md:mt-20 px-8 md:px-12"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 md:gap-12 items-start">
+          {/* Left — editorial label block */}
+          <div className="md:pt-2">
+            <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground mb-3 uppercase">
+              {footprint.eyebrow}
+            </p>
+            <p className="font-sans text-base font-light italic text-foreground/80 leading-relaxed max-w-[28ch]">
+              {footprint.caption}
+            </p>
+          </div>
+          {/* Right — the zero-JS dotted map */}
+          <FootprintMap />
+        </div>
+      </motion.div>
+
       {/* Decorative Line */}
       <motion.div
         initial={{ scaleX: 0 }}
         whileInView={{ scaleX: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="mt-16 mx-8 md:mx-12 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent origin-left"
+        className="scroll-draw mt-16 mx-8 md:mx-12 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent origin-left"
       />
     </section>
   )

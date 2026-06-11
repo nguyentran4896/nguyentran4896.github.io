@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { nav } from "@/lib/content"
 import { toggleTerminal } from "@/lib/terminal-bus"
+import { openPalette } from "@/components/command-palette"
 
 const navLinks = nav.links
 
@@ -125,8 +126,21 @@ export function Navbar() {
             ))}
           </ul>
 
-          {/* Right cluster: console trigger + availability status */}
+          {/* Right cluster: ⌘K hint + console trigger + availability status */}
           <div className="flex items-center gap-4">
+            {/* Desktop-only quiet ⌘K trigger — hidden on mobile */}
+            <button
+              onClick={() => openPalette()}
+              aria-label="Open command palette (Cmd + K)"
+              title="Command palette — ⌘K"
+              data-cursor-hover
+              className="hidden md:inline-flex items-center gap-1.5 font-mono text-xs tracking-wider text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <span className="hidden lg:inline">OPEN</span>
+              <kbd className="border border-border rounded px-1 py-0.5 text-[10px] font-mono tracking-wider text-muted-foreground">
+                ⌘K
+              </kbd>
+            </button>
             <button
               onClick={() => toggleTerminal()}
               aria-label="Open interactive console (Ctrl + `)"

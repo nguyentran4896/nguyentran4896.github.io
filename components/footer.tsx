@@ -4,6 +4,17 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { ArrowUpRight } from "lucide-react"
 import { footer } from "@/lib/content"
+import dynamic from "next/dynamic"
+
+const ContactGlobe = dynamic(
+  () => import("@/components/contact-globe").then((m) => m.ContactGlobe),
+  { ssr: false }
+)
+
+const PhysicsChips = dynamic(
+  () => import("@/components/physics-chips").then((m) => m.PhysicsChips),
+  { ssr: false }
+)
 
 export function Footer() {
   const [time, setTime] = useState("")
@@ -56,6 +67,11 @@ export function Footer() {
 
   return (
     <footer id="contact" className="relative">
+      {/* Physics chips band — above the mailto CTA */}
+      <div className="border-t border-white/10 px-8 md:px-12 py-10">
+        <PhysicsChips />
+      </div>
+
       {/* Main CTA */}
       <motion.a
         href={`mailto:${footer.email}`}
@@ -108,43 +124,60 @@ export function Footer() {
         </div>
       </motion.a>
 
-      {/* Footer Info */}
-      <div className="px-8 md:px-12 py-10 border-t border-white/10">
-        <div className="grid grid-cols-1 md:grid-cols-3 items-start md:items-center gap-8 md:gap-4">
-          {/* Location + Time */}
-          <div className="flex flex-col gap-1.5">
-            <span className="font-mono text-xs tracking-widest text-muted-foreground">
-              {footer.location}
-            </span>
-            <span className="font-mono text-xs tracking-widest text-muted-foreground">
-              <span className="mr-2">LOCAL TIME</span>
-              <span className="text-white tabular-nums">{time}</span>
-            </span>
+      {/* Globe + Social strip */}
+      <div className="border-t border-white/10 px-8 md:px-12 py-12">
+        <div className="flex flex-col md:flex-row items-start gap-12 md:gap-16">
+          {/* Globe — left column, deliberate asymmetry */}
+          <div className="shrink-0">
+            <ContactGlobe />
           </div>
 
-          {/* Links */}
-          <div className="flex flex-wrap gap-6 md:gap-8 md:justify-center">
-            {footer.socials.map((link) => (
+          {/* Right column: location/time + socials + copyright stacked vertically */}
+          <div className="flex flex-col justify-between gap-10 flex-1 self-stretch pt-2">
+            {/* Location + Time */}
+            <div className="flex flex-col gap-1.5">
+              <span className="font-mono text-xs tracking-widest text-muted-foreground">
+                {footer.location}
+              </span>
+              <span className="font-mono text-xs tracking-widest text-muted-foreground">
+                <span className="mr-2">LOCAL TIME</span>
+                <span className="text-white tabular-nums">{time}</span>
+              </span>
+            </div>
+
+            {/* Social links */}
+            <div className="flex flex-wrap gap-6">
+              {footer.socials.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target={link.href.startsWith("mailto:") ? undefined : "_blank"}
+                  rel="noopener noreferrer"
+                  data-cursor-hover
+                  className="group relative font-mono text-xs tracking-widest text-muted-foreground hover:text-white transition-colors duration-300"
+                >
+                  {link.label.toUpperCase()}
+                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-300" />
+                </a>
+              ))}
               <a
-                key={link.label}
-                href={link.href}
-                target={link.href.startsWith("mailto:") ? undefined : "_blank"}
-                rel="noopener noreferrer"
+                href="/tokens"
                 data-cursor-hover
                 className="group relative font-mono text-xs tracking-widest text-muted-foreground hover:text-white transition-colors duration-300"
               >
-                {link.label.toUpperCase()}
+                PLAYGROUND
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-300" />
               </a>
-            ))}
-          </div>
+            </div>
 
-          {/* Copyright */}
-          <p className="font-mono text-xs tracking-widest text-muted-foreground md:text-right">
-            © {new Date().getFullYear()} · NGUYEN TRAN
-          </p>
+            {/* Copyright */}
+            <p className="font-mono text-xs tracking-widest text-muted-foreground">
+              © {new Date().getFullYear()} · NGUYEN TRAN
+            </p>
+          </div>
         </div>
       </div>
+
     </footer>
   )
 }

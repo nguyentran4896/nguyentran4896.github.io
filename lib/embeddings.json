@@ -1,0 +1,288 @@
+[
+  {
+    "id": "post-para-0",
+    "kind": "post-para",
+    "href": "/blog/ai-brainrot",
+    "excerpt": "A teenager today scrolls through more cuts of video in an afternoon than a cinema-goer in 1985 saw in a year. Each clip is six seconds. Each is engineered, by a model that has watc…",
+    "x": 0.4774,
+    "y": 0.9895,
+    "neighbors": [
+      2,
+      13,
+      10
+    ]
+  },
+  {
+    "id": "post-para-1",
+    "kind": "post-para",
+    "href": "/blog/ai-brainrot",
+    "excerpt": "Layer an AI assistant on top of that and something quieter happens: the muscle that holds a thought for more than ninety seconds begins to atrophy.",
+    "x": 0.5012,
+    "y": 0.2805,
+    "neighbors": [
+      7,
+      17,
+      19
+    ]
+  },
+  {
+    "id": "post-para-2",
+    "kind": "post-para",
+    "href": "/blog/ai-brainrot",
+    "excerpt": "Median clip length ~6 s Short-form video, served by a recommender tuned for retention, not coherence. Daily feed time ~90 m Average for under-25s. That's roughly one feature film, …",
+    "x": 0.5487,
+    "y": 1,
+    "neighbors": [
+      0,
+      10,
+      12
+    ]
+  },
+  {
+    "id": "post-para-3",
+    "kind": "post-para",
+    "href": "/blog/ai-brainrot",
+    "excerpt": "It isn't intelligence. The young generation is sharp — sharper, in many ways, than mine. What's eroding is something more specific:",
+    "x": 0.1485,
+    "y": 0.1523,
+    "neighbors": [
+      9,
+      5,
+      4
+    ]
+  },
+  {
+    "id": "post-para-4",
+    "kind": "post-para",
+    "href": "/blog/ai-brainrot",
+    "excerpt": "Tolerance for boredom. Boredom is the soil that ideas grow in. Feeds till it flat.\nWorking memory under load. Holding three things in your head while you reason about a fourth. Mod…",
+    "x": 0.0768,
+    "y": 0.2434,
+    "neighbors": [
+      5,
+      7,
+      3
+    ]
+  },
+  {
+    "id": "post-para-5",
+    "kind": "post-para",
+    "href": "/blog/ai-brainrot",
+    "excerpt": "1. Generation is free. Infinite content means feeds never run dry. Scarcity used to enforce attention; abundance dissolves it.\n2. Personalisation is surgical. A 2026 recommender do…",
+    "x": 0,
+    "y": 0.3199,
+    "neighbors": [
+      4,
+      9,
+      6
+    ]
+  },
+  {
+    "id": "post-para-6",
+    "kind": "post-para",
+    "href": "/blog/ai-brainrot",
+    "excerpt": "Each loop is rational on its own. Stacked, they produce a generation that can answer anything and recall almost nothing.",
+    "x": 0.1931,
+    "y": 0.132,
+    "neighbors": [
+      5,
+      7,
+      3
+    ]
+  },
+  {
+    "id": "post-para-7",
+    "kind": "post-para",
+    "href": "/blog/ai-brainrot",
+    "excerpt": "They read long things on purpose. A book a month. Not for productivity. For range.\nThey write before they prompt. The model is downstream of the thought, not upstream.\nThey keep on…",
+    "x": 0.1685,
+    "y": 0.1354,
+    "neighbors": [
+      4,
+      19,
+      6
+    ]
+  },
+  {
+    "id": "post-para-8",
+    "kind": "post-para",
+    "href": "/blog/ai-brainrot",
+    "excerpt": "// The pattern that compounds\nconst draft = think(question)\nconst critique = await ai.criticize(draft)\nconst final = revise(draft, critique)\n```",
+    "x": 0.3782,
+    "y": 0,
+    "neighbors": [
+      7,
+      6,
+      4
+    ]
+  },
+  {
+    "id": "post-para-9",
+    "kind": "post-para",
+    "href": "/blog/ai-brainrot",
+    "excerpt": "I don't think this generation is doomed. I think they'll be the ones to design their way out of it — because they'll be the first to feel, viscerally, what it costs.",
+    "x": 0.0071,
+    "y": 0.2864,
+    "neighbors": [
+      5,
+      10,
+      3
+    ]
+  },
+  {
+    "id": "post-para-10",
+    "kind": "post-para",
+    "href": "/blog/ai-brainrot",
+    "excerpt": "The interfaces that matter in the next decade won't be the ones that hold attention longest. They'll be the ones that give it back. Quieter feeds. Fewer notifications. Tools that f…",
+    "x": 0.1275,
+    "y": 0.5607,
+    "neighbors": [
+      9,
+      5,
+      11
+    ]
+  },
+  {
+    "id": "post-para-11",
+    "kind": "post-para",
+    "href": "/blog/quiet-interfaces",
+    "excerpt": "The interfaces I keep coming back to share a single quality: they get out of the way. Not minimalism for its own sake — restraint, which is different. Minimalism removes; restraint…",
+    "x": 0.0586,
+    "y": 0.4317,
+    "neighbors": [
+      10,
+      4,
+      5
+    ]
+  },
+  {
+    "id": "post-para-12",
+    "kind": "post-para",
+    "href": "/blog/quiet-interfaces",
+    "excerpt": "1. One accent per viewport. A single point of color earns attention. Two compete.\n2. Hairlines, not boxes. A 1px divider organises space without adding weight.\n3. Type does the wor…",
+    "x": 0.4481,
+    "y": 0.4679,
+    "neighbors": [
+      10,
+      11,
+      21
+    ]
+  },
+  {
+    "id": "post-para-13",
+    "kind": "post-para",
+    "href": "/blog/quiet-interfaces",
+    "excerpt": "That's it. Short by design. The next post will get into how this rule plays out at the system level — when you have a hundred screens and a team of fifteen, restraint becomes infra…",
+    "x": 0.2626,
+    "y": 0.6265,
+    "neighbors": [
+      0,
+      20,
+      11
+    ]
+  },
+  {
+    "id": "work-14",
+    "kind": "work",
+    "href": "/#works",
+    "excerpt": "HiHorus: AI-powered diagnostic platform for ophthalmology. Detects pathologic myopia and segments lesions on fundus images using deep learning.",
+    "x": 1,
+    "y": 0.166,
+    "neighbors": [
+      15,
+      17,
+      18
+    ]
+  },
+  {
+    "id": "work-15",
+    "kind": "work",
+    "href": "/#works",
+    "excerpt": "Retinal OCT Classification: Multi-class CNN models for automated retinal disease detection from OCT scans. Optimised for production and deployed as a Flask REST API.",
+    "x": 0.9863,
+    "y": 0.2303,
+    "neighbors": [
+      14,
+      17,
+      18
+    ]
+  },
+  {
+    "id": "about-16",
+    "kind": "about",
+    "href": "/#about",
+    "excerpt": "I've built production systems for a decade.",
+    "x": 0.2544,
+    "y": 0.3914,
+    "neighbors": [
+      20,
+      19,
+      10
+    ]
+  },
+  {
+    "id": "about-17",
+    "kind": "about",
+    "href": "/#about",
+    "excerpt": "I research medical AI and computer vision.",
+    "x": 0.8612,
+    "y": 0.1731,
+    "neighbors": [
+      14,
+      19,
+      1
+    ]
+  },
+  {
+    "id": "about-18",
+    "kind": "about",
+    "href": "/#about",
+    "excerpt": "Published at the 5th Global Ortho-K & Myopia Conference, 2025.",
+    "x": 0.753,
+    "y": 0.3786,
+    "neighbors": [
+      17,
+      14,
+      15
+    ]
+  },
+  {
+    "id": "about-19",
+    "kind": "about",
+    "href": "/#about",
+    "excerpt": "AI doesn't replace engineers — it amplifies them.",
+    "x": 0.3685,
+    "y": 0.0557,
+    "neighbors": [
+      7,
+      17,
+      1
+    ]
+  },
+  {
+    "id": "about-20",
+    "kind": "about",
+    "href": "/#about",
+    "excerpt": "I translate research into scalable, deployable systems.",
+    "x": 0.255,
+    "y": 0.3404,
+    "neighbors": [
+      16,
+      17,
+      5
+    ]
+  },
+  {
+    "id": "about-21",
+    "kind": "about",
+    "href": "/#about",
+    "excerpt": "I explore model interpretability and generalisation across diverse datasets.",
+    "x": 0.3667,
+    "y": 0.0937,
+    "neighbors": [
+      7,
+      20,
+      5
+    ]
+  }
+]

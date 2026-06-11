@@ -1,8 +1,11 @@
-import Link from "next/link"
 import type { Metadata } from "next"
+import { Link } from "next-view-transitions"
 import { Navbar } from "@/components/navbar"
 import { SmoothScroll } from "@/components/smooth-scroll"
 import { getAllArticles } from "@/lib/articles"
+import embeddingsData from "@/lib/embeddings.json"
+import type { EmbeddingEntry } from "@/lib/embeddings"
+import { EmbeddingAtlas } from "@/components/embedding-atlas"
 
 const SITE_URL = "https://nguyentran4896.github.io"
 
@@ -113,7 +116,10 @@ export default function BlogIndexPage() {
                     </div>
 
                     <div>
-                      <h2 className="font-sans text-2xl md:text-4xl font-light italic leading-tight group-hover:text-white transition-colors">
+                      <h2
+                        className="font-sans text-2xl md:text-4xl font-light italic leading-tight group-hover:text-white transition-colors"
+                        style={{ viewTransitionName: `post-title-${article.slug}` }}
+                      >
                         {article.title}
                       </h2>
                       {article.excerpt && (
@@ -152,6 +158,8 @@ export default function BlogIndexPage() {
             </ol>
           )}
         </section>
+
+        <EmbeddingAtlas entries={embeddingsData as EmbeddingEntry[]} />
       </main>
     </SmoothScroll>
   )
