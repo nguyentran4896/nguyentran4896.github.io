@@ -24,9 +24,11 @@ function HorizontalWorks() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
 
-  // totalShift = number of project panels; outer height accommodates header + projects + 1 extra
+  // totalShift = number of project panels. Outer height = header panel + one
+  // viewport of scroll per panel transition, so the gallery feels tight rather
+  // than leaving a long stretch of near-static scrolling at the end.
   const totalShift = projects.length
-  const outerHeight = `${(totalShift + 2) * 100}vh`
+  const outerHeight = `${(totalShift + 1) * 100}vh`
 
   const { scrollYProgress } = useScroll({
     target: containerRef,

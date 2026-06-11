@@ -192,15 +192,6 @@ export const recognition = {
     "AI is not replacing developers — it's amplifying our capabilities. I use AI as a collaborative tool to focus on high-level problem-solving while automating the routine.",
 }
 
-export const latentField = {
-  eyebrow: "08 — LATENT SPACE",
-  heading: "Generative field",
-  captionPrefix: "SEED",
-  captionSuffix: "— WEIGHTS RE-ROLLED FOR YOU",
-  rerollLabel: "REROLL",
-  subCaption: "CPPN · 5 TANH LAYERS · 16 NEURONS · DRIFT ACTIVE",
-} as const
-
 export const particleMonogram = {
   text: "NGUYEN TRAN",
   ariaLabel: "Nguyen Tran — particle monogram",

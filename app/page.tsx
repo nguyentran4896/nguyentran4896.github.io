@@ -5,7 +5,6 @@ import { About } from "@/components/about"
 import { CustomCursor } from "@/components/custom-cursor"
 import { SmoothScroll } from "@/components/smooth-scroll"
 import { SectionBlend } from "@/components/section-blend"
-import { LatentFieldLoader } from "@/components/latent-field-loader"
 import { ParticleMonogramLoader } from "@/components/particle-monogram-loader"
 
 const Experience = dynamic(() => import("@/components/experience").then((m) => m.Experience))
@@ -28,7 +27,6 @@ export default function Home() {
         <Stats />
         <Works />
         <Recognition />
-        <LatentFieldLoader />
         <TechMarquee />
         <ParticleMonogramLoader />
         <Footer />

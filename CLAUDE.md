@@ -45,12 +45,6 @@ Path alias `@/*` resolves to the repo root (see `tsconfig.json`), so `@/componen
 - **Color, type, spacing, radius changes** → update `app/globals.css` *and* the YAML front matter in `DESIGN.md` together. Re-run the lint command above.
 - **Static export caveat** → because `output: "export"`, anything requiring a Node server at runtime (route handlers, dynamic `revalidate`, `next/image` optimization, middleware) will not work. Keep everything client- or build-time only.
 
-## On-device chat
+## CI
 
-The "CHAT — ON-DEVICE" panel (`components/on-device-chat.tsx`) runs entirely in the visitor's browser — no server, no API key, no network request after the model download.
-
-- **Engine**: `@mlc-ai/web-llm` with model `SmolLM2-360M-Instruct-q4f16_1-MLC`. A Web Worker (`components/llm.worker.ts`) is spawned via `new Worker(new URL('./llm.worker.ts', import.meta.url), { type: 'module' })` to keep inference off the main thread; falls back to `CreateMLCEngine` (main-thread) if worker bundling fails.
-- **System prompt**: built at runtime by `lib/local-llm.ts` which imports `hero`, `about`, `experience`, `works`, `recognition`, and `footer` directly from `lib/content.ts`. No hand-maintained snapshot — bio facts cannot drift.
-- **Privacy flow**: before any download the panel shows a plain-language disclosure: WebGPU required; ~190 MB one-time download; nothing leaves the page. Two buttons: `LOAD MODEL (190 MB)` / `NOT NOW`.
-- **WebGPU guard**: if `navigator.gpu` is absent the load button is replaced with `REQUIRES WEBGPU — RECENT DESKTOP BROWSER`.
-- **CI**: a single `.github/workflows/deploy.yml` pipeline builds and deploys the static site. `deploy-worker.yml` has been removed.
+A single `.github/workflows/deploy.yml` pipeline builds and deploys the static site.

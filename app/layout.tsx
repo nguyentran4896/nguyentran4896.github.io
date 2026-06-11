@@ -6,7 +6,6 @@ import { ViewTransitions } from "next-view-transitions"
 import { site, footer } from "@/lib/content"
 import { Konami } from "@/components/konami"
 import { SwRegister } from "@/components/sw-register"
-import { OnDeviceChat } from "@/components/on-device-chat"
 import { TerminalConsole } from "@/components/terminal-console"
 import { CommandPalette } from "@/components/command-palette"
 import "./globals.css"
@@ -192,7 +191,6 @@ export default function RootLayout({
           <Konami />
           <SwRegister />
           {children}
-          <OnDeviceChat />
           <TerminalConsole />
           <CommandPalette />
           <script
