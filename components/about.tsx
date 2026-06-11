@@ -36,6 +36,9 @@ export function About() {
             <img
               src="/avatar-thailand.jpeg"
               alt="Nguyen Tran"
+              width={512}
+              height={512}
+              loading="lazy"
               className="w-full h-full rounded-full object-cover object-top grayscale contrast-[1.1]"
             />
             <span className="absolute -bottom-1 -right-1 w-3 h-3 bg-accent rounded-full ring-2 ring-background" />

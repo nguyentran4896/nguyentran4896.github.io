@@ -153,7 +153,7 @@ function PhysicsChipsCanvas() {
     function startLoop() {
       if (!canvas) return
       const resolvedCanvas: HTMLCanvasElement = canvas
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+       
       const ctx = resolvedCanvas.getContext("2d")!
       if (!ctx) return
 

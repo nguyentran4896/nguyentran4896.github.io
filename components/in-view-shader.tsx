@@ -3,7 +3,7 @@
 /**
  * InViewShader — wraps a shader canvas so it only mounts/animates when in view.
  * Uses IntersectionObserver to pause (speed=0) when off-screen.
- * Shared utility used by stats, recognition, and dither-image shaders.
+ * Shared utility used by the stats and recognition shaders.
  */
 
 import { useEffect, useRef, useState, type ReactNode } from "react"

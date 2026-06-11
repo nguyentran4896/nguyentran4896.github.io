@@ -50,12 +50,38 @@ for (const city of CITIES) {
   })
 }
 
-const svgString = map.getSVG({
+const rawSvg = map.getSVG({
   radius: 0.22,
   color: "#353535",
   shape: "circle",
   backgroundColor: "transparent",
 })
+
+// ── Compact the SVG ────────────────────────────────────────────────────────────
+// dotted-map emits one <circle> per dot (~3,000 nodes, ~230 KB of markup that
+// would be inlined into every page render). Merge all background dots into a
+// single <path> of zero-length `h0` segments drawn with a round stroke cap —
+// same pixels, two orders of magnitude fewer DOM nodes and far less markup.
+// The accent city pins stay as <circle>s so CSS can animate them.
+const round = (n) => Number(Number(n).toFixed(2))
+let pins = ""
+let dotPath = ""
+let dotRadius = 0
+for (const m of rawSvg.matchAll(/<circle[^>]*\/>/g)) {
+  const tag = m[0]
+  const attr = (name) => tag.match(new RegExp(`${name}="([^"]+)"`))?.[1]
+  if (attr("fill") === "#3B5CFF") {
+    pins += tag
+    continue
+  }
+  dotRadius = round(attr("r"))
+  dotPath += `M${round(attr("cx"))} ${round(attr("cy"))}h0`
+}
+const svgOpen = rawSvg.match(/<svg[^>]*>/)[0]
+const svgString = `${svgOpen}<path d="${dotPath}" fill="none" stroke="#353535" stroke-width="${dotRadius * 2}" stroke-linecap="round"/>${pins}</svg>`
+console.log(
+  `[footprint-map] Compacted ${rawSvg.length} → ${svgString.length} chars (dot r=${dotRadius})`,
+)
 
 // ── Emit TypeScript data file ─────────────────────────────────────────────────
 const OUT = path.join(process.cwd(), "components", "footprint-map-data.ts")

@@ -291,27 +291,6 @@ export const footer = {
   ],
 }
 
-export const onDeviceChat = {
-  trigger: "CHAT — ON-DEVICE",
-  close: "CLOSE",
-  eyebrow: "00 — ON-DEVICE LLM",
-  heading: "Ask about Nguyen.",
-  disclaimer:
-    "Runs entirely in your browser via WebGPU. One-time ~190 MB model download, cached for repeat visits. Nothing you type leaves this page — watch the network tab.",
-  loadBtn: "LOAD MODEL (190 MB)",
-  cancelBtn: "NOT NOW",
-  webgpuMissing: "REQUIRES WEBGPU — RECENT DESKTOP BROWSER",
-  loadingPrefix: "LOADING",
-  readyMsg: "Model loaded. Ask me anything about Nguyen.",
-  placeholder: "Type a question…",
-  sendLabel: "SEND",
-  loadingLabel: "LOADING…",
-  errorPrefix: "ERROR:",
-  inputAriaLabel: "Chat input",
-  closeAriaLabel: "Close chat",
-  dialogAriaLabel: "On-device chat about Nguyen Tran",
-} as const
-
 export const ping = {
   header: "ROUGH RTT — BROWSER FETCH, NOT ICMP",
 } as const

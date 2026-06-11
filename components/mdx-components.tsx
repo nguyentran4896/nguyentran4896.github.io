@@ -83,8 +83,10 @@ export const mdxComponents: MDXComponents = {
     </pre>
   ),
   img: (props: ImgHTMLAttributes<HTMLImageElement>) => (
-    // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
+    // eslint-disable-next-line @next/next/no-img-element
     <img
+      loading="lazy"
+      decoding="async"
       {...props}
       className="my-10 w-full rounded-md border border-border"
       alt={props.alt ?? ""}

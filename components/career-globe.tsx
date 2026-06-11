@@ -40,7 +40,7 @@ interface GlobeSceneProps {
 }
 
 function GlobeScene({ reducedMotion, scrollYProgress }: GlobeSceneProps) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   const globeRef = useRef<any>(null)
   const { scene } = useThree()
   const readyRef = useRef(false)
@@ -53,9 +53,9 @@ function GlobeScene({ reducedMotion, scrollYProgress }: GlobeSceneProps) {
     const worldAtlas = await import("world-atlas/countries-110m.json")
 
     // Build GeoJSON features from TopoJSON
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     const topo = worldAtlas as any
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     const countries = feature(topo, topo.objects.countries) as any
 
     const globe = new ThreeGlobe({ waitForGlobeReady: true, animateIn: false })
@@ -65,7 +65,7 @@ function GlobeScene({ reducedMotion, scrollYProgress }: GlobeSceneProps) {
 
     // Hex polygon layer — countries as gray hex dots
     globe.hexPolygonsData(countries.features)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     globe.hexPolygonGeoJsonGeometry((d: any) => d.geometry)
     globe.hexPolygonColor(() => "#2A2A2A")
     globe.hexPolygonResolution(3)
@@ -101,7 +101,7 @@ function GlobeScene({ reducedMotion, scrollYProgress }: GlobeSceneProps) {
       globe.ringsData(RING_DATA)
       globe.ringLat("lat")
       globe.ringLng("lng")
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       globe.ringColor(() => (t: any) => `rgba(59,92,255,${1 - t})`)
       globe.ringMaxRadius(3)
       globe.ringPropagationSpeed(1.5)
