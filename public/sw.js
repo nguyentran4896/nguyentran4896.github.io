@@ -2,7 +2,12 @@
 // network-first for navigations (fall back to cache, then /offline) and
 // cache-first for hashed Next static assets.
 const CACHE = "portfolio-v1"
-const PRECACHE = ["/", "/blog", "/offline", "/manifest.webmanifest"]
+// Paths must match what the static export actually serves. next.config.mjs sets
+// `trailingSlash: true`, so pages are emitted as `blog/index.html` and served at
+// `/blog/`; the non-slash forms 301-redirect on GitHub Pages, and a redirected
+// response makes the atomic `cache.addAll()` reject — which aborts install and
+// leaves the SW permanently uninstalled. Keep these trailing slashes in sync.
+const PRECACHE = ["/", "/blog/", "/offline/", "/manifest.webmanifest"]
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -50,7 +55,7 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE).then((c) => c.put(req, copy))
           return res
         })
-        .catch(() => caches.match(req).then((hit) => hit || caches.match("/offline")))
+        .catch(() => caches.match(req).then((hit) => hit || caches.match("/offline/")))
     )
   }
 })
