@@ -13,10 +13,10 @@ export const metadata: Metadata = {
   title: "Writing",
   description:
     "Notes and essays by Nguyen Tran on software engineering at scale, medical AI, computer vision, and the discipline of building quiet software.",
-  alternates: { canonical: "/blog" },
+  alternates: { canonical: "/blog/" },
   openGraph: {
     type: "website",
-    url: `${SITE_URL}/blog`,
+    url: `${SITE_URL}/blog/`,
     siteName: "Nguyen Tran",
     title: "Writing — Nguyen Tran",
     description:
@@ -27,6 +27,7 @@ export const metadata: Metadata = {
     title: "Writing — Nguyen Tran",
     description:
       "Notes and essays on software engineering at scale, medical AI, and computer vision.",
+    site: "@nguyentran4896",
     creator: "@nguyentran4896",
   },
 }
@@ -41,19 +42,22 @@ function formatDate(d: string) {
 export default function BlogIndexPage() {
   const articles = getAllArticles()
 
+  const ogImage = `${SITE_URL}/opengraph-image.png`
+
   const blogJsonLd = {
     "@context": "https://schema.org",
     "@type": "Blog",
     name: "Writing — Nguyen Tran",
-    url: `${SITE_URL}/blog`,
+    url: `${SITE_URL}/blog/`,
     inLanguage: "en",
     author: { "@type": "Person", name: "Nguyen Tran", url: SITE_URL },
     blogPost: articles.map((a) => ({
       "@type": "BlogPosting",
       headline: a.title,
       description: a.excerpt,
+      image: [ogImage],
       datePublished: a.date,
-      url: `${SITE_URL}/blog/${a.slug}`,
+      url: `${SITE_URL}/blog/${a.slug}/`,
       keywords: a.tags.join(", "),
       author: { "@type": "Person", name: "Nguyen Tran", url: SITE_URL },
     })),
@@ -64,7 +68,7 @@ export default function BlogIndexPage() {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
-      { "@type": "ListItem", position: 2, name: "Writing", item: `${SITE_URL}/blog` },
+      { "@type": "ListItem", position: 2, name: "Writing", item: `${SITE_URL}/blog/` },
     ],
   }
 
