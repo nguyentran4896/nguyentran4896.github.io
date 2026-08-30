@@ -357,7 +357,7 @@ function VerticalWorks() {
               style={{ filter: "grayscale(50%) contrast(1.1)" }}
             />
           )}
-          <div className="absolute inset-0 bg-[#2563eb]/10 mix-blend-overlay" />
+          <div className="absolute inset-0 bg-accent/10 mix-blend-overlay" />
         </motion.div>
       </div>
 
