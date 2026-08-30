@@ -1,3 +1,5 @@
+import fs from "node:fs"
+import path from "node:path"
 import { notFound } from "next/navigation"
 import { Link } from "next-view-transitions"
 import type { Metadata } from "next"
@@ -14,6 +16,16 @@ import { getAllArticles, getArticleBySlug, getRelatedArticles } from "@/lib/arti
 
 const SITE_URL = "https://nguyentran4896.github.io"
 
+// Resolved at build time (static export). Each post can ship a bespoke 1200×630
+// social card at public/articles/<slug>/og.png; posts without one fall back to
+// the site-wide card. Regenerate cards with scripts/og-render.html — see the
+// note in that file.
+function ogImageFor(slug: string): string {
+  const rel = `/articles/${slug}/og.png`
+  const abs = path.join(process.cwd(), "public", rel)
+  return fs.existsSync(abs) ? `${SITE_URL}${rel}` : `${SITE_URL}/opengraph-image.png`
+}
+
 type Params = { slug: string }
 
 export function generateStaticParams(): Params[] {
@@ -29,7 +41,7 @@ export async function generateMetadata({
   const article = getArticleBySlug(slug)
   if (!article) return {}
   const url = `${SITE_URL}/blog/${article.slug}/`
-  const ogImage = `${SITE_URL}/opengraph-image.png`
+  const ogImage = ogImageFor(article.slug)
   return {
     title: article.title,
     description: article.excerpt,
@@ -76,7 +88,7 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
 
   const mins = readingTime(article.content)
   const url = `${SITE_URL}/blog/${article.slug}/`
-  const ogImage = `${SITE_URL}/opengraph-image.png`
+  const ogImage = ogImageFor(article.slug)
   const related = getRelatedArticles(article.slug, 3)
 
   const articleJsonLd = {

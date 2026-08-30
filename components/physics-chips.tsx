@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useCallback, useState } from "react"
 import { tech, physicsChips as COPY } from "@/lib/content"
+import { prefersReducedMotion, isCoarsePointer } from "@/lib/media"
 
 // Cap at 18 chips
 const TECH_ITEMS = [...tech.techItems, ...tech.concepts].slice(0, 18)
@@ -317,8 +318,8 @@ export function PhysicsChips() {
   const [canUsePhysics, setCanUsePhysics] = useState<boolean | null>(null)
 
   useEffect(() => {
-    const isCoarse = window.matchMedia("(hover: none), (pointer: coarse)").matches
-    const isReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const isCoarse = isCoarsePointer()
+    const isReducedMotion = prefersReducedMotion()
     const isTouch = "ontouchstart" in window
     const isLargeEnough = window.innerWidth >= 1024 // lg breakpoint
 

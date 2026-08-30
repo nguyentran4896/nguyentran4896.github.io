@@ -8,6 +8,7 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { SplitText } from "gsap/SplitText"
+import { REDUCED_MOTION_QUERY } from "@/lib/media"
 
 gsap.registerPlugin(ScrollTrigger, SplitText)
 
@@ -33,7 +34,7 @@ export function RevealText({ children, className, as: Tag = "div" }: RevealTextP
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const mq = window.matchMedia(REDUCED_MOTION_QUERY)
     setReducedMotion(mq.matches)
     const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
     mq.addEventListener("change", handler)
