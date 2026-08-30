@@ -40,6 +40,8 @@ function PhysicsChipsCanvas() {
   const bodiesRef = useRef<unknown[]>([])
   const mouseConstraintRef = useRef<unknown>(null)
   const runnerRef = useRef<unknown>(null)
+  const pointerHandlerRef = useRef<(() => void) | null>(null)
+  const teardownRef = useRef<(() => void) | null>(null)
   const isInViewRef = useRef(false)
   const isIdleRef = useRef(false)
   const lastInteractionRef = useRef(Date.now())
@@ -136,18 +138,34 @@ function PhysicsChipsCanvas() {
       World.add(engine.world, mouseConstraint)
       mouseConstraintRef.current = mouseConstraint
 
-      // Wake on pointer interaction
-      canvas.addEventListener("pointerdown", () => {
+      // Wake on pointer interaction. Remove any handler left by a previous
+      // spawn before adding a new one — the canvas element persists across
+      // resets / scroll-resumes, so re-adding would leak listeners.
+      if (pointerHandlerRef.current) {
+        canvas.removeEventListener("pointerdown", pointerHandlerRef.current)
+      }
+      const onPointerDown = () => {
         lastInteractionRef.current = Date.now()
         isIdleRef.current = false
         if (!rafRef.current) startLoop()
-      })
+      }
+      pointerHandlerRef.current = onPointerDown
+      canvas.addEventListener("pointerdown", onPointerDown)
     }
 
     isIdleRef.current = false
     lastInteractionRef.current = Date.now()
 
     Runner.run(runner, engine)
+
+    // Expose a teardown that stops matter-js's own runner loop (it steps the
+    // engine on an internal rAF and would otherwise keep running forever after
+    // unmount) and releases the engine. Called from the unmount effect.
+    teardownRef.current = () => {
+      Runner.stop(runner)
+      World.clear(engine.world, false)
+      Engine.clear(engine)
+    }
 
     // rAF sync loop
     function startLoop() {
@@ -233,10 +251,19 @@ function PhysicsChipsCanvas() {
     return () => observer.disconnect()
   }, [spawnPile])
 
-  // Cleanup on unmount
+  // Cleanup on unmount: cancel our sync loop, detach the pointer listener, and
+  // stop + clear the matter-js engine so it doesn't keep stepping (and holding
+  // the whole component graph in memory) after the footer unmounts.
   useEffect(() => {
     return () => {
       if (rafRef.current != null) cancelAnimationFrame(rafRef.current)
+      const canvas = canvasRef.current
+      if (canvas && pointerHandlerRef.current) {
+        canvas.removeEventListener("pointerdown", pointerHandlerRef.current)
+        pointerHandlerRef.current = null
+      }
+      teardownRef.current?.()
+      teardownRef.current = null
     }
   }, [])
 
