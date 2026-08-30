@@ -28,12 +28,12 @@ export async function generateMetadata({
   const { slug } = await params
   const article = getArticleBySlug(slug)
   if (!article) return {}
-  const url = `${SITE_URL}/blog/${article.slug}`
+  const url = `${SITE_URL}/blog/${article.slug}/`
   const ogImage = `${SITE_URL}/opengraph-image.png`
   return {
     title: article.title,
     description: article.excerpt,
-    alternates: { canonical: `/blog/${article.slug}` },
+    alternates: { canonical: `/blog/${article.slug}/` },
     openGraph: {
       type: "article",
       url,
@@ -50,6 +50,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: article.title,
       description: article.excerpt,
+      site: "@nguyentran4896",
       creator: "@nguyentran4896",
       images: [ogImage],
     },
@@ -74,7 +75,8 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
   if (!article) notFound()
 
   const mins = readingTime(article.content)
-  const url = `${SITE_URL}/blog/${article.slug}`
+  const url = `${SITE_URL}/blog/${article.slug}/`
+  const ogImage = `${SITE_URL}/opengraph-image.png`
   const related = getRelatedArticles(article.slug, 3)
 
   const articleJsonLd = {
@@ -82,6 +84,8 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
     "@type": "BlogPosting",
     headline: article.title,
     description: article.excerpt,
+    // Article/BlogPosting rich results treat `image` as effectively required.
+    image: [ogImage],
     datePublished: article.date,
     dateModified: article.date,
     inLanguage: "en",
@@ -106,7 +110,7 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
-      { "@type": "ListItem", position: 2, name: "Writing", item: `${SITE_URL}/blog` },
+      { "@type": "ListItem", position: 2, name: "Writing", item: `${SITE_URL}/blog/` },
       { "@type": "ListItem", position: 3, name: article.title, item: url },
     ],
   }

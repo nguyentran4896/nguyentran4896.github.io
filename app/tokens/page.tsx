@@ -9,10 +9,10 @@ export const metadata: Metadata = {
   title: "Tokenizer Playground",
   description:
     "Interactive BPE tokenizer playground. Paste any text and watch it decompose into tokens in real time — supports o200k_base and cl100k_base encodings.",
-  alternates: { canonical: "/tokens" },
+  alternates: { canonical: "/tokens/" },
   openGraph: {
     type: "website",
-    url: `${SITE_URL}/tokens`,
+    url: `${SITE_URL}/tokens/`,
     siteName: "Nguyen Tran",
     title: "Tokenizer Playground — Nguyen Tran",
     description:
@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     title: "Tokenizer Playground — Nguyen Tran",
     description:
       "Interactive BPE tokenizer playground. See how language models read your text.",
+    site: "@nguyentran4896",
     creator: "@nguyentran4896",
   },
 }
