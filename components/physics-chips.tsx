@@ -20,7 +20,7 @@ function StaticChips() {
           className={
             "font-mono text-[10px] uppercase tracking-[0.25em] px-3 py-1.5 rounded-full " +
             (i === ACCENT_INDEX
-              ? "border border-accent text-accent"
+              ? "border border-accent text-accent-text"
               : "border border-white/20 text-muted-foreground")
           }
         >
@@ -290,7 +290,7 @@ function PhysicsChipsCanvas() {
           className={
             "absolute pointer-events-none select-none font-mono text-[10px] uppercase tracking-[0.25em] px-3 py-1.5 rounded-full whitespace-nowrap " +
             (i === ACCENT_INDEX
-              ? "border border-accent text-accent bg-background"
+              ? "border border-accent text-accent-text bg-background"
               : "border border-white/20 text-muted-foreground bg-background")
           }
         >

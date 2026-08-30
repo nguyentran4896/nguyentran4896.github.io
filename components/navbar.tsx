@@ -125,7 +125,7 @@ export function Navbar() {
                     activeHref === link.href ? "text-foreground" : "text-muted-foreground"
                   }`}
                 >
-                  <span className="text-accent mr-1">0{index + 1}</span>
+                  <span className="text-accent-text mr-1">0{index + 1}</span>
                   {link.label.toUpperCase()}
                   <span
                     className={`absolute -bottom-1 left-0 h-px bg-foreground transition-all duration-300 ${
@@ -219,7 +219,7 @@ export function Navbar() {
                   onClick={() => scrollToSection(link.href)}
                   className="group text-4xl font-sans tracking-tight text-foreground"
                 >
-                  <span className="text-accent font-mono text-sm mr-2">0{index + 1}</span>
+                  <span className="text-accent-text font-mono text-sm mr-2">0{index + 1}</span>
                   {link.label}
                 </motion.button>
               ))}
@@ -234,7 +234,7 @@ export function Navbar() {
                 }}
                 className="group font-mono text-sm tracking-wider text-muted-foreground"
               >
-                <span className="text-accent mr-2">›_</span>
+                <span className="text-accent-text mr-2">›_</span>
                 CONSOLE
               </motion.button>
               <motion.div

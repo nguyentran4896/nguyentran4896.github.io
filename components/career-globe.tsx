@@ -276,7 +276,7 @@ export function CareerGlobe({ className = "" }: CareerGlobeProps) {
         <p className="font-mono text-[10px] tracking-[0.28em] uppercase text-muted-foreground">
           {GLOBE_COPY.caption}
         </p>
-        <p className="font-mono text-[9px] tracking-[0.22em] uppercase text-white/30">
+        <p className="font-mono text-[9px] tracking-[0.22em] uppercase text-muted-foreground">
           {GLOBE_COPY.captionSub}
         </p>
       </div>

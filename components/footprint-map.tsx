@@ -64,7 +64,7 @@ export function FootprintMap() {
             <span className="font-mono text-[10px] tracking-[0.25em] text-muted-foreground uppercase">
               {city.name}
             </span>
-            <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground/50 uppercase">
+            <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
               {city.coords}
             </span>
           </span>

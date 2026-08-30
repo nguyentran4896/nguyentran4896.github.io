@@ -211,7 +211,7 @@ export function TerminalConsole() {
           }}
           aria-label="Close console"
           data-cursor-hover
-          className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-accent"
+          className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-accent-text"
         >
           ×
         </button>
@@ -222,7 +222,7 @@ export function TerminalConsole() {
           <Line key={i} line={line} />
         ))}
         <div className="flex items-center gap-2">
-          <span className="shrink-0 text-accent">~ $</span>
+          <span className="shrink-0 text-accent-text">~ $</span>
           <input
             ref={inputRef}
             value={value}

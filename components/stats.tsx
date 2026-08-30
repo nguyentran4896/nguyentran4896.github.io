@@ -77,7 +77,7 @@ export function Stats() {
             <span className="mt-3 block font-mono text-[10px] md:text-xs tracking-[0.2em] uppercase text-muted-foreground">
               {item.label}
             </span>
-            <span className="absolute -top-2 -left-2 text-accent font-mono text-[10px] tracking-widest">
+            <span className="absolute -top-2 -left-2 text-accent-text font-mono text-[10px] tracking-widest">
               0{index + 1}
             </span>
           </motion.li>
