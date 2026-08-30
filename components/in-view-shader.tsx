@@ -1,8 +1,12 @@
 "use client"
 
 /**
- * InViewShader — wraps a shader canvas so it only mounts/animates when in view.
- * Uses IntersectionObserver to pause (speed=0) when off-screen.
+ * InViewShader — wraps a shader canvas so it only mounts while in view.
+ * Uses IntersectionObserver to fully UNMOUNT the child when off-screen, which
+ * releases its WebGL context (merely setting speed=0 kept the context alive).
+ * With several canvases on the page this keeps the number of simultaneous live
+ * GL contexts down — browsers cap them (~16, fewer on mobile) and force-lose the
+ * oldest, which can blank a canvas. Trade-off: a small re-init cost on re-entry.
  * Shared utility used by the stats and recognition shaders.
  */
 
@@ -38,7 +42,7 @@ export function InViewShader({ children, className, rootMargin = "-10% 0px" }: I
 
   return (
     <div ref={wrapperRef} className={className}>
-      {children(inView)}
+      {inView ? children(inView) : null}
     </div>
   )
 }
