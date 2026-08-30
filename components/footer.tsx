@@ -83,7 +83,7 @@ export function Footer() {
       >
         {/* Background Curtain */}
         <motion.div
-          className="absolute inset-0 bg-[#2563eb]"
+          className="absolute inset-0 bg-accent"
           initial={{ y: "100%" }}
           animate={{ y: isHovered ? "0%" : "100%" }}
           transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -170,8 +170,13 @@ export function Footer() {
               </a>
             </div>
 
-            {/* Copyright */}
-            <p className="font-mono text-xs tracking-widest text-muted-foreground">
+            {/* Copyright — suppressHydrationWarning because the year is derived
+                from the client clock, which can differ from the build-time
+                prerender across a New Year boundary (static export). */}
+            <p
+              className="font-mono text-xs tracking-widest text-muted-foreground"
+              suppressHydrationWarning
+            >
               © {new Date().getFullYear()} · NGUYEN TRAN
             </p>
           </div>
