@@ -3,7 +3,10 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { usePathname, useRouter } from "next/navigation"
 import { TERMINAL_EVENT } from "@/lib/terminal-bus"
-import { COMMAND_NAMES, runCommand, type CommandResult, type TerminalLine } from "@/lib/terminal"
+// Types are erased at build time (import type), so they don't pull the command
+// engine into the bundle. The engine itself (runCommand / COMMAND_NAMES) is
+// dynamically imported on first use, keeping it out of the initial bundle.
+import type { CommandResult, TerminalLine } from "@/lib/terminal"
 
 const BANNER: TerminalLine[] = [
   { kind: "head", text: "Nguyen Tran — interactive console" },
@@ -118,21 +121,24 @@ export function TerminalConsole() {
     [],
   )
 
-  const submit = useCallback(() => {
+  const submit = useCallback(async () => {
     const raw = value
+    // Clear the input immediately so it feels snappy while the engine chunk
+    // (dynamically imported on first command) loads.
+    setValue("")
+    setHistoryIndex(null)
+    if (raw.trim()) setHistory((h) => [...h, raw])
+    const { runCommand } = await import("@/lib/terminal")
     const result = runCommand(raw, history)
     setOutput((prev) => {
       if (result.clear) return []
       return [...prev, { kind: "input", text: raw }, ...result.lines]
     })
-    if (raw.trim()) setHistory((h) => [...h, raw])
-    setHistoryIndex(null)
-    setValue("")
     if (result.navigate) navigate(result.navigate)
     if (result.stream) drainStream(result.stream)
   }, [value, history, navigate, drainStream])
 
-  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const onKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault()
       submit()
@@ -168,6 +174,7 @@ export function TerminalConsole() {
       e.preventDefault()
       const frag = value.trim().toLowerCase()
       if (!frag) return
+      const { COMMAND_NAMES } = await import("@/lib/terminal")
       const matches = COMMAND_NAMES.filter((n) => n.startsWith(frag))
       if (matches.length === 1) {
         setValue(matches[0])
