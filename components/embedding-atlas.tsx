@@ -52,7 +52,7 @@ function ExcerptCard({
           aria-live="polite"
           aria-atomic="true"
         >
-          <span className="block font-mono text-[9px] uppercase tracking-[0.3em] text-accent mb-2">
+          <span className="block font-mono text-[9px] uppercase tracking-[0.3em] text-accent-text mb-2">
             {kindLabel}
           </span>
           <p className="font-sans text-xs leading-relaxed text-foreground/80 line-clamp-4">
@@ -173,7 +173,7 @@ export function EmbeddingAtlas({ entries }: Props) {
         <div className="absolute inset-0 border border-border pointer-events-none" />
 
         {/* Corner label */}
-        <span className="absolute bottom-3 left-3 font-mono text-[9px] uppercase tracking-[0.25em] text-muted-foreground/60 pointer-events-none select-none">
+        <span className="absolute bottom-3 left-3 font-mono text-[9px] uppercase tracking-[0.25em] text-muted-foreground pointer-events-none select-none">
           {COPY.cornerLabel}
         </span>
 

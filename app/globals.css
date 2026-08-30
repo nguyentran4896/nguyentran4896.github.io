@@ -16,6 +16,11 @@
   --muted-foreground: oklch(0.708 0 0);
   --accent: oklch(0.546 0.245 262.881);
   --accent-foreground: oklch(0.985 0 0);
+  /* AA-compliant tone of the accent for small accent-colored TEXT on the dark
+     surface: the vivid --accent is 3.45:1 on #1A1A1A (fails AA-normal), this
+     lightened blue is 5.0:1. The vivid accent is retained for large text,
+     selection, focus rings, borders, and atmospheric glows. */
+  --accent-text: oklch(0.64 0.18 264);
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
   --border: oklch(0.269 0 0);
@@ -54,6 +59,7 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-text: var(--accent-text);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
@@ -97,6 +103,9 @@
   --border: oklch(0.18 0.005 60 / 0.14);
   --input: oklch(0.18 0.005 60 / 0.14);
   --ring: oklch(0.546 0.245 262.881);
+  /* On the light paper surface the vivid accent already clears AA (4.68:1),
+     so accent-text needs no lightening here — fall back to the accent itself. */
+  --accent-text: var(--accent);
 }
 
 @layer base {
@@ -105,6 +114,15 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  /* Visible keyboard focus (WCAG 2.4.7). The default outline color resolves to
+     ring/50 ≈ 1.8:1 on #1A1A1A — effectively invisible. DESIGN.md reserves the
+     accent for focus rings, and #3B5CFF clears the 3:1 non-text bar on both the
+     dark (3.45:1) and paper (4.68:1) surfaces. :focus-visible keeps it off
+     mouse clicks; outline never affects layout. */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
 }
 

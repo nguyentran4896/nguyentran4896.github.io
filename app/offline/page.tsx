@@ -24,7 +24,7 @@ export default function OfflinePage() {
           <span className="h-px flex-1 bg-border" />
           <Link
             href="/"
-            className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground hover:text-accent transition-colors"
+            className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground hover:text-accent-text transition-colors"
           >
             ← Home
           </Link>

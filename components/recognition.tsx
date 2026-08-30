@@ -198,7 +198,7 @@ export function Recognition() {
                 key={interest}
                 className="group flex items-baseline gap-4 border-b border-white/5 pb-3"
               >
-                <span className="font-mono text-[10px] tracking-widest text-accent">
+                <span className="font-mono text-[10px] tracking-widest text-accent-text">
                   0{index + 1}
                 </span>
                 <span className="font-sans text-lg md:text-2xl font-light tracking-tight">

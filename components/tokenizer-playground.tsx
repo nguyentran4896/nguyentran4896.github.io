@@ -184,7 +184,7 @@ export function TokenizerPlayground() {
             className={[
               "flex items-center gap-2 px-4 py-1.5 border rounded-full font-mono text-[10px] tracking-[0.3em] uppercase transition-colors duration-300",
               showIds
-                ? "border-accent text-accent"
+                ? "border-accent text-accent-text"
                 : "border-white/10 text-muted-foreground hover:text-foreground hover:border-white/20",
             ].join(" ")}
           >
@@ -241,9 +241,9 @@ export function TokenizerPlayground() {
           placeholder={COPY.inputPlaceholder}
           aria-label={COPY.inputLabel}
           className={[
-            "w-full resize-none rounded-none border border-white/10 bg-transparent p-4",
-            "font-mono text-sm leading-relaxed text-foreground placeholder:text-muted-foreground/40",
-            "focus:outline-none focus:border-white/20 transition-colors duration-300",
+            "w-full resize-none rounded-none border border-white/35 bg-transparent p-4",
+            "font-mono text-sm leading-relaxed text-foreground placeholder:text-muted-foreground",
+            "focus:border-white/60 transition-colors duration-300",
             "tracking-[0.05em]",
           ].join(" ")}
         />
@@ -264,7 +264,7 @@ export function TokenizerPlayground() {
             </span>
           )}
           {spans.length === 0 && !loading && (
-            <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground/50 uppercase">
+            <p className="font-mono text-[11px] tracking-[0.2em] text-muted-foreground uppercase">
               — NO TOKENS
             </p>
           )}

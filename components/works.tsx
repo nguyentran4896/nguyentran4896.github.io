@@ -197,7 +197,7 @@ function ProjectPanel({
 
         {/* Achievement */}
         {project.achievement && (
-          <span className="font-mono text-[10px] md:text-[11px] tracking-widest uppercase text-accent">
+          <span className="font-mono text-[10px] md:text-[11px] tracking-widest uppercase text-accent-text">
             {project.achievement}
           </span>
         )}
@@ -322,7 +322,7 @@ function VerticalWorks() {
                     {project.stack}
                   </span>
                   {project.achievement && (
-                    <span className="font-mono text-[10px] md:text-[11px] tracking-widest uppercase text-accent">
+                    <span className="font-mono text-[10px] md:text-[11px] tracking-widest uppercase text-accent-text">
                       ★ {project.achievement}
                     </span>
                   )}

@@ -17,6 +17,7 @@ colors:
   secondary-foreground: "#FAFAFA"
   accent: "#3B5CFF"
   accent-foreground: "#FAFAFA"
+  accent-text: "#5285F8"
   destructive: "#7A2A2A"
   on-dark: "#FAFAFA"
   on-light: "#1A1A1A"
@@ -147,7 +148,8 @@ The palette is intentionally narrow: an inked background, a paper-white foregrou
 - **Foreground `#FAFAFA`** — Warm paper white. All primary text.
 - **Muted `#353535`** — Borders, dividers, secondary surfaces. Never used for text on background.
 - **Muted-foreground `#A3A3A3`** — Captions, metadata, mono labels, body copy when de-emphasized.
-- **Accent `#3B5CFF`** — Electric blue. Reserved for: text selection, focus rings, and at most one deliberate moment per section (a hovered link, a single highlighted word). If the accent appears more than twice in one viewport, remove one.
+- **Accent `#3B5CFF`** — Electric blue. Reserved for: text selection, focus rings, borders, atmospheric glows, large accented numerals, and at most one deliberate moment per section (a hovered link, a single highlighted word). If the accent appears more than twice in one viewport, remove one.
+- **Accent-text `#5285F8`** — Not a new hue: the same electric blue, lightened only enough to clear WCAG AA for *small* text on the near-black surface. `#3B5CFF` is 3.45:1 on `#1A1A1A` (fails AA-normal); `#5285F8` is 5.0:1. Use it for accent-colored text below ~24px (mono category labels, ordinals, prompts). Large accent text (≥24px) keeps the vivid `#3B5CFF`. On the paper theme this token resolves back to `#3B5CFF`, which already meets AA there (4.68:1).
 - **Hairline `rgba(250,250,250,0.20)`** — Outlined buttons, section dividers, decorative rules. Prefer hairlines over filled surfaces.
 
 **Contrast rules.** Body copy uses `foreground` on `background`. `muted-foreground` is acceptable for labels and captions but never for paragraph text. Do not place `muted-foreground` text on `muted` surfaces.

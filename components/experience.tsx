@@ -110,7 +110,7 @@ export function Experience() {
                     <h3 className="font-sans text-2xl md:text-4xl lg:text-5xl font-light tracking-tight leading-tight">
                       {role.role}
                     </h3>
-                    <p className="mt-2 font-mono text-xs md:text-sm tracking-[0.2em] uppercase text-accent inline-flex items-center gap-2 flex-wrap">
+                    <p className="mt-2 font-mono text-xs md:text-sm tracking-[0.2em] uppercase text-accent-text inline-flex items-center gap-2 flex-wrap">
                       <Building2 className="w-3.5 h-3.5" strokeWidth={1.25} aria-hidden />
                       {role.company}
                       <span className="mx-1 text-muted-foreground">·</span>
@@ -146,7 +146,7 @@ export function Experience() {
                 <ul className="mt-6 max-w-2xl space-y-1.5">
                   {role.bullets.map((bullet) => (
                     <li key={bullet} className="flex gap-3 text-sm leading-relaxed text-white/50">
-                      <span className="text-accent mt-0.5 shrink-0">·</span>
+                      <span className="text-accent-text mt-0.5 shrink-0">·</span>
                       <span>{bullet}</span>
                     </li>
                   ))}

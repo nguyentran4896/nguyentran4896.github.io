@@ -111,7 +111,7 @@ export default function BlogIndexPage() {
                     className="group block py-10 md:py-12 grid grid-cols-1 md:grid-cols-[18%_1fr_auto] gap-4 md:gap-12 items-baseline transition-colors hover:bg-white/[0.015]"
                   >
                     <div className="flex items-center gap-3">
-                      <span className="font-mono text-[10px] tracking-[0.3em] text-accent">
+                      <span className="font-mono text-[10px] tracking-[0.3em] text-accent-text">
                         {String(index + 1).padStart(2, "0")}
                       </span>
                       <span className="font-mono text-[11px] tracking-[0.25em] uppercase text-muted-foreground">
@@ -144,7 +144,7 @@ export default function BlogIndexPage() {
                         </div>
                       )}
                       {article.draft && (
-                        <span className="mt-4 inline-block font-mono text-[10px] tracking-[0.3em] text-accent uppercase">
+                        <span className="mt-4 inline-block font-mono text-[10px] tracking-[0.3em] text-accent-text uppercase">
                           Draft
                         </span>
                       )}
@@ -152,7 +152,7 @@ export default function BlogIndexPage() {
 
                     <span
                       aria-hidden
-                      className="hidden md:inline-block font-mono text-xs tracking-widest text-muted-foreground group-hover:text-accent transition-all group-hover:translate-x-1"
+                      className="hidden md:inline-block font-mono text-xs tracking-widest text-muted-foreground group-hover:text-accent-text transition-all group-hover:translate-x-1"
                     >
                       READ →
                     </span>
