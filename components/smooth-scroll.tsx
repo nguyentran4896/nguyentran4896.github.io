@@ -4,6 +4,7 @@ import { ReactLenis, useLenis } from "lenis/react"
 import { useEffect, useState, type ReactNode } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { prefersReducedMotion, isCoarsePointer } from "@/lib/media"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -43,8 +44,8 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
   const [enabled, setEnabled] = useState(false)
 
   useEffect(() => {
-    const coarse = window.matchMedia("(hover: none), (pointer: coarse)").matches
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const coarse = isCoarsePointer()
+    const reduced = prefersReducedMotion()
     if (coarse || reduced || "ontouchstart" in window) return
     setEnabled(true)
   }, [])

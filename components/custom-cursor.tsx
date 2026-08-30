@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
+import { prefersReducedMotion, isCoarsePointer } from "@/lib/media"
 
 export function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false)
@@ -27,8 +28,8 @@ export function CustomCursor() {
   const ringOffsetY = useTransform(ringY, (v) => v - 24)
 
   useEffect(() => {
-    const coarse = window.matchMedia("(hover: none), (pointer: coarse)").matches
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const coarse = isCoarsePointer()
+    const reduced = prefersReducedMotion()
     if (coarse || reduced || "ontouchstart" in window) return
     setEnabled(true)
   }, [])

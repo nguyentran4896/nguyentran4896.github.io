@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet" />
+<style>
+  :root { --bg:#1A1A1A; --fg:#F4F3EE; --accent:#3B5CFF; }
+  html,body { margin:0; padding:0; }
+  #stage {
+    width:512px; height:512px;
+    background:var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
+  }
+  /* glyph scale is set per-mode via body[data-mode] */
+  #mono {
+    position:relative;
+    font-family:"Playfair Display", Georgia, serif;
+    font-style:italic;
+    font-weight:600;
+    color:var(--fg);
+    line-height:1;
+    /* baseline nudge so the optical center sits mid-canvas */
+    transform:translateY(-2%);
+  }
+  #dot {
+    position:absolute;
+    border-radius:9999px;
+    background:var(--accent);
+  }
+  /* "any" — glyph fills most of the tile (matches the favicon look) */
+  body[data-mode="any"] #mono { font-size:340px; }
+  body[data-mode="any"] #dot { width:44px; height:44px; right:118px; bottom:150px; }
+  /* "maskable" — glyph pulled into the ~80% safe zone with full-bleed bg */
+  body[data-mode="maskable"] #mono { font-size:250px; }
+  body[data-mode="maskable"] #dot { width:32px; height:32px; right:158px; bottom:180px; }
+</style>
+</head>
+<body data-mode="any">
+  <div id="stage">
+    <span id="mono">N</span>
+    <span id="dot"></span>
+  </div>
+  <script>
+    // Expose readiness so the screenshotter waits for the webfont.
+    window.__fontReady = false;
+    const mode = new URLSearchParams(location.search).get("mode");
+    if (mode) document.body.setAttribute("data-mode", mode);
+    document.fonts.load('italic 600 340px "Playfair Display"').then(() =>
+      document.fonts.ready.then(() => { window.__fontReady = true; })
+    );
+  </script>
+</body>
+</html>

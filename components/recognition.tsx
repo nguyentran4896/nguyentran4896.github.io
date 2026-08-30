@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react"
 import { recognition } from "@/lib/content"
 import { InViewShader } from "@/components/in-view-shader"
 import { RevealText } from "@/components/reveal-text"
+import { REDUCED_MOTION_QUERY, isFinePointer } from "@/lib/media"
 
 // Lazy-load the dot-grid shader so it doesn't block first paint
 const DotGrid = dynamic(
@@ -29,10 +30,10 @@ function DotGridBackground() {
 
   useEffect(() => {
     // Detect fine pointer (mouse) vs coarse (touch)
-    const fine = window.matchMedia("(pointer: fine)").matches
+    const fine = isFinePointer()
     setFinePointer(fine)
     // Respect reduced motion
-    const rmq = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const rmq = window.matchMedia(REDUCED_MOTION_QUERY)
     setReducedMotion(rmq.matches)
     const rmHandler = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
     rmq.addEventListener("change", rmHandler)

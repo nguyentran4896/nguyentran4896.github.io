@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { ArrowUpRight } from "lucide-react"
 import { works, worksGallery } from "@/lib/content"
+import { REDUCED_MOTION_QUERY, isFinePointer } from "@/lib/media"
 import type { Project } from "@/lib/content"
 
 const COPY = {
@@ -378,11 +379,11 @@ export function Works() {
 
   useEffect(() => {
     const lgMq = window.matchMedia("(min-width: 1024px)")
-    const motionMq = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const motionMq = window.matchMedia(REDUCED_MOTION_QUERY)
 
     const evaluate = () => {
       const lg = lgMq.matches
-      const fine = window.matchMedia("(pointer: fine)").matches
+      const fine = isFinePointer()
       const reduced = motionMq.matches
       const touch =
         "ontouchstart" in window ||

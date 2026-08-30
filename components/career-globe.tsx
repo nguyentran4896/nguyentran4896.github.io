@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState, useCallback } from "react"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import { useScroll } from "framer-motion"
+import { REDUCED_MOTION_QUERY, isCoarsePointer } from "@/lib/media"
 
 // copy — consolidate into lib/content.ts — a later integration agent migrates it
 const GLOBE_COPY = {
@@ -204,13 +205,13 @@ export function CareerGlobe({ className = "" }: CareerGlobeProps) {
     setMounted(true)
 
     // Detect reduced motion preference — mirrors custom-cursor.tsx pattern
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const mq = window.matchMedia(REDUCED_MOTION_QUERY)
     setReducedMotion(mq.matches)
     const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
     mq.addEventListener("change", handler)
 
     // Disable pointer-driven effects on touch devices
-    const coarse = window.matchMedia("(hover: none), (pointer: coarse)").matches
+    const coarse = isCoarsePointer()
     if (coarse || "ontouchstart" in window) setIsTouch(true)
 
     return () => mq.removeEventListener("change", handler)

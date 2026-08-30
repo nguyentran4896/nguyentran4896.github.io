@@ -7,6 +7,7 @@ import { stats } from "@/lib/content"
 import { Contributions } from "@/components/contributions"
 import { InViewShader } from "@/components/in-view-shader"
 import { RevealText } from "@/components/reveal-text"
+import { REDUCED_MOTION_QUERY } from "@/lib/media"
 
 // Lazy-load the grain shader so it doesn't block first paint
 const GrainGradient = dynamic(
@@ -19,7 +20,7 @@ export function Stats() {
   const [speed, setSpeed] = useState(0.04)
 
   useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const mq = window.matchMedia(REDUCED_MOTION_QUERY)
     if (mq.matches) setSpeed(0)
     const handler = (e: MediaQueryListEvent) => setSpeed(e.matches ? 0 : 0.04)
     mq.addEventListener("change", handler)

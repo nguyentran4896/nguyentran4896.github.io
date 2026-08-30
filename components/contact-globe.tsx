@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react"
 import type { Marker, Globe } from "cobe"
 
 import { contactGlobe as GLOBE_COPY } from "@/lib/content"
+import { REDUCED_MOTION_QUERY } from "@/lib/media"
 
 // Timezone → approximate [lat, lng] for visitor marker.
 // ~40 major zones; unknown zones are silently skipped.
@@ -93,7 +94,7 @@ export function ContactGlobe() {
 
   // Detect reduced motion — store in ref only, no state re-render needed
   useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const mq = window.matchMedia(REDUCED_MOTION_QUERY)
     reducedMotionRef.current = mq.matches
     const handler = (e: MediaQueryListEvent) => {
       reducedMotionRef.current = e.matches

@@ -10,6 +10,7 @@ import { Command } from "cmdk"
 import { useRouter, usePathname } from "next/navigation"
 import { footer } from "@/lib/content"
 import { paletteActions, type PaletteAction } from "@/components/command-palette"
+import { prefersReducedMotion } from "@/lib/media"
 
 const copy = {
   placeholder: "TYPE A COMMAND OR SEARCH…",
@@ -32,7 +33,7 @@ export default function CommandPaletteDialog({ onClose }: { onClose: () => void 
   const router = useRouter()
 
   useEffect(() => {
-    setPrefersReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+    setPrefersReduced(prefersReducedMotion())
   }, [])
 
   const handleSelect = useCallback(

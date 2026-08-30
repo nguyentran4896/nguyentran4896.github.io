@@ -1,6 +1,7 @@
 "use client"
 
 import { tokenizerPlayground as COPY } from "@/lib/content"
+import { REDUCED_MOTION_QUERY } from "@/lib/media"
 
 import {
   useState,
@@ -49,7 +50,7 @@ function tokenize(tokenIds: number[], enc: { decode: (tokens: number[]) => strin
 function useReducedMotion() {
   const [reduced, setReduced] = useState(false)
   useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const mq = window.matchMedia(REDUCED_MOTION_QUERY)
     setReduced(mq.matches)
     const handler = (e: MediaQueryListEvent) => setReduced(e.matches)
     mq.addEventListener("change", handler)

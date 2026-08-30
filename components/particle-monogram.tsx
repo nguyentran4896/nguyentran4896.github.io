@@ -16,6 +16,7 @@ import {
 } from "three"
 
 import { particleMonogram as MONOGRAM_COPY } from "@/lib/content"
+import { prefersReducedMotion, isCoarsePointer } from "@/lib/media"
 
 // ── constants ────────────────────────────────────────────────────────────────
 
@@ -280,10 +281,8 @@ export function ParticleMonogram() {
   // Detect client capabilities on mount
   useEffect(() => {
     setMounted(true)
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    const touch =
-      window.matchMedia("(hover: none), (pointer: coarse)").matches ||
-      "ontouchstart" in window
+    const reduced = prefersReducedMotion()
+    const touch = isCoarsePointer() || "ontouchstart" in window
     setReducedMotion(reduced)
     setIsTouch(touch)
   }, [])

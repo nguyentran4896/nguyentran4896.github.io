@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import dynamic from "next/dynamic"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { hero } from "@/lib/content"
+import { prefersReducedMotion } from "@/lib/media"
 
 const SentientSphere = dynamic(
   () => import("./sentient-sphere").then((m) => m.SentientSphere),
@@ -15,7 +16,7 @@ export function Hero() {
   const [showSphere, setShowSphere] = useState(false)
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    if (prefersReducedMotion()) return
     setShowSphere(true)
   }, [])
 

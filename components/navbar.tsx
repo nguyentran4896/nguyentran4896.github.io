@@ -195,11 +195,13 @@ export function Navbar() {
         </nav>
       </motion.header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay — the wrapper is always in the DOM so the toggle
+          button's aria-controls="mobile-menu" always resolves to a real element;
+          the overlay itself mounts/unmounts (and animates) with AnimatePresence. */}
+      <div id="mobile-menu" aria-hidden={!isMenuOpen} className="contents">
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            id="mobile-menu"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -251,6 +253,7 @@ export function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+      </div>
     </>
   )
 }
