@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef } from "react"
-import { motion, useScroll, useTransform, useSpring } from "framer-motion"
+import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion"
 import { about, footprint } from "@/lib/content"
 import { FootprintMap } from "@/components/footprint-map"
 import { RevealText } from "@/components/reveal-text"
@@ -15,6 +15,7 @@ export function About() {
     offset: ["start end", "end start"],
   })
 
+  const reduceMotion = useReducedMotion()
   const x = useTransform(scrollYProgress, [0, 1], ["0%", "-100%"])
   const smoothX = useSpring(x, { stiffness: 100, damping: 30 })
 
@@ -62,9 +63,18 @@ export function About() {
         </div>
       </div>
 
-      {/* Horizontal Scroll Container */}
-      <div className="relative flex items-center overflow-x-hidden overflow-y-visible py-4 md:py-6 gap-0">
-        <motion.div style={{ x: smoothX }} className="flex items-center gap-16 md:gap-24 px-8 md:px-12 whitespace-nowrap leading-tight">
+      {/* Horizontal Scroll Container. Under reduced motion the scroll-linked
+          parallax is disabled (DESIGN.md §Motion); the row is instead made
+          manually scrollable so none of the statements get clipped. */}
+      <div
+        className={`relative flex items-center overflow-y-visible py-4 md:py-6 gap-0 ${
+          reduceMotion ? "overflow-x-auto" : "overflow-x-hidden"
+        }`}
+      >
+        <motion.div
+          style={reduceMotion ? undefined : { x: smoothX }}
+          className="flex items-center gap-16 md:gap-24 px-8 md:px-12 whitespace-nowrap leading-tight"
+        >
           {statements.map((statement, index) => (
             <motion.p
               key={index}
