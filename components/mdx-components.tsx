@@ -88,7 +88,10 @@ export const mdxComponents: MDXComponents = {
       loading="lazy"
       decoding="async"
       {...props}
-      className="my-10 w-full rounded-md border border-border"
+      // w-full + h-auto lets the browser reserve space from the intrinsic
+      // width/height attributes (forwarded via {...props}), preventing layout
+      // shift (CLS) as article images load. Give MDX <img> real width/height.
+      className="my-10 w-full h-auto rounded-md border border-border"
       alt={props.alt ?? ""}
     />
   ),
