@@ -133,11 +133,18 @@ function GlobeScene({ reducedMotion, scrollYProgress }: GlobeSceneProps) {
   }, [reducedMotion, scene])
 
   useEffect(() => {
+    let cancelled = false
     let cleanup: (() => void) | undefined
     initGlobe().then((fn) => {
       cleanup = fn
+      // If we unmounted (or deps changed) while the lazy imports were still
+      // resolving, `scene.add(globe)` ran after teardown. Remove it now so the
+      // globe — with its running arc/ring animations — isn't left orphaned in
+      // the scene, holding memory and animating invisibly.
+      if (cancelled) cleanup?.()
     })
     return () => {
+      cancelled = true
       cleanup?.()
     }
   }, [initGlobe])
