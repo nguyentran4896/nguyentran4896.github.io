@@ -8,8 +8,9 @@ import remarkGfm from "remark-gfm"
 import rehypePrettyCode from "rehype-pretty-code"
 import rehypeSlug from "rehype-slug"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
-import { Navbar } from "@/components/navbar"
-import { SmoothScroll } from "@/components/smooth-scroll"
+import { SiteHeader } from "@/components/site-header"
+import { Footer } from "@/components/footer"
+import { formatDate } from "@/lib/format"
 import { ReadingProgress } from "@/components/reading-progress"
 import { mdxComponents } from "@/components/mdx-components"
 import { getAllArticles, getArticleBySlug, getRelatedArticles } from "@/lib/articles"
@@ -69,13 +70,6 @@ export async function generateMetadata({
   }
 }
 
-function formatDate(d: string) {
-  if (!d) return ""
-  const date = new Date(d)
-  if (Number.isNaN(date.getTime())) return d
-  return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
-}
-
 function readingTime(text: string) {
   const words = text.trim().split(/\s+/).length
   return Math.max(1, Math.round(words / 220))
@@ -128,37 +122,36 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
   }
 
   return (
-    <div data-theme="paper" className="bg-background text-foreground min-h-screen">
-      <SmoothScroll>
+    <>
         <ReadingProgress />
-        <Navbar />
+        <SiteHeader />
         <main id="main" className="relative">
           <article className="relative">
             {/* Header — full-bleed editorial intro */}
-            <header className="relative px-6 sm:px-10 md:px-12 pt-28 sm:pt-32 md:pt-40 pb-10 md:pb-16">
+            <header className="relative px-6 sm:px-10 md:px-12 pt-28 sm:pt-36 md:pt-44 pb-10 md:pb-16">
               <div className="max-w-[68ch] mx-auto">
                 <Link
                   href="/blog"
-                  className="inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground hover:text-accent transition-colors mb-10"
+                  className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-10"
                 >
                   <span aria-hidden>←</span>
                   All writing
                 </Link>
 
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-8 font-mono text-[10.5px] sm:text-[11px] tracking-[0.25em] uppercase text-muted-foreground">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-8 font-mono text-[11px] tracking-[0.14em] uppercase text-muted-foreground">
                   <time dateTime={article.date}>{formatDate(article.date)}</time>
                   <span aria-hidden className="text-foreground/20">/</span>
                   <span>{mins} min read</span>
                   {article.tags.length > 0 && (
                     <>
                       <span aria-hidden className="text-foreground/20">/</span>
-                      <span className="text-accent">{article.tags.join(" · ")}</span>
+                      <span className="text-accent-text">{article.tags.join(" · ")}</span>
                     </>
                   )}
                 </div>
 
                 <h1
-                  className="font-sans font-light italic leading-[1.04] tracking-tight text-[2.25rem] sm:text-5xl md:text-6xl lg:text-[4.25rem] text-balance"
+                  className="font-display leading-[1.03] tracking-tight text-[2.75rem] sm:text-6xl md:text-7xl text-balance"
                   style={{ viewTransitionName: `post-title-${article.slug}` }}
                 >
                   {article.title}
@@ -169,15 +162,6 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
                     {article.excerpt}
                   </p>
                 )}
-              </div>
-
-              {/* Hairline + mono signature */}
-              <div className="max-w-[68ch] mx-auto mt-12 md:mt-16 flex items-center gap-4">
-                <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-                  Essay / {String(slug).slice(0, 2).toUpperCase()}
-                </span>
-                <span className="flex-1 h-px bg-border" />
-                <span aria-hidden className="w-1.5 h-1.5 rounded-full bg-accent" />
               </div>
             </header>
 
@@ -206,7 +190,7 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
                         [
                           rehypePrettyCode,
                           {
-                            theme: "github-light",
+                            theme: { light: "github-light", dark: "github-dark" },
                             keepBackground: false,
                           },
                         ],
@@ -227,7 +211,7 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
                     {related.map((r) => (
                       <li key={r.slug}>
                         <Link href={`/blog/${r.slug}`} className="group block">
-                          <h3 className="font-sans text-xl md:text-2xl font-light italic leading-tight text-foreground/90 group-hover:text-accent transition-colors">
+                          <h3 className="font-display text-2xl md:text-3xl leading-tight text-foreground group-hover:text-accent-text transition-colors">
                             {r.title}
                           </h3>
                           {r.excerpt && (
@@ -240,7 +224,7 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
                             {r.tags.length > 0 && (
                               <>
                                 <span aria-hidden className="mx-2 text-foreground/20">/</span>
-                                <span className="text-accent">{r.tags.join(" · ")}</span>
+                                <span className="text-accent-text">{r.tags.join(" · ")}</span>
                               </>
                             )}
                           </span>
@@ -251,22 +235,6 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
                 </div>
               </aside>
             )}
-
-            {/* Footer */}
-            <footer className="px-6 sm:px-10 md:px-12 pb-24 md:pb-32">
-              <div className="max-w-[68ch] mx-auto pt-10 border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-                <Link
-                  href="/blog"
-                  className="group inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground hover:text-accent transition-colors"
-                >
-                  <span aria-hidden className="transition-transform group-hover:-translate-x-1">←</span>
-                  Back to writing
-                </Link>
-                <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
-                  Filed {formatDate(article.date)}
-                </span>
-              </div>
-            </footer>
           </article>
           <script
             type="application/ld+json"
@@ -277,7 +245,7 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
             dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
           />
         </main>
-      </SmoothScroll>
-    </div>
+        <Footer />
+    </>
   )
 }

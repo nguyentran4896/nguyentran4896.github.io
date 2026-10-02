@@ -1,115 +1,42 @@
-"use client"
-
-import { useEffect, useRef, useState } from "react"
-import dynamic from "next/dynamic"
-import { motion, useScroll, useTransform } from "framer-motion"
-import { hero } from "@/lib/content"
-import { prefersReducedMotion } from "@/lib/media"
-
-const SentientSphere = dynamic(
-  () => import("./sentient-sphere").then((m) => m.SentientSphere),
-  { ssr: false, loading: () => null },
-)
+import { hero, nav } from "@/lib/content"
+import { AskBox } from "@/components/ask-box"
 
 export function Hero() {
-  const containerRef = useRef<HTMLElement>(null)
-  const [showSphere, setShowSphere] = useState(false)
-
-  useEffect(() => {
-    if (prefersReducedMotion()) return
-    setShowSphere(true)
-  }, [])
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  })
-
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8])
-
   return (
-    <section ref={containerRef} className="relative h-[100svh] w-full overflow-hidden bg-[#050505]">
-      <h1 className="sr-only">
-        Nguyen Tran — Senior Software Engineer and AI Researcher based in Ho Chi Minh City,
-        Vietnam. Ten years of production engineering with research in medical AI and computer
-        vision.
-      </h1>
-      {/* 3D Sphere Background */}
-      <div className="absolute inset-0">
-        {showSphere && <SentientSphere />}
+    <section id="ask" className="relative px-5 pb-16 pt-32 sm:px-8 sm:pb-24 sm:pt-44">
+      <div className="mx-auto max-w-3xl text-center">
+        <p
+          className="rise mx-auto mb-8 inline-flex items-center gap-2.5 rounded-full border border-border px-4 py-1.5 text-sm text-muted-foreground"
+          style={{ "--d": "0ms" } as React.CSSProperties}
+        >
+          <span aria-hidden className="relative flex size-2">
+            <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
+            <span className="relative inline-flex size-2 rounded-full bg-accent" />
+          </span>
+          {nav.status}
+        </p>
+
+        <h1
+          className="rise font-display text-6xl leading-[0.98] tracking-tight sm:text-8xl"
+          style={{ "--d": "80ms" } as React.CSSProperties}
+        >
+          {hero.greeting}
+        </h1>
+        <p
+          className="rise mx-auto mt-6 max-w-xl text-lg text-muted-foreground sm:text-xl"
+          style={{ "--d": "160ms" } as React.CSSProperties}
+        >
+          {hero.lead}
+        </p>
+
+        <div className="rise mt-10 text-left" style={{ "--d": "260ms" } as React.CSSProperties}>
+          <AskBox />
+        </div>
+
+        <p className="rise mt-6 text-xs text-muted-foreground" style={{ "--d": "340ms" } as React.CSSProperties}>
+          {hero.note}
+        </p>
       </div>
-
-      {/* Typography Overlay */}
-      <motion.div style={{ opacity, scale }} className="relative z-10 h-full flex flex-col justify-between px-6 pt-20 pb-8 sm:px-8 sm:pt-24 sm:pb-10 md:p-12 md:py-20">
-        {/* Top Left */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-        >
-          <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground mb-2">{hero.topLabel}</p>
-          <p aria-hidden="true" className="font-sans text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-balance">
-            {hero.topTitleLine1}
-            <br />
-            <span className="italic">{hero.topTitleLine2}</span>
-          </p>
-        </motion.div>
-
-        {/* Center Button */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="self-center md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-20"
-        >
-          <motion.button
-            data-cursor-hover
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() =>
-              document.getElementById("about")?.scrollIntoView({ behavior: "smooth", block: "start" })
-            }
-            aria-label="Scroll to About section"
-            className="relative px-8 py-4 border border-white/20 rounded-full font-mono text-sm tracking-widest uppercase bg-transparent backdrop-blur-sm hover:bg-white hover:text-black transition-colors duration-500 cursor-pointer"
-          >
-            {hero.cta}
-            <span className="absolute -top-1 -right-1 w-2 h-2 bg-accent rounded-full animate-pulse" />
-          </motion.button>
-        </motion.div>
-
-        {/* Bottom Right */}
-        <motion.div
-          initial={{ opacity: 0, y: -40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="self-end text-right"
-        >
-          <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground mb-2">{hero.bottomLabel}</p>
-          <p aria-hidden="true" className="font-sans text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-balance">
-            {hero.bottomTitleLine1}
-            <br />
-            <span className="italic">{hero.bottomTitleLine2}</span>
-          </p>
-        </motion.div>
-      </motion.div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2"
-        >
-          <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">Scroll</span>
-          <div className="w-px h-8 bg-gradient-to-b from-white/50 to-transparent" />
-        </motion.div>
-      </motion.div>
     </section>
   )
 }

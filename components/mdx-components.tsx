@@ -5,7 +5,7 @@ export const mdxComponents: MDXComponents = {
   h2: ({ children, ...props }) => (
     <h2
       {...props}
-      className="font-sans text-[1.6rem] sm:text-3xl md:text-[2rem] font-light italic mt-14 md:mt-16 mb-4 leading-[1.15] tracking-tight text-foreground text-balance"
+      className="font-display text-[2rem] sm:text-4xl mt-14 md:mt-16 mb-4 leading-[1.15] tracking-tight text-foreground text-balance"
     >
       {children}
     </h2>
@@ -13,7 +13,7 @@ export const mdxComponents: MDXComponents = {
   h3: ({ children, ...props }) => (
     <h3
       {...props}
-      className="font-sans text-xl md:text-2xl font-light italic mt-10 md:mt-12 mb-3 leading-tight text-foreground text-balance"
+      className="font-display text-2xl md:text-3xl mt-10 md:mt-12 mb-3 leading-tight text-foreground text-balance"
     >
       {children}
     </h3>
@@ -26,10 +26,10 @@ export const mdxComponents: MDXComponents = {
       {children}
     </p>
   ),
-  a: ({ children, ...props }) => (
+  a: ({ children, className, ...props }) => (
     <a
       {...props}
-      className="text-accent underline decoration-accent/40 underline-offset-[5px] decoration-[1.5px] hover:decoration-accent transition-colors"
+      className={className?.includes("heading-anchor") ? className : "text-accent-text underline decoration-accent/40 underline-offset-[5px] decoration-[1.5px] hover:decoration-accent transition-colors"}
     >
       {children}
     </a>
@@ -58,13 +58,13 @@ export const mdxComponents: MDXComponents = {
   blockquote: ({ children, ...props }) => (
     <blockquote
       {...props}
-      className="my-10 pl-6 sm:pl-8 border-l-2 border-accent/60 font-sans text-xl sm:text-2xl md:text-[1.65rem] italic font-light text-foreground/90 leading-[1.35] text-balance"
+      className="my-10 pl-6 sm:pl-8 border-l-2 border-accent/60 font-display text-2xl sm:text-3xl italic text-foreground leading-[1.3] text-balance"
     >
       {children}
     </blockquote>
   ),
   hr: (props) => (
-    <hr {...props} className="my-14 border-0 flex items-center justify-center text-center after:content-['§'] after:font-sans after:italic after:text-foreground/30 after:text-lg" />
+    <hr {...props} className="my-14 border-0 flex items-center justify-center text-center after:content-['§'] after:font-display after:italic after:text-foreground/30 after:text-lg" />
   ),
   code: ({ children, ...props }) => (
     <code
@@ -77,7 +77,7 @@ export const mdxComponents: MDXComponents = {
   pre: ({ children, ...props }) => (
     <pre
       {...props}
-      className="my-7 p-5 overflow-x-auto rounded-md border border-border bg-foreground/[0.035] font-mono text-[0.85rem] leading-relaxed"
+      className="my-7 p-5 overflow-x-auto rounded-2xl border border-border bg-card font-mono text-[0.85rem] leading-relaxed"
     >
       {children}
     </pre>
@@ -91,7 +91,7 @@ export const mdxComponents: MDXComponents = {
       // w-full + h-auto lets the browser reserve space from the intrinsic
       // width/height attributes (forwarded via {...props}), preventing layout
       // shift (CLS) as article images load. Give MDX <img> real width/height.
-      className="my-10 w-full h-auto rounded-md border border-border"
+      className="my-10 w-full h-auto rounded-2xl border border-border"
       alt={props.alt ?? ""}
     />
   ),

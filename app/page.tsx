@@ -1,36 +1,27 @@
-import dynamic from "next/dynamic"
-import { Navbar } from "@/components/navbar"
 import { Hero } from "@/components/hero"
+import { QuickAccess } from "@/components/quick-access"
 import { About } from "@/components/about"
-import { CustomCursor } from "@/components/custom-cursor"
-import { SmoothScroll } from "@/components/smooth-scroll"
-import { SectionBlend } from "@/components/section-blend"
-import { ParticleMonogramLoader } from "@/components/particle-monogram-loader"
-
-const Experience = dynamic(() => import("@/components/experience").then((m) => m.Experience))
-const Stats = dynamic(() => import("@/components/stats").then((m) => m.Stats))
-const Works = dynamic(() => import("@/components/works").then((m) => m.Works))
-const Recognition = dynamic(() => import("@/components/recognition").then((m) => m.Recognition))
-const TechMarquee = dynamic(() => import("@/components/tech-marquee").then((m) => m.TechMarquee))
-const Footer = dynamic(() => import("@/components/footer").then((m) => m.Footer))
+import { Experience } from "@/components/experience"
+import { Works } from "@/components/works"
+import { Writing } from "@/components/writing"
+import { Recognition } from "@/components/recognition"
+import { Footer } from "@/components/footer"
+import { SiteHeader } from "@/components/site-header"
 
 export default function Home() {
   return (
-    <SmoothScroll>
-      <CustomCursor />
-      <Navbar />
+    <>
+      <SiteHeader />
       <main id="main">
         <Hero />
-        <SectionBlend />
+        <QuickAccess />
         <About />
         <Experience />
-        <Stats />
         <Works />
+        <Writing />
         <Recognition />
-        <TechMarquee />
-        <ParticleMonogramLoader />
-        <Footer />
       </main>
-    </SmoothScroll>
+      <Footer />
+    </>
   )
 }

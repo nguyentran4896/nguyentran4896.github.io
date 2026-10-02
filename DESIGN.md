@@ -1,245 +1,131 @@
 ---
 version: alpha
-name: Midnight Editorial
-description: A dark, editorial portfolio aesthetic — Playfair Display italics over near-black, with mono micro-labels and a single electric-blue accent. Restraint, contrast, and typographic gravitas over decoration.
+name: Concierge
+description: A warm, light-first portfolio built around a conversational front door. A serif greeting, one prominent "Ask" prompt, soft tinted tiles and hairline structure. Calm, confident and legible, with automatic dark mode.
 colors:
-  background: "#1A1A1A"
-  foreground: "#FAFAFA"
-  card: "#1A1A1A"
-  card-foreground: "#FAFAFA"
-  muted: "#353535"
-  muted-foreground: "#A3A3A3"
-  border: "#353535"
-  ring: "#6F6F6F"
-  primary: "#FAFAFA"
-  primary-foreground: "#262626"
-  secondary: "#353535"
-  secondary-foreground: "#FAFAFA"
-  accent: "#3B5CFF"
-  accent-foreground: "#FAFAFA"
-  accent-text: "#5285F8"
-  destructive: "#7A2A2A"
-  on-dark: "#FAFAFA"
-  on-light: "#1A1A1A"
-  hairline: "rgba(250,250,250,0.20)"
-  hairline-soft: "rgba(250,250,250,0.10)"
+  background: "#F6F3EC"
+  foreground: "#15130F"
+  card: "#FFFDF8"
+  muted: "#ECE7DC"
+  muted-foreground: "#66615A"
+  accent: "#E5481B"
+  accent-foreground: "#FFFFFF"
+  accent-text: "#B8340C"
+  tint-sand: "#EDE4CF"
+  tint-sage: "#DFE8D6"
+  tint-sky: "#DCE7EE"
+  tint-blush: "#F1DCD3"
+  dark-background: "#12100D"
+  dark-foreground: "#F3EFE6"
+  dark-card: "#1B1814"
+  dark-muted-foreground: "#A8A296"
+  dark-accent: "#FF6A3D"
+  dark-accent-text: "#FF8A63"
 typography:
-  display-xl:
-    fontFamily: Playfair Display
+  display:
+    fontFamily: Instrument Serif
     fontSize: 6rem
-    fontWeight: 300
-    lineHeight: 1.0
-    letterSpacing: "-0.02em"
-  display-lg:
-    fontFamily: Playfair Display
-    fontSize: 4.5rem
-    fontWeight: 300
-    lineHeight: 1.05
-    letterSpacing: "-0.02em"
-  display-italic:
-    fontFamily: Playfair Display
-    fontSize: 3rem
-    fontWeight: 300
-    lineHeight: 1.1
-    letterSpacing: "-0.01em"
-    fontStyle: italic
-  h1:
-    fontFamily: Playfair Display
-    fontSize: 3rem
-    fontWeight: 300
-    lineHeight: 1.1
+    fontWeight: 400
+    lineHeight: 0.98
     letterSpacing: "-0.02em"
   h2:
-    fontFamily: Playfair Display
-    fontSize: 2.25rem
-    fontWeight: 300
-    lineHeight: 1.15
-    letterSpacing: "-0.01em"
-  body-lg:
-    fontFamily: Playfair Display
-    fontSize: 1.125rem
+    fontFamily: Instrument Serif
+    fontSize: 3.75rem
     fontWeight: 400
-    lineHeight: 1.6
-  body-md:
-    fontFamily: Playfair Display
+    lineHeight: 1.05
+  answer:
+    fontFamily: Instrument Serif
+    fontSize: 1.75rem
+    fontWeight: 400
+    lineHeight: 1.3
+  body:
+    fontFamily: Geist
     fontSize: 1rem
     fontWeight: 400
-    lineHeight: 1.65
-  label-caps:
+    lineHeight: 1.6
+  eyebrow:
     fontFamily: Geist Mono
-    fontSize: 0.75rem
+    fontSize: 0.6875rem
     fontWeight: 400
-    lineHeight: 1.0
-    letterSpacing: "0.3em"
-  label-micro:
-    fontFamily: Geist Mono
-    fontSize: 0.625rem
-    fontWeight: 400
-    letterSpacing: "0.2em"
-  mono-ui:
-    fontFamily: Geist Mono
-    fontSize: 0.875rem
-    fontWeight: 400
-    letterSpacing: "0.1em"
+    letterSpacing: "0.18em"
 rounded:
-  none: 0px
-  sm: 6px
-  md: 8px
-  lg: 10px
   pill: 9999px
+  tile: 1.5rem
+  dialog: 1.75rem
 spacing:
-  xs: 4px
-  sm: 8px
-  md: 16px
-  lg: 24px
-  xl: 40px
-  2xl: 64px
-  3xl: 96px
-  section: 160px
+  gutter: 1.25rem
+  section: 7rem
+  max-width: 72rem
 components:
-  button-primary:
-    backgroundColor: "transparent"
+  ask-prompt:
+    backgroundColor: "{colors.card}"
     textColor: "{colors.foreground}"
-    typography: "{typography.label-caps}"
     rounded: "{rounded.pill}"
-    padding: "16px 32px"
-  button-primary-hover:
-    backgroundColor: "{colors.foreground}"
-    textColor: "{colors.on-light}"
-  button-accent:
+  ask-submit:
     backgroundColor: "{colors.accent}"
     textColor: "{colors.accent-foreground}"
-    typography: "{typography.label-caps}"
     rounded: "{rounded.pill}"
-    padding: "16px 32px"
-  eyebrow-label:
-    textColor: "{colors.muted-foreground}"
-    typography: "{typography.label-caps}"
-  section-heading:
+  answer-card:
+    backgroundColor: "{colors.card}"
     textColor: "{colors.foreground}"
-    typography: "{typography.display-italic}"
-  card-default:
-    backgroundColor: "{colors.background}"
+    rounded: "{rounded.tile}"
+  tile:
+    backgroundColor: "{colors.tint-sand}"
     textColor: "{colors.foreground}"
-    rounded: "{rounded.lg}"
-    padding: "24px"
-  hairline-rule:
-    backgroundColor: "{colors.hairline}"
-    height: "1px"
+    rounded: "{rounded.tile}"
 ---
+
+# Concierge
 
 ## Overview
 
-**Midnight Editorial** is a dark, magazine-grade aesthetic for a senior engineer's portfolio. The voice is restrained and considered — closer to a printed monograph than a marketing site. Three forces are in tension and must stay in tension:
+The site opens like a concierge desk, not a brochure. A big serif greeting, one sentence of orientation and a single prompt box invite the visitor to ask for what they came for. Everything below is the same information laid out for people who would rather scroll.
 
-1. **Playfair Display italics** carry emotional weight and personality.
-2. **Geist Mono in wide tracking** acts as the technical voice — captions, labels, coordinates.
-3. **Near-black canvas with a single electric-blue accent** keeps the page quiet so the typography can speak.
+Influences: **america.gov** (one front door, a "Hello" greeting, a central prompt with suggested questions, rounded glyph tiles, answers that cite their sources, and an honest "check the sources" disclaimer) and **ductran96.com** (a single page with anchored sections: About, Research, Publications, Awards, Contact).
 
-The page is not decorated — it is *composed*. White space is a feature. A noise overlay (3% opacity) and a custom cursor give the surface a tactile quality. Motion is slow, deliberate, and used sparingly.
+## Ask (the core pattern)
 
-If a change makes the page louder, busier, or more "modern SaaS," it is wrong. If it makes the page feel more like a well-set book, it is right.
+- The hero prompt is the primary action. It is a pill input with a round accent submit button, three or four suggested questions beneath it, and a one-line honesty note.
+- Answers are matched in the browser from the site's own content (`lib/content.ts` facts, projects and articles). There is no model and no network call. Say so in the UI.
+- Every answer shows **Sources** chips linking to the section it came from. A miss says so plainly and offers email, never a guess.
+- The same prompt is available everywhere: header button, floating dock (after the hero scrolls away), `⌘K` / `Ctrl+K` and `/`. It opens in a native `<dialog>` (focus trap and Esc for free).
+- Answer text streams word by word unless `prefers-reduced-motion`.
 
 ## Colors
 
-The palette is intentionally narrow: an inked background, a paper-white foreground, two greys, and one accent. Do not introduce new hues. Do not use gradients except as low-opacity atmospheric effects.
-
-- **Background `#1A1A1A`** — Near-black, never pure `#000`. The page's ink.
-- **Foreground `#FAFAFA`** — Warm paper white. All primary text.
-- **Muted `#353535`** — Borders, dividers, secondary surfaces. Never used for text on background.
-- **Muted-foreground `#A3A3A3`** — Captions, metadata, mono labels, body copy when de-emphasized.
-- **Accent `#3B5CFF`** — Electric blue. Reserved for: text selection, focus rings, borders, atmospheric glows, large accented numerals, and at most one deliberate moment per section (a hovered link, a single highlighted word). If the accent appears more than twice in one viewport, remove one.
-- **Accent-text `#5285F8`** — Not a new hue: the same electric blue, lightened only enough to clear WCAG AA for *small* text on the near-black surface. `#3B5CFF` is 3.45:1 on `#1A1A1A` (fails AA-normal); `#5285F8` is 5.0:1. Use it for accent-colored text below ~24px (mono category labels, ordinals, prompts). Large accent text (≥24px) keeps the vivid `#3B5CFF`. On the paper theme this token resolves back to `#3B5CFF`, which already meets AA there (4.68:1).
-- **Hairline `rgba(250,250,250,0.20)`** — Outlined buttons, section dividers, decorative rules. Prefer hairlines over filled surfaces.
-
-**Contrast rules.** Body copy uses `foreground` on `background`. `muted-foreground` is acceptable for labels and captions but never for paragraph text. Do not place `muted-foreground` text on `muted` surfaces.
+Warm paper background, ink text, one vermilion accent. Use `accent` for the submit button, status dot, bullets and focus-free emphasis; use `accent-text` for small accent-coloured text (AA on paper). Dark mode follows `prefers-color-scheme` and swaps every token. The four `tint-*` colours are for glyph tiles and one highlight card only, never for text or buttons.
 
 ## Typography
 
-Two families, used with discipline:
-
-- **Playfair Display** — Display, headings, and body. Light weight (300) for headlines, regular (400) for body. **Italic is the signature** — every section heading should use `display-italic`. Headlines are tight (`tracking-tight`, `-0.02em`). Body copy is loose (`leading-relaxed`, ~1.65).
-- **Geist Mono** — Eyebrows, captions, navigation, button labels, numeric stats, scroll cues. **Always uppercase. Always wide-tracked** (`0.2em`–`0.3em`). Always small (10–14px). Mono is the technical counter-voice to Playfair's emotion; if mono ever appears at body size, it is wrong.
-
-**Rhythm.** Every section opens the same way: a mono `label-caps` eyebrow, then a Playfair `display-italic` heading, then breathing room, then content. Do not break this rhythm without reason.
-
-**Numerals.** Stats and large figures use Playfair light at `display-lg` or larger. Pair them with a `label-micro` mono caption underneath.
+Three families, each with a job: **Instrument Serif** for greeting, headings and answers; **Geist** for body and UI; **Geist Mono** for eyebrow labels and metadata only. Headings are regular weight, tight, `text-balance`. Eyebrows are uppercase mono at `0.18em`.
 
 ## Layout
 
-The grid is a 12-column container with generous gutters, but the *interesting* layouts break it:
+One centred column, `max-w-6xl`, 20px gutters on mobile and 32px from `sm`. Sections use generous vertical padding and open with an eyebrow plus serif heading, separated by a hairline. Order: Hero (Ask) → Quick access tiles → About → Experience → Selected work → Writing → Recognition → Contact.
 
-- **Asymmetric pairs.** Hero and section headers split into two halves where one half is right-aligned (`self-end text-right`). Mirror this pattern when introducing new sections.
-- **Vertical rhythm.** Section padding is `section` (160px) on desktop, scaling down to `2xl` (64px) on mobile. Do not use uniform padding — let sections breathe differently.
-- **Hairline dividers.** Sections are separated by full-width 1px `hairline` rules, not by background color shifts. The whole page is one continuous dark sheet.
-- **Max content width.** Prose blocks cap at ~65ch. Display headlines extend wider, sometimes to the viewport edge. Headlines may bleed; body never does.
-- **Overlap and offset.** Encouraged for decorative elements (large numerals behind text, mono coordinates floating in margins). Forbidden for interactive elements.
+## Elevation
 
-## Elevation & Depth
-
-This is a flat design. There are no drop shadows, no elevated cards, no glassmorphism panels. Depth comes from three sources only:
-
-1. **The noise overlay** (`.noise-overlay`, 3% opacity, fixed, `z-index: 9999`, `pointer-events: none`). It is global. Do not remove it. Do not increase it past 5%.
-2. **Hairline borders** at 10–20% white opacity.
-3. **Backdrop blur** on the navbar and outlined buttons (`backdrop-blur-sm`) — used sparingly, never on content surfaces.
-
-If a component needs a shadow to read, the layout is wrong. Fix the layout.
+Flat. Structure comes from hairline borders, tint fills and the blurred sticky header and dock. No drop shadows.
 
 ## Shapes
 
-- **Buttons:** pill (`rounded-full`). Always.
-- **Cards / surfaces:** `rounded-lg` (10px) maximum. Many surfaces are square (`rounded-none`) — embrace this.
-- **Images:** square or `rounded-md`. Never circular except for avatars.
-- **Dividers:** 1px hairlines, never thicker.
-
-Sharp corners are a feature here, not an oversight.
+Pills for inputs, buttons and chips. `1.5rem` tiles for cards, images and tint blocks. `1.75rem` for the Ask dialog.
 
 ## Components
 
-### Eyebrow label
-Mono, uppercase, `0.3em` tracking, `muted-foreground`, sits above every section heading. Width is intrinsic; never centered unless the heading below is also centered.
-
-### Section heading
-Playfair Display, light, italic, `3rem`–`5rem` depending on hierarchy. Always paired with an eyebrow above. Never bold, never roman for top-level section titles — italic is the signature.
-
-### Outlined button (primary CTA)
-Transparent fill, 1px white/20% border, pill, mono uppercase label with wide tracking, `backdrop-blur-sm`. On hover: fills to white, text goes to `on-light`, transition `500ms` ease. No scale, no shadow, no glow.
-
-### Mono coordinates / metadata
-Tiny mono labels (`label-micro`, 10px, `0.2em` tracking) used for scroll cues, image captions, section numbers (`01 / 06`), and timestamps. They are the page's marginalia — present but quiet.
-
-### Marquee
-Horizontal infinite scroll for the tech stack, 50s duration, linear, infinite. Two directions (`marquee-left`, `marquee-right`) used together create a counter-rotating band. Do not speed this up — slowness is the point.
-
-### Navigation
-Fixed top, transparent until scroll, `backdrop-blur-sm` when active. Links are mono, uppercase, wide-tracked. No underlines; hover state is opacity.
-
-### Custom cursor
-A bespoke cursor element follows the pointer with a slight delay. Required on desktop, disabled on touch. Do not replace with default cursor pointers on hover; instead, scale or invert the custom cursor.
+- **Tile**: tinted rounded square, large outline glyph top left, arrow top right, serif label and one-line blurb bottom. Lifts 4px on hover.
+- **Chip**: pill with hairline border, muted text; hover inverts or darkens the border.
+- **Role row**: mono period left, serif role, accent company, bullets and stack chips right.
+- **Project card**: hairline card with cover image, year, serif title, optional highlight pill.
 
 ## Motion
 
-- **Page load:** staggered reveals using `animation-delay` increments of 80–120ms. Translate-up + fade. Duration 600–900ms. `ease-out`.
-- **Hover:** color and opacity transitions only, 300–500ms. Never scale text. Never bounce.
-- **Scroll:** parallax permitted on the hero sphere and large numerals only. Body content does not parallax.
-- **Marquee:** 50s linear infinite. Never pause on hover (it breaks the meditative rhythm).
-- **Reduced motion:** `prefers-reduced-motion` must disable parallax, marquee, and the custom cursor, and reduce all transitions to ≤100ms.
+Entrance: a 14px rise, staggered by 80ms. Below the fold: CSS scroll-driven reveal where supported, plain visible content otherwise. Hover transitions 300ms. All motion is disabled under `prefers-reduced-motion`.
 
 ## Do's and Don'ts
 
-**Do**
-- Open every section with a mono eyebrow + italic Playfair heading.
-- Trust whitespace. When in doubt, add more.
-- Use the accent blue once per section, deliberately.
-- Keep mono small and wide-tracked; keep Playfair large and tight-tracked.
-- Use hairline rules instead of background fills to separate regions.
-
-**Don't**
-- Don't introduce new fonts. Playfair Display + Geist Mono is the entire system.
-- Don't introduce new colors. If you need emphasis, use italic, size, or whitespace — not hue.
-- Don't use gradients on text or buttons. Atmospheric background gradients at <10% opacity are acceptable.
-- Don't use drop shadows, glassmorphism, or neon glows.
-- Don't center long-form content. Left-align with deliberate asymmetric counterweights.
-- Don't use emoji as UI. Use mono labels or numerals instead.
-- Don't animate on every interaction — motion should feel rare and earned.
-- Don't use `Inter`, `Roboto`, `system-ui`, or any sans-serif fallback as a primary face. Playfair is the body face here, by design.
+- Do keep the Ask first. Do add new facts to `lib/content.ts` so the Ask can answer them.
+- Do reuse tokens from `app/globals.css`; do keep `DESIGN.md` in sync.
+- Don't add shadows, gradients or a second accent colour.
+- Don't claim AI. The Ask is retrieval over this site, and the UI says so.
+- Don't use tint colours for text.

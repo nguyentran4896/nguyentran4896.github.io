@@ -1,11 +1,9 @@
 import type { Metadata } from "next"
 import { Link } from "next-view-transitions"
-import { Navbar } from "@/components/navbar"
-import { SmoothScroll } from "@/components/smooth-scroll"
+import { SiteHeader } from "@/components/site-header"
+import { Footer } from "@/components/footer"
+import { formatDate } from "@/lib/format"
 import { getAllArticles } from "@/lib/articles"
-import embeddingsData from "@/lib/embeddings.json"
-import type { EmbeddingEntry } from "@/lib/embeddings"
-import { EmbeddingAtlas } from "@/components/embedding-atlas"
 
 const SITE_URL = "https://nguyentran4896.github.io"
 
@@ -30,13 +28,6 @@ export const metadata: Metadata = {
     site: "@nguyentran4896",
     creator: "@nguyentran4896",
   },
-}
-
-function formatDate(d: string) {
-  if (!d) return ""
-  const date = new Date(d)
-  if (Number.isNaN(date.getTime())) return d
-  return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
 }
 
 export default function BlogIndexPage() {
@@ -73,98 +64,62 @@ export default function BlogIndexPage() {
   }
 
   return (
-    <SmoothScroll>
-      <Navbar />
-      <main id="main" className="min-h-screen pt-32 pb-32">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-        />
-        <section className="relative px-8 md:px-12 py-20 md:py-28">
-          <div className="mb-20 md:mb-24 max-w-4xl">
-            <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground mb-4">
-              09 — WRITING
+    <>
+      <SiteHeader />
+      <main id="main" className="min-h-screen px-5 pb-28 pt-32 sm:px-8 sm:pt-44">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+        <div className="mx-auto max-w-6xl">
+          <header className="max-w-3xl">
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent-text">Writing</p>
+            <h1 className="mt-4 text-balance font-display text-6xl leading-[1.02] sm:text-8xl">Notes and essays.</h1>
+            <p className="mt-6 max-w-xl text-lg text-muted-foreground">
+              Field notes on engineering at scale, medical AI, and the discipline of building quiet software.
             </p>
-            <h1 className="font-sans text-4xl md:text-6xl font-light italic leading-[1.05]">
-              Notes &amp; essays
-            </h1>
-            <p className="mt-8 max-w-2xl text-base md:text-lg leading-relaxed text-white/60">
-              Field notes on engineering at scale, medical AI, and the discipline of building quiet
-              software.
-            </p>
-          </div>
+          </header>
 
           {articles.length === 0 ? (
-            <p className="font-mono text-xs tracking-widest text-muted-foreground">
-              — NO ENTRIES YET
-            </p>
+            <p className="mt-16 text-muted-foreground">No entries yet.</p>
           ) : (
-            <ol className="border-t border-white/10">
-              {articles.map((article, index) => (
-                <li key={article.slug} className="border-b border-white/10">
+            <ol className="mt-16 border-t border-border">
+              {articles.map((article) => (
+                <li key={article.slug} className="border-b border-border">
                   <Link
                     href={`/blog/${article.slug}`}
-                    className="group block py-10 md:py-12 grid grid-cols-1 md:grid-cols-[18%_1fr_auto] gap-4 md:gap-12 items-baseline transition-colors hover:bg-white/[0.015]"
+                    className="group grid gap-3 py-9 sm:grid-cols-[12rem_1fr_auto] sm:items-baseline sm:gap-10"
                   >
-                    <div className="flex items-center gap-3">
-                      <span className="font-mono text-[10px] tracking-[0.3em] text-accent-text">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <span className="font-mono text-[11px] tracking-[0.25em] uppercase text-muted-foreground">
-                        {formatDate(article.date)}
-                      </span>
-                    </div>
-
+                    <time dateTime={article.date} className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                      {formatDate(article.date)}
+                    </time>
                     <div>
                       <h2
-                        className="font-sans text-2xl md:text-4xl font-light italic leading-tight group-hover:text-white transition-colors"
+                        className="font-display text-3xl leading-snug sm:text-4xl"
                         style={{ viewTransitionName: `post-title-${article.slug}` }}
                       >
                         {article.title}
                       </h2>
-                      {article.excerpt && (
-                        <p className="mt-3 max-w-2xl text-sm md:text-base leading-relaxed text-white/55">
-                          {article.excerpt}
-                        </p>
-                      )}
+                      {article.excerpt && <p className="mt-3 max-w-2xl text-muted-foreground">{article.excerpt}</p>}
                       {article.tags.length > 0 && (
-                        <div className="mt-4 flex flex-wrap gap-2">
+                        <ul className="mt-4 flex flex-wrap gap-2">
                           {article.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="font-mono text-[10px] tracking-wider px-3 py-1 border border-white/15 rounded-full text-muted-foreground"
-                            >
+                            <li key={tag} className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">
                               {tag}
-                            </span>
+                            </li>
                           ))}
-                        </div>
-                      )}
-                      {article.draft && (
-                        <span className="mt-4 inline-block font-mono text-[10px] tracking-[0.3em] text-accent-text uppercase">
-                          Draft
-                        </span>
+                        </ul>
                       )}
                     </div>
-
-                    <span
-                      aria-hidden
-                      className="hidden md:inline-block font-mono text-xs tracking-widest text-muted-foreground group-hover:text-accent-text transition-all group-hover:translate-x-1"
-                    >
-                      READ →
+                    <span aria-hidden className="hidden text-muted-foreground transition group-hover:translate-x-1 group-hover:text-accent-text sm:block">
+                      →
                     </span>
                   </Link>
                 </li>
               ))}
             </ol>
           )}
-        </section>
-
-        <EmbeddingAtlas entries={embeddingsData as EmbeddingEntry[]} />
+        </div>
       </main>
-    </SmoothScroll>
+      <Footer />
+    </>
   )
 }
