@@ -4,46 +4,36 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Design system — read this first for any UI work
 
-This repo has an opinionated visual identity. **Before changing anything visual, read `DESIGN.md` and `AGENTS.md` at the repo root.**
-
-- `DESIGN.md` is a [Google Labs `design.md`](https://github.com/google-labs-code/design.md)–format spec: YAML token front matter (colors, typography, rounded, spacing, components) plus prose rationale (Overview, Colors, Typography, Layout, Elevation, Shapes, Components, Motion, Do's/Don'ts). It is the **source of truth** for the "Midnight Editorial" aesthetic — Playfair Display italics + Geist Mono micro-labels on near-black `#1A1A1A`, single `#3B5CFF` accent, hairline dividers, pill outlined buttons, flat (no shadows/glassmorphism), `noise-overlay` global texture.
-- `AGENTS.md` summarizes the rules an agent must follow: reuse tokens (don't hard-code values), every section opens with mono eyebrow + italic Playfair heading, two fonts only, one accent per viewport, flat surfaces only.
-- If the code drifts from `DESIGN.md`, fix the code — don't update `DESIGN.md` to ratify drift unless the user explicitly approves.
-- Validate spec changes: `npx @google/design.md lint DESIGN.md`.
+The visual identity is "Concierge" (warm paper, serif greeting, one accent, an on-site Ask). **Before changing anything visual, read `DESIGN.md` and `AGENTS.md` at the repo root.** `DESIGN.md` is the source of truth (Google Labs `design.md` format). If the code drifts from it, fix the code. Validate spec changes with `npx @google/design.md lint DESIGN.md`.
 
 ## Commands
 
 - `pnpm dev` — Next.js dev server.
-- `pnpm build` — static export build (`output: "export"` in `next.config.mjs`; emits `out/`).
-- `pnpm start` — serve a non-export production build.
+- `pnpm build` — static export build (`output: "export"`; emits `out/`).
 - `pnpm lint` — ESLint.
-- `pnpm contributions` — fetch GitHub contribution calendar data into `public/contributions.json`. Re-run when the snapshot is stale.
-- `pnpm embeddings` — generate `lib/embeddings.json` (MiniLM-L6 sentence embeddings for every blog post paragraph, work, and bio entry). **Re-run after adding a new blog post** so the Embedding Atlas reflects the new content.
-- `pnpm map` — generate `public/footprint-map.json` (dotted-map SVG paths for the Footprint section). **Re-run after adding new cities** to `footprint.cities` in `lib/content.ts`.
 
-Both `lib/embeddings.json` and `public/footprint-map.json` are committed build artifacts — they are generated at development time and served as static files.
-
-There is no test suite configured. `next.config.mjs` sets `typescript.ignoreBuildErrors: true` and `images.unoptimized: true` because the site builds as a fully static export.
+No test suite. `next.config.mjs` sets `typescript.ignoreBuildErrors: true` and `images.unoptimized: true` because the site is a static export.
 
 ## Architecture
 
-Single-page Next.js 16 (App Router) personal portfolio that builds to a static site.
+Next.js 16 (App Router) static portfolio.
 
-- **`app/page.tsx`** is the entire page: a vertical stack of section components inside `<SmoothScroll>` with a global `<CustomCursor>` and `<Navbar>`. Section order — Hero → SectionBlend → About → Experience → Stats → Works → Recognition → TechMarquee → Footer — defines the page's editorial rhythm and should not be reordered without a design reason.
-- **`app/layout.tsx`** loads two fonts via `next/font/google` and exposes them as CSS variables: `Playfair Display` → `--font-playfair` (used as `font-sans` by design), `Geist Mono` → `--font-geist-mono` (`font-mono`). The global `.noise-overlay` div lives here and is intentionally always rendered.
-- **`app/globals.css`** is the design-token layer. Tailwind v4 `@theme inline` block maps CSS variables (`--background`, `--foreground`, `--accent`, `--muted-foreground`, `--radius`, etc., all in `oklch`) to Tailwind utility names. The values here must stay in sync with `DESIGN.md`'s YAML tokens. Custom keyframes (`marquee-left`, `marquee-right`) and the `noise-overlay` rule also live here.
-- **`lib/content.ts`** is the single source of all page copy — hero labels, about statements, experience roles, stats, works, recognition entries, footer text. Edit this file rather than hard-coding strings into components. Components import named exports (`hero`, `about`, `experience`, …) and render them.
-- **`components/`** contains one file per page section plus cross-cutting pieces: `smooth-scroll.tsx` (Lenis-based smooth scroll wrapper), `custom-cursor.tsx` (bespoke pointer required on desktop, must respect `prefers-reduced-motion` and touch), `section-blend.tsx` (decorative transition between hero and About), and `mdx-components.tsx` (MDX renderers for blog posts).
-- **`components/sentient-sphere.tsx`** uses `@react-three/fiber` + `three` for the hero's animated 3D element.
+- **`app/page.tsx`** composes the home page: Hero (Ask) → QuickAccess → About → Experience → Works → Writing → Recognition → Footer, under `SiteHeader`.
+- **`app/layout.tsx`** loads Instrument Serif, Geist and Geist Mono, and wraps everything in `AskProvider` (which receives the knowledge base built at build time by `lib/knowledge.ts`).
+- **`app/globals.css`** holds the design tokens (CSS variables, light + dark) mapped to Tailwind via `@theme inline`. Keep in sync with `DESIGN.md`.
+- **`lib/content.ts`** is the single source of page copy, including `facts` (hand-written answers for the Ask). Edit it rather than hard-coding strings in components.
+- **`lib/ask.ts`** is the on-device BM25-style retrieval; **`lib/knowledge.ts`** merges `facts`, `works.projects` and blog articles into the corpus.
+- **`components/ask-box.tsx`**, **`ask-provider.tsx`**, **`ask-context.ts`** implement the prompt, the global dialog/dock/shortcuts and the context hook.
+- **`app/blog/**`** renders MDX articles from `content/articles` (`lib/articles.ts`).
 
-Path alias `@/*` resolves to the repo root (see `tsconfig.json`), so `@/components/...`, `@/lib/content`, `@/hooks/...` are the conventional imports.
+Path alias `@/*` resolves to the repo root.
 
 ## Editing patterns
 
-- **Adding or changing copy** → edit `lib/content.ts`. Keep the mono eyebrow format (`"01 — ENGINEERING"`, uppercase, em-dash, numeric prefix).
-- **Adding a new section** → new component in `components/`, new export object in `lib/content.ts`, slot it into the stack in `app/page.tsx`. Follow the section rhythm from `DESIGN.md` (mono eyebrow → Playfair italic heading → asymmetric content → hairline divider).
-- **Color, type, spacing, radius changes** → update `app/globals.css` *and* the YAML front matter in `DESIGN.md` together. Re-run the lint command above.
-- **Static export caveat** → because `output: "export"`, anything requiring a Node server at runtime (route handlers, dynamic `revalidate`, `next/image` optimization, middleware) will not work. Keep everything client- or build-time only.
+- **Copy** → `lib/content.ts`. New facts the Ask should know → add to `facts`. New blog posts are picked up automatically.
+- **New section** → component in `components/` using `<Section>`, export in `lib/content.ts`, slot into `app/page.tsx`.
+- **Tokens** → `app/globals.css` and `DESIGN.md` together.
+- **Static export** → no server runtime features (route handlers with dynamic data, middleware, image optimisation).
 
 ## CI
 

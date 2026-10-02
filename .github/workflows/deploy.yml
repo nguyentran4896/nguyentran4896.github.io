@@ -31,10 +31,6 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      # Refresh the public contribution snapshot from GitHub (no token needed).
-      # No-ops and keeps the committed snapshot if the fetch fails.
-      - run: node scripts/fetch-contributions.mjs
-
       - run: pnpm build
 
       - run: touch out/.nojekyll

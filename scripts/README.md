@@ -1,8 +1,8 @@
 # Generated visual assets
 
 Two committed image sets are rendered from HTML templates in this folder using a
-headless browser, so they use the *real* Playfair Display + Geist Mono webfonts
-and match the "Midnight Editorial" identity exactly (Satori/`next/og` can't
+headless browser, so they use the *real* Instrument Serif + Geist webfonts
+and match the "Concierge" identity exactly (Satori/`next/og` can't
 render the variable Playfair italic faithfully, which is why these are
 pre-rendered and committed rather than generated at build time).
 

@@ -1,188 +1,46 @@
-"use client"
-
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
 import { ArrowUpRight } from "lucide-react"
 import { footer } from "@/lib/content"
-import dynamic from "next/dynamic"
-
-const ContactGlobe = dynamic(
-  () => import("@/components/contact-globe").then((m) => m.ContactGlobe),
-  { ssr: false }
-)
-
-const PhysicsChips = dynamic(
-  () => import("@/components/physics-chips").then((m) => m.PhysicsChips),
-  { ssr: false }
-)
 
 export function Footer() {
-  const [time, setTime] = useState("")
-  const [isHovered, setIsHovered] = useState(false)
-  const [copied, setCopied] = useState(false)
-
-  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(footer.email).catch(() => {})
-      setCopied(true)
-      window.setTimeout(() => setCopied(false), 2000)
-    }
-  }
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date()
-      const hours = now.getHours().toString().padStart(2, "0")
-      const minutes = now.getMinutes().toString().padStart(2, "0")
-      const seconds = now.getSeconds().toString().padStart(2, "0")
-      setTime(`${hours}:${minutes}:${seconds}`)
-    }
-
-    updateTime()
-    let interval: number | undefined
-    const start = () => {
-      if (interval === undefined) interval = window.setInterval(updateTime, 1000)
-    }
-    const stop = () => {
-      if (interval !== undefined) {
-        clearInterval(interval)
-        interval = undefined
-      }
-    }
-    const onVisibility = () => {
-      if (document.visibilityState === "visible") {
-        updateTime()
-        start()
-      } else {
-        stop()
-      }
-    }
-    start()
-    document.addEventListener("visibilitychange", onVisibility)
-    return () => {
-      stop()
-      document.removeEventListener("visibilitychange", onVisibility)
-    }
-  }, [])
-
   return (
-    <footer id="contact" className="relative">
-      {/* Physics chips band — above the mailto CTA */}
-      <div className="border-t border-white/10 px-8 md:px-12 py-10">
-        <PhysicsChips />
-      </div>
+    <footer id="contact" className="border-t border-border px-5 pb-28 pt-20 sm:px-8 sm:pt-28">
+      <div className="mx-auto max-w-6xl">
+        <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent-text">{footer.eyebrow}</p>
+        <h2 className="mt-4 max-w-4xl text-balance font-display text-5xl leading-[1.02] sm:text-8xl">{footer.heading}</h2>
+        <p className="mt-6 max-w-xl text-lg text-muted-foreground">{footer.lead}</p>
 
-      {/* Main CTA */}
-      <motion.a
-        href={`mailto:${footer.email}`}
-        data-cursor-hover
-        className="relative block overflow-hidden"
-        onClick={handleContactClick}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        {/* Background Curtain */}
-        <motion.div
-          className="absolute inset-0 bg-accent"
-          initial={{ y: "100%" }}
-          animate={{ y: isHovered ? "0%" : "100%" }}
-          transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-        />
+        <a
+          href={`mailto:${footer.email}`}
+          className="mt-10 inline-flex items-center gap-3 rounded-full bg-accent px-7 py-4 text-base font-medium text-accent-foreground transition hover:brightness-95 sm:text-lg"
+        >
+          {footer.email} <ArrowUpRight className="size-5" aria-hidden />
+        </a>
 
-        {/* Content */}
-        <div className="relative py-16 md:py-24 px-8 md:px-12 border-t border-white/10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex flex-col gap-4 text-center md:text-left">
-              <motion.h2
-                className="font-sans text-[2.5rem] sm:text-5xl md:text-6xl lg:text-8xl font-light tracking-tight"
-                animate={{
-                  color: isHovered ? "#050505" : "#fafafa",
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                {footer.heading1} <span className="italic">{footer.heading2}</span>
-              </motion.h2>
-              <motion.span
-                className="font-mono text-xs tracking-widest"
-                animate={{ color: isHovered ? "#050505" : "#a1a1a1" }}
-                transition={{ duration: 0.3 }}
-              >
-                {copied ? "EMAIL COPIED — OPENING MAIL CLIENT…" : `${footer.email.toUpperCase()} · CLICK TO COPY`}
-              </motion.span>
-            </div>
-
-            <motion.div
-              animate={{
-                rotate: isHovered ? 45 : 0,
-                color: isHovered ? "#050505" : "#fafafa",
-              }}
-              transition={{ duration: 0.3 }}
-            >
-              <ArrowUpRight className="w-12 h-12 md:w-16 md:h-16" />
-            </motion.div>
-          </div>
-        </div>
-      </motion.a>
-
-      {/* Globe + Social strip */}
-      <div className="border-t border-white/10 px-8 md:px-12 py-12">
-        <div className="flex flex-col md:flex-row items-start gap-12 md:gap-16">
-          {/* Globe — left column, deliberate asymmetry */}
-          <div className="shrink-0">
-            <ContactGlobe />
-          </div>
-
-          {/* Right column: location/time + socials + copyright stacked vertically */}
-          <div className="flex flex-col justify-between gap-10 flex-1 self-stretch pt-2">
-            {/* Location + Time */}
-            <div className="flex flex-col gap-1.5">
-              <span className="font-mono text-xs tracking-widest text-muted-foreground">
-                {footer.location}
-              </span>
-              <span className="font-mono text-xs tracking-widest text-muted-foreground">
-                <span className="mr-2">LOCAL TIME</span>
-                <span className="text-white tabular-nums">{time}</span>
-              </span>
-            </div>
-
-            {/* Social links */}
-            <div className="flex flex-wrap gap-6">
-              {footer.socials.map((link) => (
+        <div className="mt-20 flex flex-col gap-6 border-t border-border pt-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © {new Date().getFullYear()} Nguyen Tran · {footer.location}
+          </p>
+          <ul className="flex gap-6">
+            {footer.socials.map((s) => (
+              <li key={s.label}>
                 <a
-                  key={link.label}
-                  href={link.href}
-                  target={link.href.startsWith("mailto:") ? undefined : "_blank"}
+                  href={s.href}
+                  target="_blank"
                   rel="noopener noreferrer"
-                  data-cursor-hover
-                  className="group relative font-mono text-xs tracking-widest text-muted-foreground hover:text-white transition-colors duration-300"
+                  className="transition hover:text-foreground"
                 >
-                  {link.label.toUpperCase()}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-300" />
+                  {s.label}
                 </a>
-              ))}
-              <a
-                href="/tokens"
-                data-cursor-hover
-                className="group relative font-mono text-xs tracking-widest text-muted-foreground hover:text-white transition-colors duration-300"
-              >
-                PLAYGROUND
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-300" />
+              </li>
+            ))}
+            <li>
+              <a href="/feed.xml" className="transition hover:text-foreground">
+                RSS
               </a>
-            </div>
-
-            {/* Copyright — suppressHydrationWarning because the year is derived
-                from the client clock, which can differ from the build-time
-                prerender across a New Year boundary (static export). */}
-            <p
-              className="font-mono text-xs tracking-widest text-muted-foreground"
-              suppressHydrationWarning
-            >
-              © {new Date().getFullYear()} · NGUYEN TRAN
-            </p>
-          </div>
+            </li>
+          </ul>
         </div>
       </div>
-
     </footer>
   )
 }

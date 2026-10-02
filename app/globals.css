@@ -1,217 +1,100 @@
 @import "tailwindcss";
 
-/* Dark portfolio theme - using dark mode as default */
+/*
+  Concierge — design tokens.
+  Warm paper surface, ink text, one vermilion accent. Light by default, dark
+  via prefers-color-scheme. Keep in sync with DESIGN.md.
+*/
 :root {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.546 0.245 262.881);
-  --accent-foreground: oklch(0.985 0 0);
-  /* AA-compliant tone of the accent for small accent-colored TEXT on the dark
-     surface: the vivid --accent is 3.45:1 on #1A1A1A (fails AA-normal), this
-     lightened blue is 5.0:1. The vivid accent is retained for large text,
-     selection, focus rings, borders, and atmospheric glows. */
-  --accent-text: oklch(0.64 0.18 264);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  --background: #f6f3ec;
+  --foreground: #15130f;
+  --card: #fffdf8;
+  --muted: #ece7dc;
+  --muted-foreground: #66615a;
+  --border: rgba(21, 19, 15, 0.12);
+  --border-strong: rgba(21, 19, 15, 0.28);
+  --accent: #e5481b;
+  --accent-foreground: #ffffff;
+  --accent-text: #b8340c;
+  --ring: #15130f;
+  /* Tile tints: soft category colours for glyph tiles only. */
+  --tint-sand: #ede4cf;
+  --tint-sage: #dfe8d6;
+  --tint-sky: #dce7ee;
+  --tint-blush: #f1dcd3;
+  --radius: 1.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #12100d;
+    --foreground: #f3efe6;
+    --card: #1b1814;
+    --muted: #25211b;
+    --muted-foreground: #a8a296;
+    --border: rgba(243, 239, 230, 0.13);
+    --border-strong: rgba(243, 239, 230, 0.32);
+    --accent: #ff6a3d;
+    --accent-foreground: #12100d;
+    --accent-text: #ff8a63;
+    --ring: #f3efe6;
+    --tint-sand: #2a251b;
+    --tint-sage: #1f2a1f;
+    --tint-sky: #1c2831;
+    --tint-blush: #33211b;
+  }
 }
 
 @theme inline {
-  --font-sans: "Playfair Display", "Georgia", serif;
-  --font-mono: "Geist Mono", "Geist Mono Fallback", monospace;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-instrument), "Georgia", serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent-text: var(--accent-text);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
-
-/* Paper reading theme — scoped light surface for long-form articles.
-   Inverts neutrals to warm cream + ink while preserving the single
-   #3B5CFF accent. Apply via [data-theme="paper"] on a wrapper. */
-[data-theme="paper"] {
-  --background: oklch(0.975 0.008 85);
-  --foreground: oklch(0.18 0.005 60);
-  --card: oklch(0.985 0.006 85);
-  --card-foreground: oklch(0.18 0.005 60);
-  --popover: oklch(0.985 0.006 85);
-  --popover-foreground: oklch(0.18 0.005 60);
-  --primary: oklch(0.18 0.005 60);
-  --primary-foreground: oklch(0.985 0.006 85);
-  --secondary: oklch(0.93 0.006 80);
-  --secondary-foreground: oklch(0.18 0.005 60);
-  --muted: oklch(0.93 0.006 80);
-  --muted-foreground: oklch(0.42 0.005 60);
-  --border: oklch(0.18 0.005 60 / 0.14);
-  --input: oklch(0.18 0.005 60 / 0.14);
-  --ring: oklch(0.546 0.245 262.881);
-  /* On the light paper surface the vivid accent already clears AA (4.68:1),
-     so accent-text needs no lightening here — fall back to the accent itself. */
-  --accent-text: var(--accent);
+  --color-tint-sand: var(--tint-sand);
+  --color-tint-sage: var(--tint-sage);
+  --color-tint-sky: var(--tint-sky);
+  --color-tint-blush: var(--tint-blush);
+  --radius-tile: var(--radius);
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    border-color: var(--border);
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
   body {
-    @apply bg-background text-foreground;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
   }
-  /* Visible keyboard focus (WCAG 2.4.7). The default outline color resolves to
-     ring/50 ≈ 1.8:1 on #1A1A1A — effectively invisible. DESIGN.md reserves the
-     accent for focus rings, and #3B5CFF clears the 3:1 non-text bar on both the
-     dark (3.45:1) and paper (4.68:1) surfaces. :focus-visible keeps it off
-     mouse clicks; outline never affects layout. */
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-foreground);
+  }
   :focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+    border-radius: 0.5rem;
   }
-}
-
-/* Noise texture overlay */
-.noise-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--background);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 3px;
-}
-
-/* Selection styles */
-::selection {
-  background: var(--accent);
-  color: var(--accent-foreground);
-}
-
-/* Marquee animation */
-@keyframes marquee-left {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes marquee-right {
-  from {
-    transform: translateX(-50%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-.animate-marquee-left {
-  animation: marquee-left 50s linear infinite;
-  will-change: transform;
-  backface-visibility: hidden;
-}
-
-.animate-marquee-right {
-  animation: marquee-right 50s linear infinite;
-  will-change: transform;
-  backface-visibility: hidden;
-}
-
-/* Heading anchor links injected by rehype-autolink-headings on /blog/[slug] */
-.heading-anchor {
-  display: inline-block;
-  margin-left: 0.4em;
-  color: var(--muted-foreground);
-  text-decoration: none;
-  opacity: 0;
-  transition: opacity 200ms ease, color 200ms ease;
-  font-weight: 400;
-}
-:where(h1, h2, h3, h4, h5, h6):hover .heading-anchor,
-.heading-anchor:focus-visible {
-  opacity: 1;
-}
-.heading-anchor:hover {
-  color: var(--accent);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee-left,
-  .animate-marquee-right {
-    animation-play-state: paused;
+  html {
+    scroll-behavior: auto;
   }
   *,
   *::before,
@@ -219,175 +102,70 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }
 
-/* ==========================================================================
-   Native CSS scroll-driven micro-animations
-   Opt-in utility classes — NO global element selectors touched.
-   Wrapped in @supports so non-supporting browsers (Safari < 18, older FF)
-   silently skip the block and show the elements in their resting state.
-
-   Firefox consistency trick: an explicit animation-duration is set on every
-   rule. The scroll-driven spec requires it even though duration is logically
-   overridden by timeline range — Firefox Nightly and early Chromium builds
-   ignored the animation when the property was absent.
-   ========================================================================== */
-
-/* Keyframes used by the three utilities below */
-@keyframes scroll-draw-rule {
-  from { width: 0; }
-  to   { width: 100%; }
-}
-
-@keyframes scroll-clip-reveal {
-  from { clip-path: inset(8% 4% 8% 4%); }
-  to   { clip-path: inset(0% 0% 0% 0%); }
-}
-
-@keyframes scroll-eyebrow-in {
+/* Entrance: gentle rise, staggered through --d. */
+@keyframes rise {
   from {
     opacity: 0;
-    letter-spacing: 0.4em;
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
-    /* resting value matches the design token: label-caps = 0.3em tracking */
-    letter-spacing: 0.3em;
+    transform: none;
   }
 }
+.rise {
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--d, 0ms);
+}
 
-@supports (animation-timeline: view()) {
-  /* ------------------------------------------------------------------
-     .scroll-draw
-     Apply to hairline <hr> or <div class="h-px"> divider elements.
-     The rule "draws" from 0 to full width as it crosses the viewport.
-     Finishes around entry 60-80% so it completes before the element
-     reaches the mid-screen, feeling snappy and deliberate.
-  ------------------------------------------------------------------ */
-  .scroll-draw {
-    animation-name: scroll-draw-rule;
-    animation-duration: 1ms;          /* Firefox consistency fix */
-    animation-timing-function: ease-out;
-    animation-fill-mode: both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 70%;
-    /* Start at zero width so the un-animated state is invisible */
-    width: 0;
-    transform-origin: left center;
-    will-change: width;
-  }
-
-  /* ------------------------------------------------------------------
-     .scroll-clip
-     Apply to <figure>, <img>, or any decorative image wrapper.
-     De-clips from a slight inset mask as the element enters the viewport.
-     The 8% vertical / 4% horizontal starting inset is subtle enough to
-     avoid noticeable layout shift while still conveying reveal motion.
-  ------------------------------------------------------------------ */
-  .scroll-clip {
-    animation-name: scroll-clip-reveal;
-    animation-duration: 1ms;          /* Firefox consistency fix */
-    animation-timing-function: ease-out;
-    animation-fill-mode: both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 75%;
-    clip-path: inset(8% 4% 8% 4%);
-    will-change: clip-path;
-  }
-
-  /* ------------------------------------------------------------------
-     .scroll-eyebrow
-     Apply to mono eyebrow <p> / <span> elements (class="font-mono …").
-     Fades in while letter-spacing eases from the exaggerated 0.4em
-     down to the design-system resting value (0.3em), giving the
-     typewriter-expanding feel requested without JavaScript.
-  ------------------------------------------------------------------ */
-  .scroll-eyebrow {
-    animation-name: scroll-eyebrow-in;
-    animation-duration: 1ms;          /* Firefox consistency fix */
-    animation-timing-function: ease-out;
-    animation-fill-mode: both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 65%;
+@keyframes caret {
+  50% {
     opacity: 0;
-    letter-spacing: 0.4em;
-    will-change: opacity, letter-spacing;
+  }
+}
+.caret::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.12em;
+  background: var(--accent);
+  animation: caret 1s steps(1) infinite;
+}
+
+/* Scroll-driven reveal where supported; elsewhere content is simply visible. */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
   }
 }
 
-/* ------------------------------------------------------------------
-   prefers-reduced-motion: disable all three scroll-driven utilities
-   unconditionally. The @supports block above only activates when the
-   browser supports animation-timeline; this media query takes priority
-   via the cascade and eliminates animation regardless of support.
------------------------------------------------------------------- */
-@media (prefers-reduced-motion: reduce) {
-  .scroll-draw {
-    animation: none !important;
-    width: 100% !important;
-  }
-  .scroll-clip {
-    animation: none !important;
-    clip-path: none !important;
-  }
-  .scroll-eyebrow {
-    animation: none !important;
-    opacity: 1 !important;
-    letter-spacing: 0.3em !important;
-  }
+/* MDX heading permalink. */
+.heading-anchor {
+  margin-left: 0.5rem;
+  color: var(--muted-foreground);
+  opacity: 0;
+  text-decoration: none;
+}
+:is(h2, h3):hover .heading-anchor,
+.heading-anchor:focus-visible {
+  opacity: 1;
 }
 
-/* ==========================================================================
-   View Transitions — blog title morph between index and article pages.
-
-   The root page-level cross-fade keeps the dark-to-paper theme crossing
-   from feeling jarring: a short, tight opacity blend that fires only on
-   the ::view-transition-root pseudo-element so the rest of the UI doesn't
-   flash. The title morph is handled by the per-slug view-transition-name
-   (post-title-<slug>) applied inline to <h2> on the index and <h1> in the
-   article — the browser interpolates geometry, font-size, and color across
-   the matched pair automatically.
-
-   prefers-reduced-motion: both the root fade AND the title morph are
-   removed; the browser performs an instant swap instead.
-   ========================================================================== */
-
-/* Root cross-fade: short and subtle so the dark→paper theme change reads
-   as a deliberate shift rather than an accidental flash. */
-::view-transition-old(root) {
-  animation: 180ms ease-out both vt-fade-out;
+/* rehype-pretty-code: light/dark token colours via CSS variables. */
+code[data-theme*=" "],
+code[data-theme*=" "] span {
+  color: var(--shiki-light);
 }
-::view-transition-new(root) {
-  animation: 220ms ease-out both vt-fade-in;
-}
-
-/* Title morph: longer duration so the Playfair italic heading has time to
-   smoothly interpolate size and position across the page boundary. */
-::view-transition-old(post-title) {
-  animation: 260ms ease-out both vt-fade-out;
-}
-::view-transition-new(post-title) {
-  animation: 260ms ease-out both vt-fade-in;
-}
-
-@keyframes vt-fade-out {
-  from { opacity: 1; }
-  to   { opacity: 0; }
-}
-
-@keyframes vt-fade-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-/* Instant swap — no animation — for users who prefer reduced motion. */
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root),
-  ::view-transition-old(post-title),
-  ::view-transition-new(post-title) {
-    animation: none !important;
+@media (prefers-color-scheme: dark) {
+  code[data-theme*=" "],
+  code[data-theme*=" "] span {
+    color: var(--shiki-dark);
   }
 }
