@@ -11,7 +11,7 @@ export function Footer() {
 
         <a
           href={`mailto:${footer.email}`}
-          className="mt-10 inline-flex items-center gap-3 rounded-full bg-accent px-7 py-4 text-base font-medium text-accent-foreground transition hover:brightness-95 sm:text-lg"
+          className="mt-10 inline-flex items-center gap-3 rounded-full bg-accent-text px-7 py-4 text-base font-medium text-accent-foreground transition hover:brightness-95 sm:text-lg"
         >
           {footer.email} <ArrowUpRight className="size-5" aria-hidden />
         </a>
