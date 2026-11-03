@@ -71,7 +71,7 @@ export default function BlogIndexPage() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
         <div className="mx-auto max-w-6xl">
           <header className="max-w-3xl">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent-text">Writing</p>
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent-text">Writing</p>
             <h1 className="mt-4 text-balance font-display text-6xl leading-[1.02] sm:text-8xl">Notes and essays.</h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground">
               Field notes on engineering at scale, medical AI, and the discipline of building quiet software.
@@ -88,7 +88,7 @@ export default function BlogIndexPage() {
                     href={`/blog/${article.slug}`}
                     className="group grid gap-3 py-9 sm:grid-cols-[12rem_1fr_auto] sm:items-baseline sm:gap-10"
                   >
-                    <time dateTime={article.date} className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                    <time dateTime={article.date} className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
                       {formatDate(article.date)}
                     </time>
                     <div>

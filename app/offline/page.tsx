@@ -10,7 +10,7 @@ export default function OfflinePage() {
   return (
     <main className="min-h-screen bg-background text-foreground flex items-center justify-center px-6">
       <div className="max-w-[48ch] w-full">
-        <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-muted-foreground mb-6">
+        <p className="font-mono text-xs tracking-[0.18em] uppercase text-muted-foreground mb-6">
           Offline
         </p>
         <h1 className="font-display leading-[1.05] tracking-tight text-5xl sm:text-7xl">

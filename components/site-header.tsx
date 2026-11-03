@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react"
 import { Link } from "next-view-transitions"
-import { Menu, Search, X } from "lucide-react"
-import { nav } from "@/lib/content"
+import { Mail, Menu, Search, X } from "lucide-react"
+import { footer, nav } from "@/lib/content"
 import { useAsk } from "@/components/ask-context"
 
 export function SiteHeader() {
@@ -52,6 +52,14 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <a
+            href={`mailto:${footer.email}`}
+            className="flex items-center gap-2 rounded-full bg-accent-text px-4 py-2 text-sm font-medium text-accent-foreground transition hover:brightness-95"
+          >
+            <Mail className="size-4" aria-hidden />
+            <span className="hidden min-[380px]:inline">{nav.cta}</span>
+            <span className="sr-only min-[380px]:hidden">{nav.cta}</span>
+          </a>
           <button
             type="button"
             onClick={() => open()}
@@ -59,7 +67,7 @@ export function SiteHeader() {
           >
             <Search className="size-4" aria-hidden />
             Ask
-            <kbd className="font-mono text-[11px] text-muted-foreground">⌘K</kbd>
+            <kbd className="font-mono text-xs text-muted-foreground">⌘K</kbd>
           </button>
           <button
             type="button"
@@ -83,13 +91,13 @@ export function SiteHeader() {
       </div>
 
       {menu && (
-        <nav id="mobile-nav" aria-label="Mobile" className="border-t border-border px-5 pb-6 pt-2 md:hidden">
+        <nav id="mobile-nav" aria-label="Mobile" className="border-t border-border bg-background px-5 pb-6 pt-2 md:hidden">
           {nav.links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               onClick={() => setMenu(false)}
-              className="block border-b border-border py-4 font-display text-3xl"
+              className="block border-b border-border py-3.5 font-display text-2xl"
             >
               {l.label}
             </Link>

@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Concierge
-description: A warm, light-first portfolio built around a conversational front door. A serif greeting, one prominent "Ask" prompt, soft tinted tiles and hairline structure. Calm, confident and legible, with automatic dark mode.
+description: A warm, light-first portfolio built around a conversational front door. A serif greeting, a one-line offer with an email CTA, one prominent "Ask" prompt and hairline structure. Calm, confident and legible, with automatic dark mode.
 colors:
   background: "#F6F3EC"
   foreground: "#15130F"
@@ -30,7 +30,7 @@ typography:
     letterSpacing: "-0.02em"
   h2:
     fontFamily: Instrument Serif
-    fontSize: 3.75rem
+    fontSize: 3rem
     fontWeight: 400
     lineHeight: 1.05
   answer:
@@ -40,12 +40,12 @@ typography:
     lineHeight: 1.3
   body:
     fontFamily: Geist
-    fontSize: 1rem
+    fontSize: 1.0625rem
     fontWeight: 400
     lineHeight: 1.6
   eyebrow:
     fontFamily: Geist Mono
-    fontSize: 0.6875rem
+    fontSize: 0.75rem
     fontWeight: 400
     letterSpacing: "0.18em"
 rounded:
@@ -54,7 +54,7 @@ rounded:
   dialog: 1.75rem
 spacing:
   gutter: 1.25rem
-  section: 7rem
+  section: 5rem
   max-width: 72rem
 components:
   ask-prompt:
@@ -69,10 +69,14 @@ components:
     backgroundColor: "{colors.card}"
     textColor: "{colors.foreground}"
     rounded: "{rounded.tile}"
-  tile:
-    backgroundColor: "{colors.tint-sand}"
+  proof-strip:
+    backgroundColor: "{colors.background}"
     textColor: "{colors.foreground}"
     rounded: "{rounded.tile}"
+  award-badge:
+    backgroundColor: "{colors.tint-blush}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.pill}"
 ---
 
 # Concierge
@@ -93,7 +97,7 @@ Influences: **america.gov** (one front door, a "Hello" greeting, a central promp
 
 ## Colors
 
-Warm paper background, ink text, one vermilion accent. Use `accent` for the submit button, status dot, bullets and focus-free emphasis; use `accent-text` for small accent-coloured text (AA on paper). Dark mode follows `prefers-color-scheme` and swaps every token. The four `tint-*` colours are for glyph tiles and one highlight card only, never for text or buttons.
+Warm paper background, ink text, one vermilion accent. Use `accent` for the submit button, status dot, bullets and focus-free emphasis; use `accent-text` for small accent-coloured text (AA on paper). Dark mode follows `prefers-color-scheme` and swaps every token. The `tint-*` colours are for badges only, never for text or buttons.
 
 ## Typography
 
@@ -101,7 +105,7 @@ Three families, each with a job: **Instrument Serif** for greeting, headings and
 
 ## Layout
 
-One centred column, `max-w-6xl`, 20px gutters on mobile and 32px from `sm`. Sections use generous vertical padding and open with an eyebrow plus serif heading, separated by a hairline. Order: Hero (Ask) → Quick access tiles → About → Experience → Selected work → Writing → Recognition → Contact.
+One centred column, `max-w-6xl`, 20px gutters on mobile and 32px from `sm`. Sections use 64px (mobile) / 80px vertical padding and open with an eyebrow plus serif heading, separated by a hairline. Order: Hero (offer, Email CTA, Ask, proof strip) → About → Selected work → Experience → Writing → Contact. Five anchors, matching the nav. Each headline figure (years, businesses, award) appears once on the page, in the proof strip. Only the hero greeting is oversized; section headings stay at 3rem. Smallest text is 12px (eyebrows, metadata); muted body text is 14px or more.
 
 ## Elevation
 
@@ -113,14 +117,15 @@ Pills for inputs, buttons and chips. `1.5rem` tiles for cards, images and tint b
 
 ## Components
 
-- **Tile**: tinted rounded square, large outline glyph top left, arrow top right, serif label and one-line blurb bottom. Lifts 4px on hover.
+- **Proof strip**: one hairline-bordered row of three figures under the hero, serif value and one muted line.
+- **Award badge**: blush pill with an award glyph, on the project it belongs to.
 - **Chip**: pill with hairline border, muted text; hover inverts or darkens the border.
-- **Role row**: mono period left, serif role, accent company, bullets and stack chips right.
-- **Project card**: hairline card with cover image, year, serif title, optional highlight pill.
+- **Role row**: mono period left; serif role and accent company on one line, one-sentence outcome. Only the current role gets bullets (two at most). Tools are one quiet line under the list, not chips.
+- **Project card**: hairline card with cover image, year, serif title, optional award badge, then Problem / What I built / Result in one line each.
 
 ## Motion
 
-Entrance: a 14px rise, staggered by 80ms. Below the fold: CSS scroll-driven reveal where supported, plain visible content otherwise. Hover transitions 300ms. All motion is disabled under `prefers-reduced-motion`.
+Hero backdrop: the noise-displaced wireframe sphere (`components/sentient-sphere.tsx`, three.js) sits behind the greeting at low opacity: ink lines with `accent` on the crests, alpha about 0.1 on paper and 0.13 in dark, lighter and coarser below 640px. It tilts toward the pointer, fades and shrinks to 80% over the first 60% of a screen of scroll, pauses off screen, and shows a single still frame under `prefers-reduced-motion`. It is decorative only (`aria-hidden`, pointer-events none); copy must stay readable over it. Entrance: a 14px rise, staggered by 80ms. Below the fold: CSS scroll-driven reveal where supported, plain visible content otherwise. Hover transitions 300ms. All motion is disabled under `prefers-reduced-motion`.
 
 ## Do's and Don'ts
 

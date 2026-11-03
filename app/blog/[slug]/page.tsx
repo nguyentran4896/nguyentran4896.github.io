@@ -138,7 +138,7 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
                   All writing
                 </Link>
 
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-8 font-mono text-[11px] tracking-[0.14em] uppercase text-muted-foreground">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-8 font-mono text-xs tracking-[0.14em] uppercase text-muted-foreground">
                   <time dateTime={article.date}>{formatDate(article.date)}</time>
                   <span aria-hidden className="text-foreground/20">/</span>
                   <span>{mins} min read</span>
@@ -204,7 +204,7 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
             {related.length > 0 && (
               <aside className="px-6 sm:px-10 md:px-12 pb-16 md:pb-20">
                 <div className="max-w-[68ch] mx-auto pt-10 border-t border-border">
-                  <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-8">
+                  <p className="font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground mb-8">
                     Related reading
                   </p>
                   <ul className="space-y-6">
@@ -219,7 +219,7 @@ export default async function ArticlePage({ params }: { params: Promise<Params> 
                               {r.excerpt}
                             </p>
                           )}
-                          <span className="mt-3 inline-block font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
+                          <span className="mt-3 inline-block font-mono text-xs tracking-[0.3em] uppercase text-muted-foreground">
                             {formatDate(r.date)}
                             {r.tags.length > 0 && (
                               <>

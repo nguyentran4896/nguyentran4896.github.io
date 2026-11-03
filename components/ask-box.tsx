@@ -114,7 +114,7 @@ export function AskBox({
               <button
                 type="button"
                 onClick={() => run(p)}
-                className="rounded-full border border-border px-4 py-2 text-left text-sm text-muted-foreground transition hover:border-foreground hover:text-foreground"
+                className="rounded-full border border-border bg-background/80 px-4 py-2 text-left text-sm text-muted-foreground backdrop-blur-sm transition hover:border-foreground hover:text-foreground"
               >
                 {p}
               </button>
@@ -126,14 +126,14 @@ export function AskBox({
       <div aria-live="polite" className="mt-6 empty:hidden">
         {turn && (
           <article className="rounded-tile border border-border bg-card p-6 sm:p-8">
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{turn.q}</p>
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">{turn.q}</p>
             <p className="mt-4 font-display text-2xl leading-snug sm:text-[1.75rem]">
               <Streamed key={turn.n ?? 0} text={answerText} onDone={setDone} />
             </p>
 
             {showMeta && best && (
               <div className="mt-6 border-t border-border pt-5">
-                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{askCopy.sources}</p>
+                <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">{askCopy.sources}</p>
                 <ul className="mt-3 flex flex-wrap gap-2">
                   {turn.hits.map((h) => (
                     <li key={h.fact.id}>
