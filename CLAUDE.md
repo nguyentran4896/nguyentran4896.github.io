@@ -18,7 +18,7 @@ No test suite. `next.config.mjs` sets `typescript.ignoreBuildErrors: true` and `
 
 Next.js 16 (App Router) static portfolio.
 
-- **`app/page.tsx`** composes the home page: Hero (Ask) → QuickAccess → About → Experience → Works → Writing → Recognition → Footer, under `SiteHeader`.
+- **`app/page.tsx`** composes the home page: Hero (offer, Email CTA, Ask, proof strip) → About → Works → Experience → Writing → Footer (Contact), under `SiteHeader`.
 - **`app/layout.tsx`** loads Instrument Serif, Geist and Geist Mono, and wraps everything in `AskProvider` (which receives the knowledge base built at build time by `lib/knowledge.ts`).
 - **`app/globals.css`** holds the design tokens (CSS variables, light + dark) mapped to Tailwind via `@theme inline`. Keep in sync with `DESIGN.md`.
 - **`lib/content.ts`** is the single source of page copy, including `facts` (hand-written answers for the Ask). Edit it rather than hard-coding strings in components.

@@ -76,7 +76,7 @@ export function AskProvider({ knowledge, children }: { knowledge: Fact[]; childr
         }`}
       >
         <span>Ask anything about Nguyen</span>
-        <kbd className="hidden rounded-md border border-border px-1.5 py-0.5 font-mono text-[11px] sm:inline">⌘K</kbd>
+        <kbd className="hidden rounded-md border border-border px-1.5 py-0.5 font-mono text-xs sm:inline">⌘K</kbd>
         <span className="flex size-8 items-center justify-center rounded-full bg-foreground text-background">
           <ArrowUp className="size-4" aria-hidden />
         </span>
@@ -94,7 +94,7 @@ export function AskProvider({ knowledge, children }: { knowledge: Fact[]; childr
         {isOpen && (
           <>
             <div className="mb-5 flex items-center justify-between">
-              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{askCopy.title}</p>
+              <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">{askCopy.title}</p>
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}

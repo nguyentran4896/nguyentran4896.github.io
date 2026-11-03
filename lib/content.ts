@@ -1,16 +1,17 @@
 export const site = {
   title: "Nguyen Tran — Senior Engineer & AI Researcher",
   description:
-    "Senior Software Engineer with ~10 years building production systems, researching medical AI and computer vision. Bridging AI research with real-world impact.",
+    "Senior engineer helping teams ship reliable backend systems and turn medical-AI research into working software. Ten years in production, award-winning eye-care AI research.",
 }
 
 export const nav = {
   brand: "Nguyen Tran",
   status: "Open to collaborations",
+  cta: "Email me",
   links: [
     { label: "About", href: "/#about" },
-    { label: "Experience", href: "/#experience" },
     { label: "Work", href: "/#work" },
+    { label: "Experience", href: "/#experience" },
     { label: "Writing", href: "/#writing" },
     { label: "Contact", href: "/#contact" },
   ],
@@ -18,16 +19,18 @@ export const nav = {
 
 export const hero = {
   greeting: "Hello, I\u2019m Nguyen.",
-  lead: "Whatever you want to know about my work, start here.",
+  lead: "I help teams ship reliable backend systems and turn medical-AI research into working software.",
+  cta: "Email me",
+  secondary: "See my work",
   placeholder: "Ask about my work or research\u2026",
   submit: "Ask",
   prompts: [
     "What do you do?",
-    "Tell me about your medical AI research",
+    "Can you help with my project?",
     "Where have you worked?",
-    "How can I get in touch?",
+    "Show me your work",
   ],
-  note: "Answers come from this site only, matched in your browser. No AI model, no tracking, nothing leaves your device.",
+  note: "Answers come from this site, matched in your browser.",
 }
 
 export const ask = {
@@ -39,126 +42,65 @@ export const ask = {
   followups: ["What do you do?", "Show me your work", "Are you available for work?", "What do you write about?"],
 }
 
-export const quick = {
-  eyebrow: "Quick access",
-  title: "Start with what you need.",
-  tiles: [
-    { icon: "Briefcase", label: "Experience", blurb: "Ten years, three companies, 300k+ businesses.", href: "#experience", tint: "sand" },
-    { icon: "FlaskConical", label: "Research & work", blurb: "Medical AI for ophthalmology.", href: "#work", tint: "sage" },
-    { icon: "PenLine", label: "Writing", blurb: "Notes on quiet software and AI.", href: "#writing", tint: "sky" },
-    { icon: "Award", label: "Recognition", blurb: "2nd Prize, Global Ortho-K 2025.", href: "#recognition", tint: "blush" },
-    { icon: "Mail", label: "Get in touch", blurb: "Collaborations and consulting.", href: "#contact", tint: "sand" },
-    { icon: "Github", label: "Open source", blurb: "538+ merged pull requests.", href: "https://github.com/nguyentran4896", tint: "sage" },
+/** One quiet line of proof under the hero. Each figure appears here and nowhere else on the page. */
+export const proof = {
+  label: "At a glance",
+  items: [
+    { value: "10+ years", label: "building production systems" },
+    { value: "300k+", label: "businesses on systems I work on" },
+    { value: "2nd Prize", label: "Global Ortho-K Conference 2025" },
   ],
 }
 
 export const about = {
   eyebrow: "About",
-  title: "Engineer first. Researcher by conviction.",
+  title: "Engineer first, researcher by conviction.",
   paragraphs: [
-    "I\u2019ve built production systems for a decade, most recently distributed payroll services at Employment Hero. In parallel I research medical AI and computer vision, with a focus on model interpretability and generalisation across diverse datasets.",
-    "I believe AI doesn\u2019t replace engineers, it amplifies them. My work is translating research into scalable, deployable systems that people can rely on.",
+    "I\u2019m a senior engineer at Employment Hero, based in Ho Chi Minh City and working remotely. Alongside that I research medical AI for eye care, and my job is the bridge between the two: taking research and turning it into systems people can rely on.",
   ],
-  facts: [
-    { label: "Based in", value: "Ho Chi Minh City, Vietnam" },
-    { label: "Currently", value: "Senior Software Engineer, Employment Hero" },
-    { label: "Focus", value: "Medical AI, computer vision" },
-    { label: "Education", value: "Computer Science, HCMUT" },
-  ],
+  education: "Computer Science, Ho Chi Minh University of Technology (HCMUT) \u00b7 English (professional) and Vietnamese (native)",
 }
-
-export type Highlight = { icon: string; value: string; label: string }
 
 export type Role = {
   period: string
   role: string
   company: string
   location: string
-  icon: string
   summary: string
-  bullets: string[]
-  stack: string[]
-  highlights?: Highlight[]
+  bullets?: string[]
 }
 
 export const experience = {
   eyebrow: "Experience",
-  title: "A decade of shipping, then research.",
+  title: "Ten years of shipping.",
   roles: [
     {
-      period: "2021 — Present",
+      period: "2021 \u2014 Present",
       role: "Senior Software Engineer",
       company: "Employment Hero",
-      location: "Remote · Vietnam",
-      icon: "Server",
+      location: "Remote \u00b7 Vietnam",
       summary:
-        "Designing scalable backend systems serving 300,000+ businesses across 5 countries. Leading architectural decisions for distributed payroll services and integrating AI tooling across the engineering organisation.",
+        "Backend systems for payroll used by 300,000+ businesses across 5 countries.",
       bullets: [
-        "Lead technical research and architectural decision-making for complex distributed payroll systems",
-        "Integrate AI tools into development workflows to enhance code quality and team productivity",
-        "Implement CI/CD pipelines using GitHub Actions and CircleCI for automated testing and deployment",
-      ],
-      stack: ["Ruby on Rails", "TypeScript", "PostgreSQL", "Kubernetes", "AWS"],
-      highlights: [
-        { icon: "Users", value: "300k+", label: "Businesses served" },
-        { icon: "Globe", value: "5", label: "Countries" },
-        { icon: "Sparkles", value: "AI", label: "Tooling lead" },
+        "Lead architecture decisions for distributed payroll services",
+        "Brought AI tooling into the engineering workflow across teams",
       ],
     },
     {
-      period: "2018 — 2020",
+      period: "2018 \u2014 2020",
       role: "Software Engineer",
       company: "VNG Corporation",
       location: "Ho Chi Minh City",
-      icon: "ShieldCheck",
-      summary:
-        "Architected the full-stack authentication system for Zalo Web Login (millions of daily active users). Built Java microservices, REST APIs, and observability tooling for anomaly detection.",
-      bullets: [
-        "Designed logging, error-tracking, and statistical analysis systems for monitoring and anomaly detection",
-        "Integrated authentication across multiple platforms; addressed web security challenges and data protection",
-        "Built Java server-side applications using microservices architecture and RESTful APIs",
-      ],
-      stack: ["Java", "Microservices", "REST", "Monitoring"],
-      highlights: [
-        { icon: "Users", value: "Millions", label: "Daily active users" },
-        { icon: "Lock", value: "Auth", label: "Web Login system" },
-        { icon: "Activity", value: "24/7", label: "Observability" },
-      ],
+      summary: "Built the authentication system behind Zalo Web Login, used by millions of people daily.",
     },
     {
-      period: "2017 — 2018",
+      period: "2017 \u2014 2018",
       role: "Web Developer",
       company: "Nguyen Hiep Software",
       location: "Ho Chi Minh City",
-      icon: "Code2",
-      summary:
-        "Built full-stack web applications on the MEAN stack. Deployed scalable backend services on AWS for early-stage commerce products.",
-      bullets: [
-        "Built scalable backend services with Node.js, RESTful APIs, and AWS cloud infrastructure",
-        "Applied Agile/Scrum methodologies and automated testing for continuous delivery",
-      ],
-      stack: ["MongoDB", "Express", "Angular", "Node.js"],
-      highlights: [
-        { icon: "Cloud", value: "AWS", label: "Cloud delivery" },
-        { icon: "Repeat", value: "Agile", label: "CI · automated tests" },
-      ],
+      summary: "Full-stack web apps and AWS backends for early-stage commerce products.",
     },
   ] satisfies Role[],
-  education: {
-    period: "2014 — 2018",
-    degree: "Engineering Degree, Computer Science",
-    school: "Ho Chi Minh University of Technology (HCMUT)",
-    note: "GPA 7.22 / 10.0",
-  },
-}
-
-export const stats = {
-  items: [
-    { value: "10+", label: "Years engineering" },
-    { value: "538+", label: "Merged pull requests" },
-    { value: "300k+", label: "Businesses served" },
-    { value: "70%", label: "AI-assisted workflow" },
-  ],
 }
 
 export type Project = {
@@ -167,6 +109,9 @@ export type Project = {
   image: string
   year: string
   summary: string
+  problem: string
+  built: string
+  result: string
   stack: string
   href: string
   achievement?: string
@@ -174,7 +119,7 @@ export type Project = {
 
 export const works = {
   eyebrow: "Selected work",
-  title: "Research and systems.",
+  title: "Research turned into software.",
   projects: [
     {
       title: "HiHorus",
@@ -183,6 +128,9 @@ export const works = {
       image: "/works/hihorus-editorial.jpg",
       summary:
         "AI-powered diagnostic platform for ophthalmology. Detects pathologic myopia and segments lesions on fundus images using deep learning.",
+      problem: "Spotting pathologic myopia on eye scans takes a specialist\u2019s time.",
+      built: "A deep-learning model that flags it and outlines the lesions on fundus images, inside a web app.",
+      result: "Won 2nd Prize at the Global Ortho-K Conference 2025; presented at VOS, November 2025.",
       stack: "PyTorch \u00b7 TensorFlow \u00b7 OpenCV \u00b7 React",
       href: "https://github.com/nguyentran4896",
       achievement: "2nd Prize \u2014 Global Ortho-K Conference 2025",
@@ -194,7 +142,10 @@ export const works = {
       image: "/works/retinal-oct-editorial.jpg",
       summary:
         "Multi-class CNN models for automated retinal disease detection from OCT scans. Optimised for production and deployed as a Flask REST API.",
-      stack: "Python \u00b7 CNN \u00b7 Flask \u00b7 Waitress",
+      problem: "Reading retinal OCT scans by hand is slow.",
+      built: "CNN models that sort scans into disease classes automatically.",
+      result: "Optimised for production and served as a REST API.",
+      stack: "Python \u00b7 CNN \u00b7 Flask",
       href: "https://github.com/nguyentran4896",
     },
   ] satisfies Project[],
@@ -206,44 +157,15 @@ export const writing = {
   all: "All writing",
 }
 
-export const recognition = {
-  eyebrow: "Recognition",
-  title: "Honors and inquiry.",
-  award: {
-    place: "2nd Prize",
-    event: "5th Global Orthokeratology \u2014 Myopia Control Conference",
-    date: "August 2025",
-    paper:
-      "Artificial Intelligence Model for Detecting Pathologic Myopia and Segmenting Lesions on Fundus Images",
-    follow: "Presented at Vietnam Ophthalmology Conference VOS \u2014 November 2025",
-  },
-  interests: [
-    "Deep Learning Architectures",
-    "Computer Vision",
-    "Healthcare AI",
-    "Model Interpretability",
-    "Scalable ML Systems",
-  ],
-  languages: [
-    { name: "English", level: "Professional \u00b7 TOEIC 820" },
-    { name: "Vietnamese", level: "Native" },
-  ],
-  quote:
-    "AI is not replacing developers \u2014 it\u2019s amplifying our capabilities. I use AI as a collaborative tool to focus on high-level problem-solving while automating the routine.",
-}
-
 export const tech = {
-  eyebrow: "Toolbox",
-  items: [
-    "Ruby on Rails", "TypeScript", "Python", "PyTorch", "TensorFlow", "OpenCV",
-    "PostgreSQL", "AWS", "Docker", "Redis", "Node.js", "Keras", "Kubernetes", "Java",
-  ],
+  eyebrow: "Tools I use",
+  items: ["Ruby on Rails", "TypeScript", "Python", "PyTorch", "PostgreSQL", "AWS", "Kubernetes", "Docker"],
 }
 
 export const footer = {
   eyebrow: "Contact",
   heading: "Let\u2019s build something careful.",
-  lead: "Open to research collaborations, consulting and senior engineering conversations.",
+  lead: "Open to consulting, research collaborations and senior engineering roles. Email is the quickest route.",
   email: "nguyentran4896@gmail.com",
   location: "Ho Chi Minh City \u00b7 Vietnam",
   socials: [
@@ -311,8 +233,8 @@ export const facts: Fact[] = [
     keywords: "award prize publication paper conference published recognition honors presented speaking vos ortho-k",
     answer:
       "2nd Prize at the 5th Global Orthokeratology and Myopia Control Conference (August 2025) for a model that detects pathologic myopia and segments lesions on fundus images, later presented at the Vietnam Ophthalmology Conference, November 2025.",
-    href: "/#recognition",
-    source: "Recognition",
+    href: "/#work",
+    source: "Selected work",
   },
   {
     id: "stack",
@@ -329,8 +251,8 @@ export const facts: Fact[] = [
     keywords: "ai opinion view philosophy replace developers amplify assisted workflow copilot llm tools productivity",
     answer:
       "Nguyen believes AI doesn\u2019t replace engineers, it amplifies them. Roughly 70% of his workflow is AI-assisted, which frees him to focus on high-level problem solving while automating the routine.",
-    href: "/#recognition",
-    source: "Recognition",
+    href: "/#about",
+    source: "About",
   },
   {
     id: "interpretability",
@@ -346,7 +268,7 @@ export const facts: Fact[] = [
     title: "By the numbers",
     keywords: "numbers stats statistics years pull requests prs github contributions open source businesses countries",
     answer:
-      "10+ years engineering, 538+ merged pull requests, 300,000+ businesses served and a roughly 70% AI-assisted workflow.",
+      "10+ years engineering, 300,000+ businesses on systems Nguyen works on, 538+ merged pull requests on GitHub and a roughly 70% AI-assisted workflow.",
     href: "/#about",
     source: "About",
   },
@@ -356,8 +278,8 @@ export const facts: Fact[] = [
     keywords: "education degree university school study hcmut gpa language english vietnamese toeic speak",
     answer:
       "Engineering degree in Computer Science from Ho Chi Minh University of Technology (HCMUT), 2014 to 2018. Nguyen speaks Vietnamese natively and English professionally (TOEIC 820).",
-    href: "/#experience",
-    source: "Experience",
+    href: "/#about",
+    source: "About",
   },
   {
     id: "location",
@@ -371,9 +293,9 @@ export const facts: Fact[] = [
   {
     id: "availability",
     title: "Availability",
-    keywords: "available availability hire hiring freelance consulting collaborate collaboration open work together engage",
+    keywords: "help project can you available availability hire hiring freelance consulting collaborate collaboration open work together engage",
     answer:
-      "Nguyen is open to research collaborations, consulting and senior engineering conversations. The quickest route is email.",
+      "Nguyen is open to consulting, research collaborations and senior engineering roles: backend and distributed systems, and turning AI research into production software. The quickest route is email, nguyentran4896@gmail.com.",
     href: "/#contact",
     source: "Contact",
   },

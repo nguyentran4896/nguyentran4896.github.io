@@ -1,26 +1,21 @@
 import Image from "next/image"
-import { about, stats } from "@/lib/content"
+import { about } from "@/lib/content"
 import { Section } from "@/components/section"
 
 export function About() {
   return (
-    <Section id="about" eyebrow={about.eyebrow} title={about.title}>
-      <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
-        <div className="reveal space-y-6 text-lg leading-relaxed text-foreground/85 sm:text-xl">
+    <Section id="about" eyebrow={about.eyebrow} title={about.title} className="border-t border-border">
+      <div className="grid items-center gap-10 md:grid-cols-[1fr_16rem] lg:gap-16">
+        <div className="reveal space-y-5 text-lg leading-relaxed text-foreground/85">
           {about.paragraphs.map((p) => (
-            <p key={p}>{p}</p>
+            <p key={p} className="max-w-2xl">
+              {p}
+            </p>
           ))}
-          <dl className="mt-10 grid grid-cols-1 gap-x-8 gap-y-5 border-t border-border pt-8 text-base sm:grid-cols-2">
-            {about.facts.map((f) => (
-              <div key={f.label}>
-                <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{f.label}</dt>
-                <dd className="mt-1">{f.value}</dd>
-              </div>
-            ))}
-          </dl>
+          <p className="max-w-2xl text-sm text-muted-foreground">{about.education}</p>
         </div>
 
-        <div className="reveal">
+        <div className="reveal mx-auto w-48 md:w-full">
           <Image
             src="/avatar-thailand.jpeg"
             alt="Portrait of Nguyen Tran"
@@ -30,15 +25,6 @@ export function About() {
           />
         </div>
       </div>
-
-      <dl className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-tile border border-border bg-border lg:grid-cols-4">
-        {stats.items.map((s) => (
-          <div key={s.label} className="bg-background p-6 sm:p-8">
-            <dd className="font-display text-5xl sm:text-6xl">{s.value}</dd>
-            <dt className="mt-2 text-sm text-muted-foreground">{s.label}</dt>
-          </div>
-        ))}
-      </dl>
     </Section>
   )
 }
