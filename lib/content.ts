@@ -4,26 +4,66 @@ export const site = {
     "Senior Software Engineer with ~10 years building production systems, researching medical AI and computer vision. Bridging AI research with real-world impact.",
 }
 
+export const nav = {
+  brand: "Nguyen Tran",
+  status: "Open to collaborations",
+  links: [
+    { label: "About", href: "/#about" },
+    { label: "Experience", href: "/#experience" },
+    { label: "Work", href: "/#work" },
+    { label: "Writing", href: "/#writing" },
+    { label: "Contact", href: "/#contact" },
+  ],
+}
+
 export const hero = {
-  topLabel: "01 — ENGINEERING",
-  topTitleLine1: "SENIOR",
-  topTitleLine2: "ENGINEER",
-  bottomLabel: "02 — RESEARCH",
-  bottomTitleLine1: "AI",
-  bottomTitleLine2: "RESEARCHER",
-  cta: "Initialize",
+  greeting: "Hello, I\u2019m Nguyen.",
+  lead: "Whatever you want to know about my work, start here.",
+  placeholder: "Ask about my work or research\u2026",
+  submit: "Ask",
+  prompts: [
+    "What do you do?",
+    "Tell me about your medical AI research",
+    "Where have you worked?",
+    "How can I get in touch?",
+  ],
+  note: "Answers come from this site only, matched in your browser. No AI model, no tracking, nothing leaves your device.",
+}
+
+export const ask = {
+  title: "Ask about Nguyen",
+  empty:
+    "I couldn\u2019t find that on this site. Try one of these, or email Nguyen directly.",
+  sources: "Sources",
+  dialogHint: "Esc to close",
+  followups: ["What do you do?", "Show me your work", "Are you available for work?", "What do you write about?"],
+}
+
+export const quick = {
+  eyebrow: "Quick access",
+  title: "Start with what you need.",
+  tiles: [
+    { icon: "Briefcase", label: "Experience", blurb: "Ten years, three companies, 300k+ businesses.", href: "#experience", tint: "sand" },
+    { icon: "FlaskConical", label: "Research & work", blurb: "Medical AI for ophthalmology.", href: "#work", tint: "sage" },
+    { icon: "PenLine", label: "Writing", blurb: "Notes on quiet software and AI.", href: "#writing", tint: "sky" },
+    { icon: "Award", label: "Recognition", blurb: "2nd Prize, Global Ortho-K 2025.", href: "#recognition", tint: "blush" },
+    { icon: "Mail", label: "Get in touch", blurb: "Collaborations and consulting.", href: "#contact", tint: "sand" },
+    { icon: "Github", label: "Open source", blurb: "538+ merged pull requests.", href: "https://github.com/nguyentran4896", tint: "sage" },
+  ],
 }
 
 export const about = {
-  sectionLabel: "03 — PHILOSOPHY",
-  sectionTitle: "Stream of Consciousness",
-  statements: [
-    "I've built production systems for a decade.",
-    "I research medical AI and computer vision.",
-    "Published at the 5th Global Ortho-K & Myopia Conference, 2025.",
-    "AI doesn't replace engineers — it amplifies them.",
-    "I translate research into scalable, deployable systems.",
-    "I explore model interpretability and generalisation across diverse datasets.",
+  eyebrow: "About",
+  title: "Engineer first. Researcher by conviction.",
+  paragraphs: [
+    "I\u2019ve built production systems for a decade, most recently distributed payroll services at Employment Hero. In parallel I research medical AI and computer vision, with a focus on model interpretability and generalisation across diverse datasets.",
+    "I believe AI doesn\u2019t replace engineers, it amplifies them. My work is translating research into scalable, deployable systems that people can rely on.",
+  ],
+  facts: [
+    { label: "Based in", value: "Ho Chi Minh City, Vietnam" },
+    { label: "Currently", value: "Senior Software Engineer, Employment Hero" },
+    { label: "Focus", value: "Medical AI, computer vision" },
+    { label: "Education", value: "Computer Science, HCMUT" },
   ],
 }
 
@@ -42,8 +82,8 @@ export type Role = {
 }
 
 export const experience = {
-  sectionLabel: "04 — TRAJECTORY",
-  sectionTitle: "Career & Education",
+  eyebrow: "Experience",
+  title: "A decade of shipping, then research.",
   roles: [
     {
       period: "2021 — Present",
@@ -113,18 +153,12 @@ export const experience = {
 }
 
 export const stats = {
-  sectionLabel: "05 — BY THE NUMBERS",
   items: [
-    { value: "10+", label: "Years Engineering" },
-    { value: "538+", label: "Merged Pull Requests" },
-    { value: "300k+", label: "Businesses Served" },
-    { value: "70%", label: "AI-Assisted Workflow" },
+    { value: "10+", label: "Years engineering" },
+    { value: "538+", label: "Merged pull requests" },
+    { value: "300k+", label: "Businesses served" },
+    { value: "70%", label: "AI-assisted workflow" },
   ],
-}
-
-export const contributions = {
-  label: "GitHub Activity",
-  caption: "in the last year",
 }
 
 export type Project = {
@@ -139,19 +173,19 @@ export type Project = {
 }
 
 export const works = {
-  sectionLabel: "06 — SELECTED WORKS",
-  sectionTitle: "Research & Systems",
+  eyebrow: "Selected work",
+  title: "Research and systems.",
   projects: [
     {
       title: "HiHorus",
       tags: ["Medical AI", "Ophthalmology", "Diagnostics"],
-      year: "2024 — 2025",
+      year: "2024 \u2014 2025",
       image: "/works/hihorus-editorial.jpg",
       summary:
         "AI-powered diagnostic platform for ophthalmology. Detects pathologic myopia and segments lesions on fundus images using deep learning.",
-      stack: "PyTorch · TensorFlow · OpenCV · React",
+      stack: "PyTorch \u00b7 TensorFlow \u00b7 OpenCV \u00b7 React",
       href: "https://github.com/nguyentran4896",
-      achievement: "2nd Prize — Global Ortho-K Conference 2025",
+      achievement: "2nd Prize \u2014 Global Ortho-K Conference 2025",
     },
     {
       title: "Retinal OCT Classification",
@@ -160,22 +194,28 @@ export const works = {
       image: "/works/retinal-oct-editorial.jpg",
       summary:
         "Multi-class CNN models for automated retinal disease detection from OCT scans. Optimised for production and deployed as a Flask REST API.",
-      stack: "Python · CNN · Flask · Waitress",
+      stack: "Python \u00b7 CNN \u00b7 Flask \u00b7 Waitress",
       href: "https://github.com/nguyentran4896",
     },
   ] satisfies Project[],
 }
 
+export const writing = {
+  eyebrow: "Writing",
+  title: "Notes and essays.",
+  all: "All writing",
+}
+
 export const recognition = {
-  sectionLabel: "07 — RECOGNITION",
-  sectionTitle: "Honors & Inquiry",
+  eyebrow: "Recognition",
+  title: "Honors and inquiry.",
   award: {
     place: "2nd Prize",
-    event: "5th Global Orthokeratology — Myopia Control Conference",
+    event: "5th Global Orthokeratology \u2014 Myopia Control Conference",
     date: "August 2025",
     paper:
       "Artificial Intelligence Model for Detecting Pathologic Myopia and Segmenting Lesions on Fundus Images",
-    follow: "Presented at Vietnam Ophthalmology Conference VOS — November 2025",
+    follow: "Presented at Vietnam Ophthalmology Conference VOS \u2014 November 2025",
   },
   interests: [
     "Deep Learning Architectures",
@@ -185,124 +225,165 @@ export const recognition = {
     "Scalable ML Systems",
   ],
   languages: [
-    { name: "English", level: "Professional · TOEIC 820" },
+    { name: "English", level: "Professional \u00b7 TOEIC 820" },
     { name: "Vietnamese", level: "Native" },
   ],
   quote:
-    "AI is not replacing developers — it's amplifying our capabilities. I use AI as a collaborative tool to focus on high-level problem-solving while automating the routine.",
+    "AI is not replacing developers \u2014 it\u2019s amplifying our capabilities. I use AI as a collaborative tool to focus on high-level problem-solving while automating the routine.",
 }
 
-export const particleMonogram = {
-  text: "NGUYEN TRAN",
-  ariaLabel: "Nguyen Tran — particle monogram",
-} as const
-
-export const contactGlobe = {
-  caption: "COORDINATES — 10.776 N · 106.700 E · SAIGON",
-  eyebrow: "SIGNAL FROM SAIGON",
-} as const
-
-export const footprint = {
-  eyebrow: "FOOTPRINT",
-  title: "Where the work lives",
-  caption: "Built across two cities, shipped to the world.",
-  cities: [
-    { id: "hcmc", name: "Ho Chi Minh City", lat: 10.8231, lng: 106.6297, coords: "10°49′N 106°37′E" },
-    { id: "sydney", name: "Sydney", lat: -33.8688, lng: 151.2093, coords: "33°52′S 151°12′E" },
-  ],
-} as const
-
-export const tokenizerPlayground = {
-  eyebrow: "10 — TOKENS",
-  heading: "Tokenizer Playground",
-  intro:
-    "Paste any text and watch it decompose into BPE tokens in real time. Toggle encodings, reveal token IDs, and see how the model actually reads language.",
-  inputLabel: "INPUT TEXT",
-  inputPlaceholder: "Type or paste text to tokenize…",
-  countLabel: "TOKEN COUNT",
-  charLabel: "CHAR COUNT",
-  encodingLabel: "ENCODING",
-  idsToggle: "IDS",
-  examples: [
-    { label: "emoji", text: "Hello 😊 World 🌍 AI 🤖" },
-    { label: "leading space", text: " token vs token" },
-    { label: "banh mi", text: "banh mi" },
-  ],
-} as const
-
-export const physicsChips = {
-  eyebrow: "TECHNICAL ARSENAL",
-  resetLabel: "RESET",
-} as const
-
-export const embeddingAtlas = {
-  eyebrow: "10 — ATLAS",
-  heading: "Latent space of the writing",
-  cornerLabel: "LATENT — MINILM-L6 · PCA",
-  kindLabels: {
-    "post-para": "ARTICLE",
-    work: "WORK",
-    about: "BIO",
-  } as Record<string, string>,
-} as const
-
-export const worksGallery = {
-  scrollHint: "SCROLL TO EXPLORE",
-  viewProject: "VIEW PROJECT",
-} as const
-
 export const tech = {
-  sectionLabel: "09 — TECHNICAL ARSENAL",
-  techItems: [
-    "RUBY ON RAILS",
-    "TYPESCRIPT",
-    "PYTHON",
-    "PYTORCH",
-    "TENSORFLOW",
-    "OPENCV",
-    "POSTGRESQL",
-    "AWS",
-    "DOCKER",
-    "REDIS",
-    "NODE.JS",
-    "KERAS",
-  ],
-  concepts: [
-    "DEEP LEARNING",
-    "COMPUTER VISION",
-    "MEDICAL AI",
-    "DISTRIBUTED SYSTEMS",
-    "INTERPRETABILITY",
-    "SCALABLE BACKEND",
-    "AI-ASSISTED DEV",
+  eyebrow: "Toolbox",
+  items: [
+    "Ruby on Rails", "TypeScript", "Python", "PyTorch", "TensorFlow", "OpenCV",
+    "PostgreSQL", "AWS", "Docker", "Redis", "Node.js", "Keras", "Kubernetes", "Java",
   ],
 }
 
 export const footer = {
-  heading1: "Let's",
-  heading2: "Collaborate",
+  eyebrow: "Contact",
+  heading: "Let\u2019s build something careful.",
+  lead: "Open to research collaborations, consulting and senior engineering conversations.",
   email: "nguyentran4896@gmail.com",
-  location: "HO CHI MINH CITY · VIETNAM",
+  location: "Ho Chi Minh City \u00b7 Vietnam",
   socials: [
     { label: "GitHub", href: "https://github.com/nguyentran4896" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/nguyentran4896" },
     { label: "ORCID", href: "https://orcid.org/0009-0003-6853-4316" },
-    { label: "Email", href: "mailto:nguyentran4896@gmail.com" },
   ],
 }
 
-export const ping = {
-  header: "ROUGH RTT — BROWSER FETCH, NOT ICMP",
-} as const
-
-export const nav = {
-  brand: "NGUYEN TRAN",
-  status: "AVAILABLE FOR WORK",
-  links: [
-    { label: "About", href: "#about" },
-    { label: "Experience", href: "#experience" },
-    { label: "Works", href: "#works" },
-    { label: "Writing", href: "/blog" },
-    { label: "Contact", href: "#contact" },
-  ],
+/**
+ * Hand-written answers for the on-site "Ask". Each entry is retrieved by
+ * keyword match (see lib/ask.ts) and rendered with a link back to the section
+ * it was drawn from. Article and project entries are generated from the
+ * content above at build time (lib/knowledge.ts).
+ */
+export type Fact = {
+  id: string
+  title: string
+  keywords: string
+  answer: string
+  href: string
+  source: string
 }
+
+export const facts: Fact[] = [
+  {
+    id: "overview",
+    title: "What Nguyen does",
+    keywords: "what do you do who are you nguyen about intro summary profession job role engineer researcher background",
+    answer:
+      "Nguyen Tran is a senior software engineer with about ten years of experience building production systems, and an AI researcher focused on medical AI and computer vision. He translates research into scalable, deployable systems.",
+    href: "/#about",
+    source: "About",
+  },
+  {
+    id: "current-role",
+    title: "Current role",
+    keywords: "current job role company employer work now present employment hero payroll senior software engineer",
+    answer:
+      "Since 2021 Nguyen has been a Senior Software Engineer at Employment Hero, designing distributed payroll services used by 300,000+ businesses across 5 countries and leading integration of AI tooling across engineering.",
+    href: "/#experience",
+    source: "Experience",
+  },
+  {
+    id: "career",
+    title: "Career history",
+    keywords: "experience career history worked where companies employers past jobs vng zalo nguyen hiep resume cv timeline",
+    answer:
+      "Employment Hero (2021 to now, Senior Software Engineer), VNG Corporation (2018 to 2020, Zalo Web Login authentication for millions of daily users) and Nguyen Hiep Software (2017 to 2018, MEAN stack web apps on AWS).",
+    href: "/#experience",
+    source: "Experience",
+  },
+  {
+    id: "research",
+    title: "Medical AI research",
+    keywords: "research medical ai ophthalmology myopia fundus lesion segmentation deep learning hihorus eye pathologic computer vision",
+    answer:
+      "Nguyen researches medical AI for ophthalmology. His HiHorus platform detects pathologic myopia and segments lesions on fundus images using deep learning, and won 2nd Prize at the 5th Global Ortho-K & Myopia Conference in 2025.",
+    href: "/#work",
+    source: "Selected work",
+  },
+  {
+    id: "award",
+    title: "Awards and publications",
+    keywords: "award prize publication paper conference published recognition honors presented speaking vos ortho-k",
+    answer:
+      "2nd Prize at the 5th Global Orthokeratology and Myopia Control Conference (August 2025) for a model that detects pathologic myopia and segments lesions on fundus images, later presented at the Vietnam Ophthalmology Conference, November 2025.",
+    href: "/#recognition",
+    source: "Recognition",
+  },
+  {
+    id: "stack",
+    title: "Technology",
+    keywords: "tech stack technologies languages tools skills framework python typescript ruby rails pytorch tensorflow aws kubernetes postgres",
+    answer:
+      "Day to day: Ruby on Rails, TypeScript, PostgreSQL, Kubernetes and AWS. For research: Python, PyTorch, TensorFlow, Keras and OpenCV. Earlier work includes Java microservices and the MEAN stack.",
+    href: "/#experience",
+    source: "Experience",
+  },
+  {
+    id: "ai-view",
+    title: "Views on AI",
+    keywords: "ai opinion view philosophy replace developers amplify assisted workflow copilot llm tools productivity",
+    answer:
+      "Nguyen believes AI doesn\u2019t replace engineers, it amplifies them. Roughly 70% of his workflow is AI-assisted, which frees him to focus on high-level problem solving while automating the routine.",
+    href: "/#recognition",
+    source: "Recognition",
+  },
+  {
+    id: "interpretability",
+    title: "Interpretability and generalisation",
+    keywords: "interpretability generalisation generalization explainability datasets models robustness",
+    answer:
+      "A core research interest: making vision models explainable and checking that they generalise across diverse datasets, not only the one they were trained on.",
+    href: "/#about",
+    source: "About",
+  },
+  {
+    id: "numbers",
+    title: "By the numbers",
+    keywords: "numbers stats statistics years pull requests prs github contributions open source businesses countries",
+    answer:
+      "10+ years engineering, 538+ merged pull requests, 300,000+ businesses served and a roughly 70% AI-assisted workflow.",
+    href: "/#about",
+    source: "About",
+  },
+  {
+    id: "education",
+    title: "Education and languages",
+    keywords: "education degree university school study hcmut gpa language english vietnamese toeic speak",
+    answer:
+      "Engineering degree in Computer Science from Ho Chi Minh University of Technology (HCMUT), 2014 to 2018. Nguyen speaks Vietnamese natively and English professionally (TOEIC 820).",
+    href: "/#experience",
+    source: "Experience",
+  },
+  {
+    id: "location",
+    title: "Location",
+    keywords: "where location based live city country timezone remote vietnam saigon ho chi minh",
+    answer:
+      "Nguyen is based in Ho Chi Minh City, Vietnam and works remotely.",
+    href: "/#contact",
+    source: "Contact",
+  },
+  {
+    id: "availability",
+    title: "Availability",
+    keywords: "available availability hire hiring freelance consulting collaborate collaboration open work together engage",
+    answer:
+      "Nguyen is open to research collaborations, consulting and senior engineering conversations. The quickest route is email.",
+    href: "/#contact",
+    source: "Contact",
+  },
+  {
+    id: "contact",
+    title: "Contact",
+    keywords: "contact email reach message talk linkedin github orcid get in touch social hello connect",
+    answer:
+      "Email nguyentran4896@gmail.com, or find Nguyen on GitHub (nguyentran4896), LinkedIn (nguyentran4896) and ORCID.",
+    href: "/#contact",
+    source: "Contact",
+  },
+]

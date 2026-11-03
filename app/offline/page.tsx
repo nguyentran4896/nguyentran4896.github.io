@@ -10,10 +10,10 @@ export default function OfflinePage() {
   return (
     <main className="min-h-screen bg-background text-foreground flex items-center justify-center px-6">
       <div className="max-w-[48ch] w-full">
-        <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-6">
-          00 — Offline
+        <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-muted-foreground mb-6">
+          Offline
         </p>
-        <h1 className="font-sans font-light italic leading-[1.05] tracking-tight text-4xl sm:text-5xl md:text-6xl">
+        <h1 className="font-display leading-[1.05] tracking-tight text-5xl sm:text-7xl">
           You&rsquo;re offline.
         </h1>
         <p className="mt-6 text-foreground/65 leading-relaxed">
@@ -24,7 +24,7 @@ export default function OfflinePage() {
           <span className="h-px flex-1 bg-border" />
           <Link
             href="/"
-            className="font-mono text-[11px] tracking-[0.3em] uppercase text-muted-foreground hover:text-accent-text transition-colors"
+            className="text-sm text-muted-foreground hover:text-accent-text transition-colors"
           >
             ← Home
           </Link>

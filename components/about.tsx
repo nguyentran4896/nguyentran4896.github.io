@@ -1,126 +1,44 @@
-"use client"
-
-import { useRef } from "react"
-import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion"
-import { about, footprint } from "@/lib/content"
-import { FootprintMap } from "@/components/footprint-map"
-import { RevealText } from "@/components/reveal-text"
-
-const { statements, sectionLabel, sectionTitle } = about
+import Image from "next/image"
+import { about, stats } from "@/lib/content"
+import { Section } from "@/components/section"
 
 export function About() {
-  const containerRef = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  })
-
-  const reduceMotion = useReducedMotion()
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-100%"])
-  const smoothX = useSpring(x, { stiffness: 100, damping: 30 })
-
   return (
-    <section id="about" ref={containerRef} className="relative py-32 overflow-hidden md:py-0">
-      {/* Section Header */}
-      <div className="px-8 md:px-12 mb-0 py-20">
-        <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-12">
-          {/* Avatar */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="relative flex-shrink-0 w-24 h-24 md:w-32 md:h-32"
-          >
-            <div className="absolute inset-0 rounded-full border border-white/10" />
-            <div className="absolute -inset-1 rounded-full border border-accent/20" />
-            <img
-              src="/avatar-thailand.jpeg"
-              alt="Nguyen Tran"
-              width={512}
-              height={512}
-              loading="lazy"
-              className="w-full h-full rounded-full object-cover object-top grayscale contrast-[1.1]"
-            />
-            <span className="absolute -bottom-1 -right-1 w-3 h-3 bg-accent rounded-full ring-2 ring-background" />
-          </motion.div>
-
-          {/* Label + Title */}
-          <div>
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="scroll-eyebrow font-mono text-xs tracking-[0.3em] text-muted-foreground mb-4"
-            >
-              {sectionLabel}
-            </motion.p>
-            <RevealText as="h2" className="font-sans text-3xl md:text-5xl font-light italic">
-              {sectionTitle}
-            </RevealText>
-          </div>
-        </div>
-      </div>
-
-      {/* Horizontal Scroll Container. Under reduced motion the scroll-linked
-          parallax is disabled (DESIGN.md §Motion); the row is instead made
-          manually scrollable so none of the statements get clipped. */}
-      <div
-        className={`relative flex items-center overflow-y-visible py-4 md:py-6 gap-0 ${
-          reduceMotion ? "overflow-x-auto" : "overflow-x-hidden"
-        }`}
-      >
-        <motion.div
-          style={reduceMotion ? undefined : { x: smoothX }}
-          className="flex items-center gap-16 md:gap-24 px-8 md:px-12 whitespace-nowrap leading-tight"
-        >
-          {statements.map((statement, index) => (
-            <motion.p
-              key={index}
-              className="text-[2.25rem] sm:text-5xl md:text-6xl lg:text-7xl font-sans font-light tracking-tight text-white/90"
-              style={{
-                WebkitTextStroke: index % 2 === 0 ? "none" : "1px rgba(255,255,255,0.3)",
-                color: index % 2 === 0 ? "inherit" : "transparent",
-              }}
-            >
-              {statement}
-            </motion.p>
+    <Section id="about" eyebrow={about.eyebrow} title={about.title}>
+      <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
+        <div className="reveal space-y-6 text-lg leading-relaxed text-foreground/85 sm:text-xl">
+          {about.paragraphs.map((p) => (
+            <p key={p}>{p}</p>
           ))}
-        </motion.div>
+          <dl className="mt-10 grid grid-cols-1 gap-x-8 gap-y-5 border-t border-border pt-8 text-base sm:grid-cols-2">
+            {about.facts.map((f) => (
+              <div key={f.label}>
+                <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{f.label}</dt>
+                <dd className="mt-1">{f.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <div className="reveal">
+          <Image
+            src="/avatar-thailand.jpeg"
+            alt="Portrait of Nguyen Tran"
+            width={512}
+            height={511}
+            className="aspect-square w-full rounded-tile object-cover"
+          />
+        </div>
       </div>
 
-      {/* Footprint Map — asymmetric editorial figure */}
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.15 }}
-        className="mt-16 md:mt-20 px-8 md:px-12"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8 md:gap-12 items-start">
-          {/* Left — editorial label block */}
-          <div className="md:pt-2">
-            <p className="font-mono text-xs tracking-[0.3em] text-muted-foreground mb-3 uppercase">
-              {footprint.eyebrow}
-            </p>
-            <p className="font-sans text-base font-light italic text-foreground/80 leading-relaxed max-w-[28ch]">
-              {footprint.caption}
-            </p>
+      <dl className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-tile border border-border bg-border lg:grid-cols-4">
+        {stats.items.map((s) => (
+          <div key={s.label} className="bg-background p-6 sm:p-8">
+            <dd className="font-display text-5xl sm:text-6xl">{s.value}</dd>
+            <dt className="mt-2 text-sm text-muted-foreground">{s.label}</dt>
           </div>
-          {/* Right — the zero-JS dotted map */}
-          <FootprintMap />
-        </div>
-      </motion.div>
-
-      {/* Decorative Line */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="scroll-draw mt-16 mx-8 md:mx-12 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent origin-left"
-      />
-    </section>
+        ))}
+      </dl>
+    </Section>
   )
 }
