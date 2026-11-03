@@ -125,7 +125,7 @@ Pills for inputs, buttons and chips. `1.5rem` tiles for cards, images and tint b
 
 ## Motion
 
-Entrance: a 14px rise, staggered by 80ms. Below the fold: CSS scroll-driven reveal where supported, plain visible content otherwise. Hover transitions 300ms. All motion is disabled under `prefers-reduced-motion`.
+Hero backdrop: the noise-displaced wireframe sphere (`components/sentient-sphere.tsx`, three.js) sits behind the greeting at low opacity: ink lines with `accent` on the crests, alpha about 0.1 on paper and 0.13 in dark, lighter and coarser below 640px. It tilts toward the pointer, fades and shrinks to 80% over the first 60% of a screen of scroll, pauses off screen, and shows a single still frame under `prefers-reduced-motion`. It is decorative only (`aria-hidden`, pointer-events none); copy must stay readable over it. Entrance: a 14px rise, staggered by 80ms. Below the fold: CSS scroll-driven reveal where supported, plain visible content otherwise. Hover transitions 300ms. All motion is disabled under `prefers-reduced-motion`.
 
 ## Do's and Don'ts
 

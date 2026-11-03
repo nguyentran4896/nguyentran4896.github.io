@@ -114,7 +114,7 @@ export function AskBox({
               <button
                 type="button"
                 onClick={() => run(p)}
-                className="rounded-full border border-border px-4 py-2 text-left text-sm text-muted-foreground transition hover:border-foreground hover:text-foreground"
+                className="rounded-full border border-border bg-background/80 px-4 py-2 text-left text-sm text-muted-foreground backdrop-blur-sm transition hover:border-foreground hover:text-foreground"
               >
                 {p}
               </button>

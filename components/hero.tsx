@@ -1,10 +1,12 @@
 import { ArrowRight, Mail } from "lucide-react"
 import { footer, hero, nav, proof } from "@/lib/content"
 import { AskBox } from "@/components/ask-box"
+import { HeroSphere } from "@/components/hero-sphere"
 
 export function Hero() {
   return (
-    <section id="ask" className="relative px-5 pb-14 pt-28 sm:px-8 sm:pb-20 sm:pt-40">
+    <section id="ask" className="relative isolate px-5 pb-14 pt-28 sm:px-8 sm:pb-20 sm:pt-40">
+      <HeroSphere />
       <div className="mx-auto max-w-3xl text-center">
         <p
           className="rise mx-auto mb-6 inline-flex items-center gap-2.5 rounded-full border border-border px-4 py-1.5 text-sm text-muted-foreground"
