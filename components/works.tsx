@@ -12,7 +12,7 @@ const ROWS = [
 export function Works() {
   return (
     <Section id="work" eyebrow={works.eyebrow} title={works.title} className="border-t border-border">
-      <ul className="grid gap-6 lg:grid-cols-2">
+      <ul data-swarm-list className="grid gap-6 lg:grid-cols-2">
         {works.projects.map((p) => (
           <li key={p.title} className="reveal">
             <a
@@ -30,7 +30,7 @@ export function Works() {
               />
               <div className="flex flex-1 flex-col p-6 sm:p-7">
                 <div className="flex items-center justify-between gap-4">
-                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">{p.year}</p>
+                  <p data-swt="text" className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">{p.year}</p>
                   <ArrowUpRight className="size-5 text-muted-foreground transition group-hover:text-foreground" aria-hidden />
                 </div>
                 <h3 className="mt-2 font-display text-3xl">{p.title}</h3>
@@ -44,11 +44,11 @@ export function Works() {
                   {ROWS.map(([label, key]) => (
                     <div key={key}>
                       <dt className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">{label}</dt>
-                      <dd className="mt-0.5 text-foreground/85">{p[key]}</dd>
+                      <dd data-swt="text" className="mt-0.5 text-foreground/85">{p[key]}</dd>
                     </div>
                   ))}
                 </dl>
-                <p className="mt-auto pt-5 font-mono text-xs text-muted-foreground">{p.stack}</p>
+                <p data-swt="text" className="mt-auto pt-5 font-mono text-xs text-muted-foreground">{p.stack}</p>
               </div>
             </a>
           </li>

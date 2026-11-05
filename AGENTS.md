@@ -9,4 +9,6 @@ Next.js + Tailwind v4 personal portfolio. **`DESIGN.md` is the source of truth f
 5. **Accessible by default**: AA contrast (`accent-text` for small accent text), visible focus, `prefers-reduced-motion`, semantic landmarks.
 6. **Honest copy**: the Ask is retrieval over this site, not an AI model; never imply otherwise.
 
+7. **Built sections**: the swarm crew types plain-text elements marked `data-swt` (wrap text that shares an element with an icon in a `<span data-swt>`). Never mark text React updates after mount, and never mark an element with `.rise` or `.reveal`. See `components/swarm.tsx`.
+
 If `DESIGN.md` and the code disagree, fix the code. Validate with `npx @google/design.md lint DESIGN.md`.

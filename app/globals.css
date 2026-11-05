@@ -184,3 +184,222 @@ code[data-theme*=" "] span {
     color: var(--shiki-dark);
   }
 }
+
+/* ==========================================================================
+   Swarm build: a crew of cursors builds each section while it is read.
+   Engine: public/crew.js (byte copy of the swarm-build skill's crew.js).
+   Plans: components/swarm.tsx. The crew wears the one accent and nothing
+   else, in light and dark; there is no shadow (DESIGN.md §Elevation): the
+   copied row's shadow token is transparent and the size label is a pill.
+   ========================================================================== */
+:root {
+  --crew-cursor: var(--accent); /* the cursors' fill */
+  --crew-outline: var(--background); /* so they read over text */
+  --crew-mark: var(--accent-text); /* boxes, handles, guides, hairlines, caret, size label */
+  --crew-paper: var(--accent-foreground); /* handles' fill, size label text */
+  --crew-ground: var(--background); /* the copied row's opaque ground */
+  --crew-shadow: transparent;
+  --crew-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --crew-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hero: held back before the first paint while html.has-crew (set by the head
+   script, once per visit); shown after 3 s if the build never takes over. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  .has-crew [data-swarm="hero"]:not(.sw-on, .sw-done) [data-sw-hold] {
+    animation: crew-late 0.3s 3s both;
+  }
+}
+@keyframes crew-late {
+  from { opacity: 0; }
+}
+/* crew.css: what crew.js needs from the stylesheet. The hidden states of the parts waiting to be built, the typing, the
+   layer, the cursors and their marks. Map the custom properties below to the site's palette; give the cursors the colour
+   the site already uses for "AI at work", and keep it for nothing else.
+
+   Hiding is by clip, opacity or a clear border, never by layout, so nothing on the page moves when a part appears. All of
+   it sits under .sw-on, which crew.js puts on the host only while it works: without the script, or after it, the page is
+   as the HTML wrote it. Screen only: a printout shows the page as written. */
+@media screen {
+  /* The host: give it position: relative (or sticky) so the layer covers it */
+  .sw-on [data-sw="clip"] { clip-path: inset(0 100% 100% 0); }
+  .sw-on [data-sw="hide"] { opacity: 0; }
+  .sw-on [data-sw="top"] { border-top-color: transparent; }
+  .sw-on [data-sw="bottom"] { border-bottom-color: transparent; }
+  .sw-on [data-sw="fold"] { clip-path: inset(0 0 100% 0); }
+  /* open { at }: until the click, `at` carries data-sw-shut. Draw the site's own marker closed under it, e.g.
+     .sw-on summary[data-sw-shut]::after { ...the plus... } */
+  /* A drawing's shapes pop in one by one as the pen reaches them */
+  .sw-on [data-sw-pop] > * {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: opacity 0.18s, transform 0.4s var(--crew-ease);
+  }
+  .sw-on [data-sw-pop] > [data-sw="hide"] { transform: scale(0.4); }
+  /* Typing: the rest of the text is laid out but clear, so the lines break where they will in the end */
+  .sw-rest { color: transparent; }
+  .sw-caret {
+    border-left: 2px solid var(--crew-mark);
+    margin-right: -2px;
+  }
+
+  .sw-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    contain: strict;
+    transition: opacity 0.4s;
+  }
+  .sw-layer > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .sw-fade { opacity: 0 !important; transition: opacity 0.35s; }
+
+  /* A cursor's hot spot is at 0,0 of its drawing, 12px into the box */
+  .sw-agent {
+    width: 36px;
+    height: 36px;
+    margin: -12px 0 0 -12px;
+    will-change: transform;
+    transition: opacity 0.5s, filter 0.5s;
+  }
+  .sw-agent svg {
+    display: block;
+    overflow: visible;
+    transform: scale(0);
+    transform-origin: 12px 12px;
+    transition: transform 0.3s var(--crew-ease);
+  }
+  .sw-agent.is-in svg { transform: none; }
+  /* Waiting for the next part: quieter */
+  .sw-agent.is-idle { opacity: 0.55; }
+  .sw-agent.is-in.is-down svg { transform: scale(0.86); }
+  .sw-agent path { display: none; }
+  .sw-agent[data-tool="arrow"] .sw-arrow,
+  .sw-agent[data-tool="cross"] .sw-cross,
+  .sw-agent[data-tool="beam"] .sw-beam,
+  .sw-agent[data-tool="pen"] .sw-pen { display: inline; }
+  .sw-arrow,
+  .sw-pen {
+    fill: var(--crew-cursor);
+    stroke: var(--crew-outline);
+    stroke-width: 1.3;
+    stroke-linejoin: round;
+  }
+  .sw-nib { fill: none; }
+  .sw-cross,
+  .sw-beam {
+    fill: none;
+    stroke: var(--crew-cursor);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+  }
+  .sw-cross.sw-under,
+  .sw-beam.sw-under {
+    stroke: var(--crew-outline);
+    stroke-width: 4.2;
+  }
+  /* Stopped (stop()): the crew greys where it stands, then goes */
+  .sw-layer.is-off .sw-agent {
+    filter: grayscale(1);
+    opacity: 0.45;
+  }
+
+  .sw-frame { border: 1.5px solid var(--crew-mark); }
+  .sw-frame i,
+  .sw-line i {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    background: var(--crew-paper);
+    border: 1.5px solid var(--crew-mark);
+  }
+  .sw-frame i:nth-child(1) { left: -4px; top: -4px; }
+  .sw-frame i:nth-child(2) { right: -4px; top: -4px; }
+  .sw-frame i:nth-child(3) { left: -4px; bottom: -4px; }
+  .sw-frame i:nth-child(4) { right: -4px; bottom: -4px; }
+  .sw-size {
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 8px);
+    transform: translateX(-50%);
+    padding: 3px 6px;
+    border-radius: 3px;
+    background: var(--crew-mark);
+    color: var(--crew-paper);
+    font: 500 11px/1 var(--crew-mono);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .sw-guide {
+    background: var(--crew-mark);
+    opacity: 0.6;
+  }
+  .sw-guide--h { height: 1px; }
+  .sw-guide--v { width: 1px; }
+  .sw-line { background: var(--crew-mark); }
+  .sw-line i { top: -3px; }
+  .sw-line i:nth-child(1) { left: -4px; }
+  .sw-line i:nth-child(2) { right: -4px; }
+  /* A part being copied down, and how far it has gone. Opaque: a see-through copy doubles the text under it */
+  .sw-ghost {
+    margin: 0;
+    background: var(--crew-ground);
+    box-shadow: 0 10px 28px -14px var(--crew-shadow);
+  }
+  .sw-measure {
+    width: 0;
+    border-left: 1px dashed var(--crew-mark);
+  }
+  .sw-measure .sw-size {
+    left: auto;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  /* A press (grid, fill, open): a ring that opens and goes */
+  .sw-click::after {
+    content: "";
+    position: absolute;
+    left: -13px;
+    top: -13px;
+    width: 26px;
+    height: 26px;
+    border: 1.5px solid var(--crew-mark);
+    border-radius: 50%;
+    animation: sw-click 0.5s var(--crew-ease) both;
+  }
+  /* A layout grid: a band for each cell, its size at its top while it drops */
+  .sw-band {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: color-mix(in srgb, var(--crew-mark) 8%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--crew-mark) 40%, transparent);
+  }
+  .sw-band .sw-size { top: 8px; }
+  /* A link from one part to the next: a dot where it leaves, a head where it arrives */
+  .sw-link svg { display: block; overflow: visible; }
+  .sw-link path {
+    fill: none;
+    stroke: var(--crew-mark);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .sw-link circle { fill: var(--crew-mark); }
+  .sw-link .sw-head { opacity: 0; transition: opacity 0.15s; }
+}
+@keyframes sw-click {
+  from { transform: scale(0.2); opacity: 1; }
+  to { opacity: 0; }
+}
+
+@media screen {
+  .sw-size { border-radius: 9999px; padding: 3px 8px; }
+  /* A copied row keeps no scroll-driven reveal of its own */
+  .sw-ghost, .sw-ghost * { animation: none !important; }
+}

@@ -127,6 +127,8 @@ Pills for inputs, buttons and chips. `1.5rem` tiles for cards, images and tint b
 
 Hero backdrop: the noise-displaced wireframe sphere (`components/sentient-sphere.tsx`, three.js) sits behind the greeting at low opacity: ink lines with `accent` on the crests, alpha about 0.1 on paper and 0.13 in dark, lighter and coarser below 640px. It tilts toward the pointer, fades and shrinks to 80% over the first 60% of a screen of scroll, pauses off screen, and shows a single still frame under `prefers-reduced-motion`. It is decorative only (`aria-hidden`, pointer-events none); copy must stay readable over it. Entrance: a 14px rise, staggered by 80ms. Below the fold: CSS scroll-driven reveal where supported, plain visible content otherwise. Hover transitions 300ms. All motion is disabled under `prefers-reduced-motion`.
 
+Swarm build: each part of the page is built once, in front of the reader, by a small crew of cursors (`components/swarm.tsx`, engine `public/crew.js`). The crew wears the one accent (`accent` for the cursors, `accent-text` for the boxes and labels) in light and dark, is flat (no shadow, pill size labels), comes out of and returns to the "N" badge in the header, and gives every section a move of its own: a guide and dragged boxes (hero), a layout grid (About), dragged cards (Work), a relay of links down the timeline (Experience), a pen-ruled list with a copied row (Writing), a button that floods from a click (Contact). It never builds headings, photos, figures or the hero sphere. The hero is built once per visit; reduced motion, a `#hash` or a blocked script shows the page as written.
+
 ## Do's and Don'ts
 
 - Do keep the Ask first. Do add new facts to `lib/content.ts` so the Ask can answer them.

@@ -147,6 +147,8 @@ const websiteJsonLd = {
   author: { "@type": "Person", name: "Nguyen Tran", url: SITE_URL },
 }
 
+const SWARM_BOOT = `try{var d=document.documentElement;if(location.pathname==='/'&&!location.hash&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window&&!sessionStorage.getItem('crew')){sessionStorage.setItem('crew','1');d.classList.add('has-crew');var s=document.createElement('script');s.src='/crew.js';s.async=true;s.onerror=function(){d.classList.remove('has-crew')};document.head.appendChild(s)}}catch(e){}`
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -154,8 +156,12 @@ export default function RootLayout({
 }>) {
   return (
     <ViewTransitions>
-      <html lang="en" className={`${geist.variable} ${instrument.variable} ${geistMono.variable}`}>
+      <html lang="en" className={`${geist.variable} ${instrument.variable} ${geistMono.variable}`} suppressHydrationWarning>
         <head>
+          {/* Swarm build, hero: decide before the first paint, once per visit, on the home page only, never with
+              reduced motion or a #hash. html.has-crew holds the hero copy back (globals.css); if crew.js cannot
+              load, the hold is lifted at once. */}
+          <script dangerouslySetInnerHTML={{ __html: SWARM_BOOT }} />
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
             strategy="afterInteractive"

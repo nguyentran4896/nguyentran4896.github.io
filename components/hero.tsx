@@ -5,7 +5,7 @@ import { HeroSphere } from "@/components/hero-sphere"
 
 export function Hero() {
   return (
-    <section id="ask" className="relative isolate px-5 pb-14 pt-28 sm:px-8 sm:pb-20 sm:pt-40">
+    <section id="ask" data-swarm="hero" className="relative isolate px-5 pb-14 pt-28 sm:px-8 sm:pb-20 sm:pt-40">
       <HeroSphere />
       <div className="mx-auto max-w-3xl text-center">
         <p
@@ -16,7 +16,7 @@ export function Hero() {
             <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
             <span className="relative inline-flex size-2 rounded-full bg-accent" />
           </span>
-          {nav.status}
+          <span data-sw-hold data-swt="status">{nav.status}</span>
         </p>
 
         <h1
@@ -29,7 +29,7 @@ export function Hero() {
           className="rise mx-auto mt-5 max-w-xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl"
           style={{ "--d": "160ms" } as React.CSSProperties}
         >
-          {hero.lead}
+          <span data-sw-hold data-swt="lead">{hero.lead}</span>
         </p>
 
         <div
@@ -38,12 +38,16 @@ export function Hero() {
         >
           <a
             href={`mailto:${footer.email}`}
+            data-sw-hold
+            data-swt="cta"
             className="inline-flex items-center gap-2 rounded-full bg-accent-text px-6 py-3 text-base font-medium text-accent-foreground transition hover:brightness-95"
           >
             <Mail className="size-4" aria-hidden /> {hero.cta}
           </a>
           <a
             href="#work"
+            data-sw-hold
+            data-swt="cta"
             className="inline-flex items-center gap-2 rounded-full border border-border-strong px-6 py-3 text-base transition hover:bg-foreground hover:text-background"
           >
             {hero.secondary} <ArrowRight className="size-4" aria-hidden />
@@ -51,11 +55,13 @@ export function Hero() {
         </div>
 
         <div className="rise mt-10 text-left" style={{ "--d": "260ms" } as React.CSSProperties}>
-          <AskBox />
+          <div data-sw-hold data-swt="ask">
+            <AskBox />
+          </div>
         </div>
 
         <p className="rise mt-4 text-sm text-muted-foreground" style={{ "--d": "340ms" } as React.CSSProperties}>
-          {hero.note}
+          <span data-sw-hold data-swt="note">{hero.note}</span>
         </p>
       </div>
 

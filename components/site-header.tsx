@@ -33,7 +33,7 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
         <Link href="/" className="flex items-center gap-2.5 text-[15px] font-medium tracking-tight">
-          <span aria-hidden className="flex size-8 items-center justify-center rounded-full bg-foreground font-display text-lg italic leading-none text-background">
+          <span aria-hidden data-swarm-lamp className="flex size-8 items-center justify-center rounded-full bg-foreground font-display text-lg italic leading-none text-background">
             N
           </span>
           {nav.brand}
