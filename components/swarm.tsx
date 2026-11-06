@@ -195,18 +195,15 @@ function buildHero(hero: HTMLElement): Crew | null {
           y: Math.max(next.top, 160) + Math.random() * 120,
         }
       },
-      plan({ add, type }) {
-        // The lead and the Ask are the largest paints on the first screen: they stay on screen from the first paint
-        // (holding them back put the largest paint 1-2 s later) and the crew only drags a box round each. What it
-        // builds is small: the status, the two buttons and the note.
+      plan({ add }) {
+        // All the hero's text stays on screen from the first paint, and nothing in it is typed: typed text is new paint,
+        // and the largest paint of the first screen (LCP) would then be the line typed last, 2-3.5 s in. The crew
+        // pulls a guide to the lead, drags a box round the lead and the Ask, and drags out the two buttons.
         const [lead, ask] = all(hero, "[data-swarm-box]")
-        type(parts("status"))
         const guide = add("guide", null, [], { axis: "x", to: lead })
         add("box", lead)
         for (const cta of parts("cta")) add("rect", cta)
-        const asked = add("box", ask)
-        guide.until = [asked]
-        type(parts("note"), [asked])
+        guide.until = [add("box", ask)]
       },
       onEnd: shown,
     })

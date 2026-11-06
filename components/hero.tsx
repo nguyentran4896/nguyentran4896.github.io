@@ -16,7 +16,7 @@ export function Hero() {
             <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
             <span className="relative inline-flex size-2 rounded-full bg-accent" />
           </span>
-          <span data-sw-hold data-swt="status">{nav.status}</span>
+          {nav.status}
         </p>
 
         <h1
@@ -62,7 +62,7 @@ export function Hero() {
         </div>
 
         <p className="rise mt-4 text-sm text-muted-foreground" style={{ "--d": "340ms" } as React.CSSProperties}>
-          <span data-sw-hold data-swt="note">{hero.note}</span>
+          {hero.note}
         </p>
       </div>
 
