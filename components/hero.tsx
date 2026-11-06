@@ -26,10 +26,11 @@ export function Hero() {
           {hero.greeting}
         </h1>
         <p
+          data-swarm-box
           className="rise mx-auto mt-5 max-w-xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl"
           style={{ "--d": "160ms" } as React.CSSProperties}
         >
-          <span data-sw-hold data-swt="lead">{hero.lead}</span>
+          {hero.lead}
         </p>
 
         <div
@@ -55,7 +56,7 @@ export function Hero() {
         </div>
 
         <div className="rise mt-10 text-left" style={{ "--d": "260ms" } as React.CSSProperties}>
-          <div data-sw-hold data-swt="ask">
+          <div data-swarm-box>
             <AskBox />
           </div>
         </div>

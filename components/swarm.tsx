@@ -125,6 +125,11 @@ function below(host: HTMLElement, plan: Plan, options: Record<string, unknown> =
   const first = one(host, '[data-swt="eyebrow"]')
   if (!first || !ready() || jumpedPast(host) || first.getBoundingClientRect().top < innerHeight) return null
   let io: IntersectionObserver | null = null
+  // Jumped over (End key, a dragged scrollbar): the eyebrow never crossed the screen, so the observer never fires
+  function jumped() {
+    if (first!.getBoundingClientRect().bottom < 0) team.teardown()
+  }
+  addEventListener("scroll", jumped, { passive: true })
   const team = window.crew!({
     pace: 1.2,
     orbit: { radius: 24, step: 10, ms: 320, gap: 40 },
@@ -135,7 +140,10 @@ function below(host: HTMLElement, plan: Plan, options: Record<string, unknown> =
       api.type([first])
       plan(api, host)
     },
-    onEnd: () => io?.disconnect(),
+    onEnd: () => {
+      io?.disconnect()
+      removeEventListener("scroll", jumped)
+    },
   })
   io = new IntersectionObserver(
     ([entry]) => {
@@ -155,7 +163,10 @@ function below(host: HTMLElement, plan: Plan, options: Record<string, unknown> =
 
 /** The hero: on the first screen, so it is held back before the first paint (html.has-crew) and built once per visit. */
 function buildHero(hero: HTMLElement): Crew | null {
-  const shown = () => hero.classList.add("sw-done")
+  const shown = () => {
+    hero.classList.add("sw-done")
+    document.documentElement.classList.remove("has-crew")
+  }
   // Too late (the 3 s failsafe in globals.css is about to show it), already scrolled, or crew.js missing: just show it
   if (!ready() || performance.now() > 2500 || scrollY > 32) {
     shown()
@@ -185,14 +196,17 @@ function buildHero(hero: HTMLElement): Crew | null {
         }
       },
       plan({ add, type }) {
+        // The lead and the Ask are the largest paints on the first screen: they stay on screen from the first paint
+        // (holding them back put the largest paint 1-2 s later) and the crew only drags a box round each. What it
+        // builds is small: the status, the two buttons and the note.
+        const [lead, ask] = all(hero, "[data-swarm-box]")
         type(parts("status"))
-        const [lead] = parts("lead")
         const guide = add("guide", null, [], { axis: "x", to: lead })
-        type([lead], [], { box: true })
+        add("box", lead)
         for (const cta of parts("cta")) add("rect", cta)
-        const ask = add("rect", parts("ask")[0])
-        guide.until = [ask]
-        type(parts("note"), [ask])
+        const asked = add("box", ask)
+        guide.until = [asked]
+        type(parts("note"), [asked])
       },
       onEnd: shown,
     })
